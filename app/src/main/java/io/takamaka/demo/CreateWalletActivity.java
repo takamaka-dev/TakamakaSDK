@@ -8,5 +8,10 @@ public class CreateWalletActivity extends MainController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_wallet);
         initMenu();
+        initFormCreateWallet();
+    }
+
+    private void initFormCreateWallet() {
+
     }
 }
