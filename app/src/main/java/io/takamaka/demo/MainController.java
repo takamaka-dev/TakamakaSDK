@@ -6,20 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainController extends AppCompatActivity {
 
-    // Make sure to use the FloatingActionButton
-    // for all the FABs
     FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab;
-
-    // These are taken to make visible and invisible along
-    // with FABs
     TextView takamakaButtonText, loginButtonText, createWalletText, restoreWalletText;
-
-    // to check whether sub FAB buttons are visible or not.
     Boolean isAllFabsVisible;
 
     @Override
@@ -29,7 +21,7 @@ public class MainController extends AppCompatActivity {
         initMenu();
     }
 
-    private void initMenu() {
+    protected void initMenu() {
         // Register all the FABs with their IDs
         // This FAB button is the Parent
         takamakaButton = findViewById(R.id.takamaka_button);
@@ -117,7 +109,8 @@ public class MainController extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(MainController.this, "Send tokens section", Toast.LENGTH_SHORT).show();
+                        Intent activity2Intent = new Intent(getApplicationContext(), SendTokenActivity.class);
+                        startActivity(activity2Intent);
                     }
                 });
 
@@ -131,7 +124,6 @@ public class MainController extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent activity2Intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(activity2Intent);
-
                     }
                 });
 
@@ -140,7 +132,8 @@ public class MainController extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MainController.this, "Create Wallet section", Toast.LENGTH_SHORT).show();
+                        Intent activity2Intent = new Intent(getApplicationContext(), CreateWalletActivity.class);
+                        startActivity(activity2Intent);
                     }
                 });
 
@@ -149,7 +142,8 @@ public class MainController extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MainController.this, "Restore Wallet section", Toast.LENGTH_SHORT).show();
+                        Intent activity2Intent = new Intent(getApplicationContext(), RestoreWalletActivity.class);
+                        startActivity(activity2Intent);
                     }
                 }
         );

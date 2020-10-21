@@ -2,13 +2,11 @@ package io.takamaka.demo;
 
 import android.os.Bundle;
 
-public class LoginActivity extends MainController {
+public class CreateWalletActivity extends MainController {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_create_wallet);
         initMenu();
     }
-
-
 }
