@@ -23,14 +23,18 @@ public class CreateWalletActivity extends MainController {
 
     public void initFormCreateWallet() {
         walletCreateSubmit = findViewById(R.id.wallet_create_submit);
-        LinearLayout createWalletForm = (LinearLayout) findViewById(R.id.create_wallet_form);
-        walletCreateSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!checkFieldsForm(createWalletForm)) {
-                    
-                }
+        LinearLayout createWalletForm = findViewById(R.id.create_wallet_form);
+        walletCreateSubmit.setOnClickListener(v -> {
+            List<View> wrongFields = checkFieldsForm(createWalletForm);
+            if (!wrongFields.isEmpty()) {
+                highlightWrongForm(wrongFields);
             }
         });
+        initWalletCreation();
     }
+
+    public void initWalletCreation() {
+
+    }
+
 }

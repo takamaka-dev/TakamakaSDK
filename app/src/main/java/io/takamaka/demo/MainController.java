@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainController extends AppCompatActivity {
 
@@ -22,44 +26,41 @@ public class MainController extends AppCompatActivity {
         initMenu();
     }
 
-    protected void highlightWrongForm(LinearLayout form) {
-        int childCount = form.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            View v = form.getChildAt(i);
-            if (v instanceof TextView) {
-                v.setBackground(getDrawable());
-            }
-        }
+    protected void highlightWrongForm(List<View> wrongFields) {
+        wrongFields.forEach(v-> {
+            ((TextView) v).setError("Field error");
+        });
     }
 
-    protected boolean checkFieldsForm(LinearLayout form) {
+    protected List<View> checkFieldsForm(LinearLayout form) {
         int childCount = form.getChildCount();
-        StringBuilder typedPasswords = new StringBuilder();
+        List<View> wrongFields = new ArrayList<>();
+        View passwordField = null;
+        String password = "";
+        String retypePassword;
         for (int i = 0; i < childCount; i++) {
             View v = form.getChildAt(i);
             if (v instanceof TextView) {
-                if (((TextView) v).getText().equals("")) {
-                    return false;
-                } else {
-                    String idString = v.getResources().getResourceEntryName(v.getId()); // widgetA1
-                    if (idString.contains("password")) {
-                        typedPasswords.append(((TextView) v).getText().toString()).append(",");
+                if (((TextView) v).getText().toString().equals("")) {
+                    wrongFields.add(v);
+                }
+
+                String idString = v.getResources().getResourceEntryName(v.getId()); // widgetA1
+                if (idString.contains("password")) {
+                    password = ((TextView) v).getText().toString();
+                    passwordField = v;
+                }
+                if (idString.contains("retype")) {
+                    retypePassword = ((TextView) v).getText().toString();
+                    if (!password.equals(retypePassword)) {
+                        wrongFields.add(v);
+                        wrongFields.add(passwordField);
                     }
                 }
             }
         }
 
-        if (!typedPasswords.toString().equals("") && typedPasswords.toString().contains(",")) {
-            String first = typedPasswords.toString().split(",")[0];
-            for (String pass : typedPasswords.toString().split(",")) {
-                if (!pass.equals(first)) {
-                    return false;
-                }
-            }
-        }
-
-
-        return true;
+        return wrongFields;
     }
 
     protected void initMenu() {
