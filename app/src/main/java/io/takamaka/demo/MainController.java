@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -19,6 +20,46 @@ public class MainController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initMenu();
+    }
+
+    protected void highlightWrongForm(LinearLayout form) {
+        int childCount = form.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View v = form.getChildAt(i);
+            if (v instanceof TextView) {
+                v.setBackground(getDrawable());
+            }
+        }
+    }
+
+    protected boolean checkFieldsForm(LinearLayout form) {
+        int childCount = form.getChildCount();
+        StringBuilder typedPasswords = new StringBuilder();
+        for (int i = 0; i < childCount; i++) {
+            View v = form.getChildAt(i);
+            if (v instanceof TextView) {
+                if (((TextView) v).getText().equals("")) {
+                    return false;
+                } else {
+                    String idString = v.getResources().getResourceEntryName(v.getId()); // widgetA1
+                    if (idString.contains("password")) {
+                        typedPasswords.append(((TextView) v).getText().toString()).append(",");
+                    }
+                }
+            }
+        }
+
+        if (!typedPasswords.toString().equals("") && typedPasswords.toString().contains(",")) {
+            String first = typedPasswords.toString().split(",")[0];
+            for (String pass : typedPasswords.toString().split(",")) {
+                if (!pass.equals(first)) {
+                    return false;
+                }
+            }
+        }
+
+
+        return true;
     }
 
     protected void initMenu() {
@@ -58,46 +99,43 @@ public class MainController extends AppCompatActivity {
         // we have to handle the Parent FAB button first, by
         // using setOnClickListener you can see below
         takamakaButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (!isAllFabsVisible) {
+                view -> {
+                    if (!isAllFabsVisible) {
 
-                            // when isAllFabsVisible becomes
-                            // true make all the action name
-                            // texts and FABs VISIBLE.
-                            loginButton.show();
-                            tokensButton.show();
-                            createWalletFab.show();
-                            restoreWalletFab.show();
-                            takamakaButtonText.setVisibility(View.VISIBLE);
-                            loginButtonText.setVisibility(View.VISIBLE);
-                            createWalletText.setVisibility(View.VISIBLE);
-                            restoreWalletText.setVisibility(View.VISIBLE);
+                        // when isAllFabsVisible becomes
+                        // true make all the action name
+                        // texts and FABs VISIBLE.
+                        loginButton.show();
+                        tokensButton.show();
+                        createWalletFab.show();
+                        restoreWalletFab.show();
+                        takamakaButtonText.setVisibility(View.VISIBLE);
+                        loginButtonText.setVisibility(View.VISIBLE);
+                        createWalletText.setVisibility(View.VISIBLE);
+                        restoreWalletText.setVisibility(View.VISIBLE);
 
-                            // make the boolean variable true as
-                            // we have set the sub FABs
-                            // visibility to GONE
-                            isAllFabsVisible = true;
-                        } else {
+                        // make the boolean variable true as
+                        // we have set the sub FABs
+                        // visibility to GONE
+                        isAllFabsVisible = true;
+                    } else {
 
-                            // when isAllFabsVisible becomes
-                            // true make all the action name
-                            // texts and FABs GONE.
-                            loginButton.hide();
-                            tokensButton.hide();
-                            createWalletFab.hide();
-                            restoreWalletFab.hide();
-                            takamakaButtonText.setVisibility(View.GONE);
-                            loginButtonText.setVisibility(View.GONE);
-                            createWalletText.setVisibility(View.GONE);
-                            restoreWalletText.setVisibility(View.GONE);
+                        // when isAllFabsVisible becomes
+                        // true make all the action name
+                        // texts and FABs GONE.
+                        loginButton.hide();
+                        tokensButton.hide();
+                        createWalletFab.hide();
+                        restoreWalletFab.hide();
+                        takamakaButtonText.setVisibility(View.GONE);
+                        loginButtonText.setVisibility(View.GONE);
+                        createWalletText.setVisibility(View.GONE);
+                        restoreWalletText.setVisibility(View.GONE);
 
-                            // make the boolean variable false
-                            // as we have set the sub FABs
-                            // visibility to GONE
-                            isAllFabsVisible = false;
-                        }
+                        // make the boolean variable false
+                        // as we have set the sub FABs
+                        // visibility to GONE
+                        isAllFabsVisible = false;
                     }
                 });
 
@@ -106,12 +144,9 @@ public class MainController extends AppCompatActivity {
         // will be shown only when they are visible and only
         // when user clicks on them
         tokensButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent activity2Intent = new Intent(getApplicationContext(), SendTokenActivity.class);
-                        startActivity(activity2Intent);
-                    }
+                view -> {
+                    Intent activity2Intent = new Intent(getApplicationContext(), SendTokenActivity.class);
+                    startActivity(activity2Intent);
                 });
 
         // below is the sample action to handle add alarm
@@ -119,32 +154,21 @@ public class MainController extends AppCompatActivity {
         // will be shown only when they are visible and only
         // when user clicks on them
         loginButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent activity2Intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(activity2Intent);
-                    }
+                view -> {
+                    Intent activity2Intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(activity2Intent);
                 });
 
         createWalletFab.setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        Intent activity2Intent = new Intent(getApplicationContext(), CreateWalletActivity.class);
-                        startActivity(activity2Intent);
-                    }
+                v -> {
+                    Intent activity2Intent = new Intent(getApplicationContext(), CreateWalletActivity.class);
+                    startActivity(activity2Intent);
                 });
 
         restoreWalletFab.setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        Intent activity2Intent = new Intent(getApplicationContext(), RestoreWalletActivity.class);
-                        startActivity(activity2Intent);
-                    }
+                v -> {
+                    Intent activity2Intent = new Intent(getApplicationContext(), RestoreWalletActivity.class);
+                    startActivity(activity2Intent);
                 }
         );
     }
