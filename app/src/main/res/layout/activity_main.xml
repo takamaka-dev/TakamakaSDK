@@ -20,10 +20,12 @@
         android:layout_gravity="end"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_black_24dp"
+        android:src="@drawable/takamaka_simple_dot_vertical"
+        app:backgroundTint="#173C5A"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/white" />
 
     <!--Floating action button for add alarm-->
     <!--Make sure that you are constraining this
@@ -33,7 +35,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="#173C5A"
         app:fabSize="normal"
+        app:tint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/add_fab"
         app:layout_constraintStart_toStartOf="@+id/add_fab"
         app:srcCompat="@drawable/ic_add_alarm_black_24dp" />
@@ -61,7 +65,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="#173C5A"
         app:fabSize="normal"
+        app:tint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/add_alarm_fab"
         app:layout_constraintEnd_toEndOf="@+id/add_alarm_fab"
         app:layout_constraintStart_toStartOf="@+id/add_alarm_fab"
@@ -91,7 +97,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="#173C5A"
         app:fabSize="normal"
+        app:tint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/create_wallet"
         app:layout_constraintEnd_toEndOf="@+id/create_wallet"
         app:layout_constraintStart_toStartOf="@+id/create_wallet"
@@ -121,7 +129,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="#173C5A"
         app:fabSize="normal"
+        app:tint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/restore_wallet"
         app:layout_constraintEnd_toEndOf="@+id/restore_wallet"
         app:layout_constraintStart_toStartOf="@+id/restore_wallet"
