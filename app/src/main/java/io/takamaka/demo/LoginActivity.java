@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainController extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     // Make sure to use the FloatingActionButton
     // for all the FABs
@@ -25,7 +26,7 @@ public class MainController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         initMenu();
     }
 
@@ -117,7 +118,7 @@ public class MainController extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(MainController.this, "Send tokens section", Toast.LENGTH_SHORT).show();
+                        //TODO
                     }
                 });
 
@@ -129,9 +130,7 @@ public class MainController extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent activity2Intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(activity2Intent);
-
+                        //DO NOTHING
                     }
                 });
 
@@ -140,7 +139,7 @@ public class MainController extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MainController.this, "Create Wallet section", Toast.LENGTH_SHORT).show();
+                        //TODO
                     }
                 });
 
@@ -149,7 +148,7 @@ public class MainController extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MainController.this, "Restore Wallet section", Toast.LENGTH_SHORT).show();
+                        //TODO
                     }
                 }
         );
