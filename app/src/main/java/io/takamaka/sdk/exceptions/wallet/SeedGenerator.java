@@ -176,12 +176,4 @@ public class SeedGenerator {
         return String.join(" ", rndWords);
     }
 
-    public static void main(String[] args) throws NoSuchAlgorithmException, HashEncodeException, InvalidKeySpecException, HashAlgorithmNotFoundException, HashProviderNotFoundException {
-
-        List<String> rndWords = generateWords();
-        //System.out.println(toStringSeed(rndWords));
-        //System.out.println("Seed: " + generateSeedPWH(rndWords));
-
-    }
-
 }

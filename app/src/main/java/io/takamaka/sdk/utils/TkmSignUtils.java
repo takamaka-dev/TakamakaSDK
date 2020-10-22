@@ -406,8 +406,4 @@ public class TkmSignUtils {
         }
     }
 
-    public static void main(String[] args) throws HashEncodeException, HashAlgorithmNotFoundException, HashProviderNotFoundException {
-        System.out.println(getLongID("gatto"));
-    }
-
 }
