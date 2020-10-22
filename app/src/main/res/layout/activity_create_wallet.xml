@@ -37,11 +37,30 @@
         <!--Floating action button for add alarm-->
         <!--Make sure that you are constraining this
         button to the parent button-->
+
+        <!--Action name text for the add alarm button-->
+        <!--Make sure that you are constraining this Text to
+        the add Alarm FAB button-->
+
+
+        <!--Floating action button for add alarm-->
+        <!--Make sure that you are constraining this
+        button to the parent button-->
+
+        <!--Action name text for the add alarm button-->
+        <!--Make sure that you are constraining this Text to
+        the add Alarm FAB button-->
+
+
+        <!--Floating action button for add alarm-->
+        <!--Make sure that you are constraining this
+        button to the parent button-->
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/takamaka_button"
@@ -49,108 +68,57 @@
             app:srcCompat="@drawable/user"
             app:tint="@color/white" />
 
-        <!--Action name text for the add alarm button-->
-        <!--Make sure that you are constraining this Text to
-        the add Alarm FAB button-->
-        <TextView
-            android:id="@+id/login_button_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="Login"
-            app:layout_constraintBottom_toBottomOf="@+id/login_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/login_button" />
-
-
-        <!--Floating action button for add alarm-->
-        <!--Make sure that you are constraining this
-        button to the parent button-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/create_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/login_button"
-            app:layout_constraintEnd_toEndOf="@+id/login_button"
-            app:layout_constraintStart_toStartOf="@+id/login_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/takamaka_button"
             app:srcCompat="@drawable/wallet_100pxbianco"
             app:tint="@color/white" />
 
-        <!--Action name text for the add alarm button-->
-        <!--Make sure that you are constraining this Text to
-        the add Alarm FAB button-->
-        <TextView
-            android:id="@+id/create_wallet_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="Create a new wallet"
-            app:layout_constraintBottom_toBottomOf="@+id/create_wallet"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/create_wallet" />
-
-
-        <!--Floating action button for add alarm-->
-        <!--Make sure that you are constraining this
-        button to the parent button-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/restore_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/create_wallet"
-            app:layout_constraintEnd_toEndOf="@+id/create_wallet"
-            app:layout_constraintStart_toStartOf="@+id/create_wallet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/create_wallet"
             app:srcCompat="@drawable/reuse_100px_1white"
             app:tint="@color/white" />
 
         <!--Action name text for the add alarm button-->
         <!--Make sure that you are constraining this Text to
         the add Alarm FAB button-->
-        <TextView
-            android:id="@+id/restore_wallet_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="Restore an existing wallet"
-            app:layout_constraintBottom_toBottomOf="@+id/restore_wallet"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/restore_wallet" />
 
 
         <!--Floating action button for add person-->
         <!--Make sure that you are constraining this
         button to the add Alarm FAB button-->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/tokens_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="#173C5A"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/restore_wallet"
-            app:layout_constraintEnd_toEndOf="@+id/restore_wallet"
-            app:layout_constraintStart_toStartOf="@+id/restore_wallet"
-            app:srcCompat="@drawable/send_50"
-            app:tint="@color/white" />
 
         <!--Action name text for the add person button-->
         <!--Make sure that you are constraining this Text
         to the add Person FAB button-->
-        <TextView
-            android:id="@+id/tokens_button_text"
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/tokens_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="Send tokens"
-            app:layout_constraintBottom_toBottomOf="@+id/tokens_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tokens_button" />
+            android:layout_marginStart="23dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#173C5A"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/restore_wallet"
+            app:srcCompat="@drawable/send_50"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/textView"
@@ -193,11 +161,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/wallet_name"
-            android:singleLine="true"
+            android:id="@+id/create_wallet_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Wallet Name" />
+            android:hint="Wallet Name"
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/inputPasswordText"
@@ -214,22 +182,18 @@
             android:inputType="textPassword" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/wallet_create_submit"
-                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/create_wallet_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="#173C5A"
+                android:layout_marginTop="16dp"
                 android:text="Create"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 

@@ -16,7 +16,7 @@ import java.util.List;
 public class MainController extends AppCompatActivity {
 
     FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab;
-    TextView takamakaButtonText, loginButtonText, createWalletText, restoreWalletText;
+
     Boolean isAllFabsVisible;
 
     @Override
@@ -27,9 +27,7 @@ public class MainController extends AppCompatActivity {
     }
 
     protected void highlightWrongForm(List<View> wrongFields) {
-        wrongFields.forEach(v-> {
-            ((TextView) v).setError("Field error");
-        });
+        wrongFields.forEach(v-> ((TextView) v).setError("Field error"));
     }
 
     protected List<View> checkFieldsForm(LinearLayout form) {
@@ -73,10 +71,6 @@ public class MainController extends AppCompatActivity {
         createWalletFab = findViewById(R.id.create_wallet);
         restoreWalletFab = findViewById(R.id.restore_wallet);
         // Also register the action name text, of all the FABs.
-        takamakaButtonText = findViewById(R.id.login_button_text);
-        loginButtonText = findViewById(R.id.tokens_button_text);
-        createWalletText = findViewById(R.id.create_wallet_text);
-        restoreWalletText = findViewById(R.id.restore_wallet_text);
 
 
         // Now set all the FABs and all the action name
@@ -85,10 +79,6 @@ public class MainController extends AppCompatActivity {
         tokensButton.setVisibility(View.GONE);
         createWalletFab.setVisibility(View.GONE);
         restoreWalletFab.setVisibility(View.GONE);
-        takamakaButtonText.setVisibility(View.GONE);
-        loginButtonText.setVisibility(View.GONE);
-        createWalletText.setVisibility(View.GONE);
-        restoreWalletText.setVisibility(View.GONE);
 
 
         // make the boolean variable as false, as all the
@@ -110,10 +100,7 @@ public class MainController extends AppCompatActivity {
                         tokensButton.show();
                         createWalletFab.show();
                         restoreWalletFab.show();
-                        takamakaButtonText.setVisibility(View.VISIBLE);
-                        loginButtonText.setVisibility(View.VISIBLE);
-                        createWalletText.setVisibility(View.VISIBLE);
-                        restoreWalletText.setVisibility(View.VISIBLE);
+
 
                         // make the boolean variable true as
                         // we have set the sub FABs
@@ -128,10 +115,6 @@ public class MainController extends AppCompatActivity {
                         tokensButton.hide();
                         createWalletFab.hide();
                         restoreWalletFab.hide();
-                        takamakaButtonText.setVisibility(View.GONE);
-                        loginButtonText.setVisibility(View.GONE);
-                        createWalletText.setVisibility(View.GONE);
-                        restoreWalletText.setVisibility(View.GONE);
 
                         // make the boolean variable false
                         // as we have set the sub FABs
