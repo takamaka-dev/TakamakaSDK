@@ -30,6 +30,9 @@ public class CreateWalletActivity extends MainController {
                 highlightWrongForm(wrongFields);
             }
         });
+
+
+
         initWalletCreation();
     }
 

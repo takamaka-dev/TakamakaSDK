@@ -194,21 +194,24 @@
 
         <EditText
             android:id="@+id/wallet_name"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Wallet Name" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/inputPasswordText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password" />
+            android:ems="10"
+            android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/retype"
+            android:id="@+id/inputPasswordRetypeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Retype password" />
+            android:ems="10"
+            android:inputType="textPassword" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
