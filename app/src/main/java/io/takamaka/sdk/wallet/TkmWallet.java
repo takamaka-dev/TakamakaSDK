@@ -9,7 +9,6 @@ import io.takamaka.sdk.exceptions.wallet.WalletException;
 import io.takamaka.sdk.transactions.InternalTransactionBean;
 import io.takamaka.sdk.transactions.TransactionBean;
 import io.takamaka.sdk.utils.threadSafeUtils.TkmTextUtils;
-import java.util.logging.Level;
 
 /**
  *
