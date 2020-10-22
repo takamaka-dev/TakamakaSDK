@@ -1,11 +1,10 @@
-package io.takamaka.sdk.utils;
+package io.takamaka.sdk.utils.threadSafeUtils;
 
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.KeyDecodeException;
 import io.takamaka.sdk.globalContext.FixedParameters;
-import io.takamaka.sdk.utils.threadSafeUtils.TkmCompressionUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
@@ -391,7 +390,7 @@ public class TkmSignUtils {
             //MessageDigest digest = MessageDigest.getInstance(hashType, BouncyCastleProvider.PROVIDER_NAME);
             ByteBuffer buffer = ByteBuffer.allocate(bitLen / 8);
             buffer.put(byteRes);
-            buffer.flip();//need flip
+            buffer.flip();//need flip 
             return buffer.getLong();
         } catch (Exception ex) {
             throw new HashEncodeException(ex);
@@ -405,5 +404,6 @@ public class TkmSignUtils {
             return 0L;
         }
     }
+
 
 }
