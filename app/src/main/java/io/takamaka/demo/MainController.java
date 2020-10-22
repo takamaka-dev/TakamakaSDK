@@ -46,11 +46,11 @@ public class MainController extends AppCompatActivity {
                 }
 
                 String idString = v.getResources().getResourceEntryName(v.getId()); // widgetA1
-                if (idString.contains("password")) {
+                if (idString.contains("inputPasswordText")) {
                     password = ((TextView) v).getText().toString();
                     passwordField = v;
                 }
-                if (idString.contains("retype")) {
+                if (idString.contains("inputPasswordRetypeText")) {
                     retypePassword = ((TextView) v).getText().toString();
                     if (!password.equals(retypePassword)) {
                         wrongFields.add(v);
