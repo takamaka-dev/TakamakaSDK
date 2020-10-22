@@ -220,7 +220,7 @@
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="8dp"
                 android:background="#173C5A"
                 android:text="Create"
                 app:layout_constraintEnd_toEndOf="parent"
