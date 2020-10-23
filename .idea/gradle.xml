@@ -7,10 +7,11 @@
         <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="13" />
         <option name="modules">
           <set>
-            <option value="/mnt/extra/android_projects/AndroidSdk" />
-            <option value="/mnt/extra/android_projects/AndroidSdk/app" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

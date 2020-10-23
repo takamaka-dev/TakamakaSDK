@@ -9,10 +9,99 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="550dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/imageViewFrom"
+                android:layout_width="100dp"
+                android:layout_height="112dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginEnd="23dp"
+                android:layout_marginRight="23dp"
+                android:layout_weight="1"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/inputFromAddressText"
+                app:srcCompat="@drawable/takamaka_hq_icon" />
+
+            <EditText
+                android:id="@+id/inputFromAddressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:hint="From address"
+                android:shadowColor="#C8C8C8"
+                android:tooltipText="From Address" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="410dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewTo"
+                android:layout_width="100dp"
+                android:layout_height="112dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginEnd="23dp"
+                android:layout_marginRight="23dp"
+                android:layout_weight="1"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/inputFromAddressText"
+                app:srcCompat="@drawable/takamaka_hq_icon" />
+
+            <EditText
+                android:id="@+id/inputToAddressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:hint="To Address"
+                android:shadowColor="#C8C8C8"
+                android:tooltipText="To Address" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:context=".MainController"
-        tools:ignore="HardcodedText">
+        tools:ignore="HardcodedText"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-16dp">
 
         <!--This will be the parent Floating Action Button-->
         <!--After the implementation the Floating Action Button
@@ -37,11 +126,30 @@
         <!--Floating action button for add alarm-->
         <!--Make sure that you are constraining this
         button to the parent button-->
+
+        <!--Action name text for the add alarm button-->
+        <!--Make sure that you are constraining this Text to
+        the add Alarm FAB button-->
+
+
+        <!--Floating action button for add alarm-->
+        <!--Make sure that you are constraining this
+        button to the parent button-->
+
+        <!--Action name text for the add alarm button-->
+        <!--Make sure that you are constraining this Text to
+        the add Alarm FAB button-->
+
+
+        <!--Floating action button for add alarm-->
+        <!--Make sure that you are constraining this
+        button to the parent button-->
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/takamaka_button"
@@ -49,116 +157,138 @@
             app:srcCompat="@drawable/user"
             app:tint="@color/white" />
 
-        <!--Action name text for the add alarm button-->
-        <!--Make sure that you are constraining this Text to
-        the add Alarm FAB button-->
-        <TextView
-            android:id="@+id/login_button_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="Login"
-            app:layout_constraintBottom_toBottomOf="@+id/login_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/login_button" />
-
-
-        <!--Floating action button for add alarm-->
-        <!--Make sure that you are constraining this
-        button to the parent button-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/create_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/login_button"
-            app:layout_constraintEnd_toEndOf="@+id/login_button"
-            app:layout_constraintStart_toStartOf="@+id/login_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/takamaka_button"
             app:srcCompat="@drawable/wallet_100pxbianco"
             app:tint="@color/white" />
 
-        <!--Action name text for the add alarm button-->
-        <!--Make sure that you are constraining this Text to
-        the add Alarm FAB button-->
-        <TextView
-            android:id="@+id/create_wallet_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="Create a new wallet"
-            app:layout_constraintBottom_toBottomOf="@+id/create_wallet"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/create_wallet" />
-
-
-        <!--Floating action button for add alarm-->
-        <!--Make sure that you are constraining this
-        button to the parent button-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/restore_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/create_wallet"
-            app:layout_constraintEnd_toEndOf="@+id/create_wallet"
-            app:layout_constraintStart_toStartOf="@+id/create_wallet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/create_wallet"
             app:srcCompat="@drawable/reuse_100px_1white"
             app:tint="@color/white" />
 
         <!--Action name text for the add alarm button-->
         <!--Make sure that you are constraining this Text to
         the add Alarm FAB button-->
-        <TextView
-            android:id="@+id/restore_wallet_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="Restore an existing wallet"
-            app:layout_constraintBottom_toBottomOf="@+id/restore_wallet"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/restore_wallet" />
 
 
         <!--Floating action button for add person-->
         <!--Make sure that you are constraining this
         button to the add Alarm FAB button-->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/tokens_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:backgroundTint="#173C5A"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/restore_wallet"
-            app:layout_constraintEnd_toEndOf="@+id/restore_wallet"
-            app:layout_constraintStart_toStartOf="@+id/restore_wallet"
-            app:srcCompat="@drawable/send_50"
-            app:tint="@color/white" />
 
         <!--Action name text for the add person button-->
         <!--Make sure that you are constraining this Text
         to the add Person FAB button-->
-        <TextView
-            android:id="@+id/tokens_button_text"
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/tokens_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:text="Send tokens"
-            app:layout_constraintBottom_toBottomOf="@+id/tokens_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tokens_button" />
+            android:layout_marginStart="23dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#173C5A"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/restore_wallet"
+            app:srcCompat="@drawable/send_50"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is the send tokens section!"
-            tools:layout_editor_absoluteX="118dp"
-            tools:layout_editor_absoluteY="234dp" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:text="Send Token"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verify "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.195"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.723" />
+
+        <Button
+            android:id="@+id/inputSendToken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Token"
+            app:layout_constraintBottom_toBottomOf="@+id/restore_wallet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.756"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.74" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="335dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="170dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="TKG"
+                android:text=""
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:hint="TKR"
+                android:text=""
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Write your message"
+                android:text=""
+                android:gravity="center" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
