@@ -18,14 +18,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
-import org.bouncycastle.crypto.digests.SHAKEDigest;
+
 import org.bouncycastle.crypto.params.Ed25519PublicKeyParameters;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.pqc.crypto.qtesla.QTESLAPublicKeyParameters;
-import org.bouncycastle.pqc.crypto.qtesla.QTESLASecurityCategory;
-import org.bouncycastle.util.encoders.Hex;
-import org.bouncycastle.util.encoders.UrlBase64;
+import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
+import org.spongycastle.crypto.digests.SHAKEDigest;
+import org.spongycastle.jce.provider.BouncyCastleProvider;
+import org.spongycastle.util.encoders.Hex;
+import org.spongycastle.util.encoders.UrlBase64;
+
 
 /**
  *
@@ -39,20 +39,6 @@ public class TkmSignUtils {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             UrlBase64.decode(publicKey, baos);
             Ed25519PublicKeyParameters edPublicKey = new Ed25519PublicKeyParameters(baos.toByteArray(), 0);
-            baos.close();
-            AsymmetricCipherKeyPair ackp = new AsymmetricCipherKeyPair(edPublicKey, null);
-            return ackp;
-        } catch (Exception ex) {
-            throw new KeyDecodeException(ex);
-        }
-    }
-
-    public static AsymmetricCipherKeyPair stringPublicKeyToKeyPairBCQTESLAPSSC1(String publicKey) throws KeyDecodeException {
-        try {
-            //UrlBase64 b64e = new UrlBase64();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            UrlBase64.decode(publicKey, baos);
-            QTESLAPublicKeyParameters edPublicKey = new QTESLAPublicKeyParameters(QTESLASecurityCategory.PROVABLY_SECURE_I, baos.toByteArray());
             baos.close();
             AsymmetricCipherKeyPair ackp = new AsymmetricCipherKeyPair(edPublicKey, null);
             return ackp;
@@ -218,11 +204,18 @@ public class TkmSignUtils {
             if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
                 Security.addProvider(new BouncyCastleProvider());
             }
+
+            System.out.println("BATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAY");
             MessageDigest digest = MessageDigest.getInstance(hashType, BouncyCastleProvider.PROVIDER_NAME);
+            System.out.println("BATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAY");
             digest.reset();
+            System.out.println("BATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAY");
             ByteBuffer bb = ByteBuffer.wrap(inputBytes);
+            System.out.println("BATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAY");
             digest.update(bb);
+            System.out.println("BATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAY");
             Hex.encode(digest.digest(), baos);
+            System.out.println("BATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAYBATMANISGAY");
             bb.clear();
             return baos.toString(FixedParameters.CHARSET.name());
 
