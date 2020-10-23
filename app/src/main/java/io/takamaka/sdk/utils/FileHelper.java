@@ -1,6 +1,10 @@
 package io.takamaka.sdk.utils;
 
 
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.os.Environment;
+
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
@@ -45,14 +49,16 @@ public class FileHelper {
 
     public static final Object KEYLOCK = new Object();
 
+
+
     /**
      * return the default path to application directory
      *
      * @return
      */
     public static Path getDefaultApplicationDirectoryPath() {
+        System.setProperty("user.home", "/storage/emulated/0/Android/data/com.example.androidsdk/files");
         String userHome = System.getProperty("user.home");
-        //Log.log(Level.INFO, userHome);
         return Paths.get(userHome, DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME);
     }
 
