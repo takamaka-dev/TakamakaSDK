@@ -2,16 +2,25 @@ package io.takamaka.demo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.takamaka.sdk.utils.FileHelper;
 
 public class MainController extends AppCompatActivity {
 
@@ -24,7 +33,16 @@ public class MainController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initMenu();
+        Context context = new ContextWrapper(getApplicationContext());
+        System.out.println("Path dove poter scrivere: " + context.getExternalFilesDir(null));
+        try {
+            FileHelper.initProjectFiles();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
 
     protected void highlightWrongForm(List<View> wrongFields) {
         wrongFields.forEach(v-> ((TextView) v).setError("Field error"));
