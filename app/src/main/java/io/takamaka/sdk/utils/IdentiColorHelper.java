@@ -3,15 +3,12 @@ package io.takamaka.sdk.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 
 import java.util.stream.IntStream;
 
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
-import java.util.stream.IntStream;
 
 public class IdentiColorHelper {
 
@@ -201,14 +198,25 @@ public class IdentiColorHelper {
         return Color.valueOf(cfh(hex.substring(0, 2)), cfh(hex.substring(2, 4)), cfh(hex.substring(4, 6)));
     }
 
-    public static Color bgColorFromHex(String hex) {
+//    public static Color bgColorFromHex(String hex) {
+//        int r = cfh(hex.substring(0, 2));
+//        int g = cfh(hex.substring(2, 4));
+//        int b = cfh(hex.substring(4, 6));
+//        if (r > 220 & g > 220 & b > 220) {
+//            return Color.parseColor("#000000");//Color.valueOf(0, 0, 0);
+//        } else {
+//            return Color.valueOf(255, 255, 255);
+//        }
+//    }
+
+    public static int bgColorFromHex(String hex) {
         int r = cfh(hex.substring(0, 2));
         int g = cfh(hex.substring(2, 4));
         int b = cfh(hex.substring(4, 6));
         if (r > 220 & g > 220 & b > 220) {
-            return Color.valueOf(0, 0, 0);
+            return Color.parseColor("#000000");//Color.valueOf(0, 0, 0);
         } else {
-            return Color.valueOf(255, 255, 255);
+            return Color.parseColor("#ffffff");//Color.valueOf(255, 255, 255);
         }
     }
 
@@ -219,9 +227,10 @@ public class IdentiColorHelper {
         String hex = TkmSignUtils.Hash256ToHex(value);
         int[][] hrandMatrix = get256by256SquareBlockHIRND(hex.substring(0, 60));
         Color fgC = fgColorFromHex(hex.substring(58, 64));
-        Color bgC = bgColorFromHex(hex.substring(58, 64));
-        int fg = fgC.toArgb();
-        int bg = bgC.toArgb();
+        System.out.println("FGC GENERATO: " + fgC);
+        System.out.println("COLOR string input: " + "#" + hex.substring(58, 64));
+        int bg = bgColorFromHex(hex.substring(58, 64));
+        int fg = Color.parseColor("#" + hex.substring(58, 64));//fgC.toArgb();
         IntStream.range(0, len).forEach((int indexRow) -> {
             IntStream.range(0, len).forEach((int indexCol) -> {
                 switch (hrandMatrix[indexRow][indexCol]) {
