@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:contentDescription="Takamaka button"
             android:src="@drawable/takamaka_simple_dot_vertical"
             app:backgroundTint="#173C5A"
@@ -149,7 +149,7 @@
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/takamaka_button"
@@ -162,7 +162,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -175,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -201,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -214,7 +214,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="24dp"
             android:text="Send Token"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -224,68 +224,65 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Verify "
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.195"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.723" />
-
-        <Button
-            android:id="@+id/inputSendToken"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send Token"
-            app:layout_constraintBottom_toBottomOf="@+id/restore_wallet"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.756"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.74" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="335dp"
+            android:layout_marginTop="310dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="170dp"
+            android:layout_marginBottom="145dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0">
 
-            <TextView
-                android:id="@+id/textView1"
+            <EditText
+                android:id="@+id/inputTextNumberTKG"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:hint="TKG"
-                android:text=""
-                android:gravity="center"/>
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="TKG: 12345"
+                android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/textView2"
+            <EditText
+                android:id="@+id/inputTextNumberTKR"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:hint="TKR"
-                android:text=""
-                android:gravity="center" />
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="TKR: 12345"
+                android:inputType="numberDecimal" />
 
-            <TextView
-                android:id="@+id/textView3"
+            <EditText
+                android:id="@+id/inputTextMessage"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
                 android:hint="Write your message"
-                android:text=""
-                android:gravity="center" />
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/inputButtonVerify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verify Cost" />
+
+            <EditText
+                android:id="@+id/editTextNumber3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/inputSendToken"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Token" />
 
         </LinearLayout>
 
