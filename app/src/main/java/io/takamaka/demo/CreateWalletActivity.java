@@ -1,8 +1,8 @@
 package io.takamaka.demo;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -86,22 +86,19 @@ public class CreateWalletActivity extends MainController {
                 passwordField = findViewById(R.id.inputPasswordText);
                 setInternalName(internalNameField.getText().toString());
                 setPassword(passwordField.getText().toString());
-                try {
-                    initWalletCreation();
-                } catch (WalletException | InterruptedException e) {
-                    e.printStackTrace();
-                }
+                initWalletCreation();
             }
         });
     }
 
-    public void initWalletCreation() throws WalletException, InterruptedException {
+    public void initWalletCreation() {
         //setIwk(new InstanceWalletKeyStoreBCED25519(getInternalName(), getPassword()));
         //System.out.println("Wallet creato: " + getIwk().getPublicKeyAtIndexURL64(0));
         CreateWalletTasks cwt = new CreateWalletTasks();
         cwt.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CreateWalletTasks extends AsyncTask<Void, Void, Void> {
         protected void onPreExecute() {
             pgsBar.setVisibility(View.VISIBLE);
@@ -118,13 +115,7 @@ public class CreateWalletActivity extends MainController {
 
                 imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(getIwk().getPublicKeyAtIndexURL64(0))));
 
-            } catch (WalletException e) {
-                e.printStackTrace();
-            } catch (HashEncodeException e) {
-                e.printStackTrace();
-            } catch (HashAlgorithmNotFoundException e) {
-                e.printStackTrace();
-            } catch (HashProviderNotFoundException e) {
+            } catch (WalletException | HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException e) {
                 e.printStackTrace();
             }
         }
