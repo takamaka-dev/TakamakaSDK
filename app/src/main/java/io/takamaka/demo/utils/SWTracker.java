@@ -14,7 +14,7 @@ import okhttp3.OkHttpClient;
 
 
 public class SWTracker {
-
+    private static int currIndex = 0;
     private static final Object SWTLOCK = new Object();
     private static NewWalletBean nwb = null;
     private static BalanceBean bb = null;
@@ -27,6 +27,14 @@ public class SWTracker {
     private static ConcurrentSkipListMap<String, ComboItemSettingsBookmarkUrl> sendTransactionUrl;
     private static ConcurrentSkipListMap<String, ComboItemSettingsBookmarkUrl> apiUrl;
     private static ConcurrentSkipListMap<String, ComboItemSettingsBookmarkUrl> fastTag;
+
+    public static int getCurrIndex() {
+        return currIndex;
+    }
+
+    public static void setCurrIndex(int currIndex) {
+        SWTracker.currIndex = currIndex;
+    }
 
     public static BalanceBean getBb() {
         return bb;

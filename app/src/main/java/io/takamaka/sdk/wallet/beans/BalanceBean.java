@@ -2,11 +2,11 @@ package io.takamaka.sdk.wallet.beans;
 
 public class BalanceBean {
     private String address;
-    private long greenBalance;
-    private long redBalance;
-    private int greenPenalty;
-    private int redPenalty;
-    private int penaltySlots;
+    private String greenBalance;
+    private String redBalance;
+    private String greenPenalty;
+    private String redPenalty;
+    private String penaltySlots;
     private String generatorSith;
 
     public String getAddress() {
@@ -17,43 +17,43 @@ public class BalanceBean {
         this.address = address;
     }
 
-    public long getGreenBalance() {
+    public String getGreenBalance() {
         return greenBalance;
     }
 
-    public void setGreenBalance(long greenBalance) {
+    public void setGreenBalance(String greenBalance) {
         this.greenBalance = greenBalance;
     }
 
-    public long getRedBalance() {
+    public String getRedBalance() {
         return redBalance;
     }
 
-    public void setRedBalance(long redBalance) {
+    public void setRedBalance(String redBalance) {
         this.redBalance = redBalance;
     }
 
-    public int getGreenPenalty() {
+    public String getGreenPenalty() {
         return greenPenalty;
     }
 
-    public void setGreenPenalty(int greenPenalty) {
+    public void setGreenPenalty(String greenPenalty) {
         this.greenPenalty = greenPenalty;
     }
 
-    public int getRedPenalty() {
+    public String getRedPenalty() {
         return redPenalty;
     }
 
-    public void setRedPenalty(int redPenalty) {
+    public void setRedPenalty(String redPenalty) {
         this.redPenalty = redPenalty;
     }
 
-    public int getPenaltySlots() {
+    public String getPenaltySlots() {
         return penaltySlots;
     }
 
-    public void setPenaltySlots(int penaltySlots) {
+    public void setPenaltySlots(String penaltySlots) {
         this.penaltySlots = penaltySlots;
     }
 

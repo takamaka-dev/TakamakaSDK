@@ -1,7 +1,11 @@
 package io.takamaka.demo;
 
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -9,7 +13,11 @@ import com.google.gson.Gson;
 import java.io.IOException;
 
 import io.takamaka.demo.utils.SWTracker;
+import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
+import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
+import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
+import io.takamaka.sdk.utils.IdentiColorHelper;
 import io.takamaka.sdk.wallet.beans.BalanceBean;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -24,6 +32,10 @@ public class HomeWalletActivity extends MainController {
     TextView ftkgValue;
     TextView ftkrValue;
     TextView labelValWalletName;
+    TextView labelCurrentAddress;
+    TextView editTextRefreshIndex;
+    ImageView imageViewIdenticon;
+    Button refreshIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +45,40 @@ public class HomeWalletActivity extends MainController {
         CallAPI callApi = new CallAPI();
         System.out.println("IWK: " + SWTracker.i().getIwk());
         try {
-            callApi.execute(SWTracker.i().getBalanceEndpoint().toString(), SWTracker.i().getIwk().getPublicKeyAtIndexURL64(0));
+            callApi.execute(SWTracker.i().getBalanceEndpoint().toString(), SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
         } catch (WalletException e) {
             e.printStackTrace();
         }
+        imageViewIdenticon = findViewById(R.id.imageViewIdenticon);
+        try {
+            imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()))));
+        } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException | WalletException e) {
+            e.printStackTrace();
+        }
+        labelCurrentAddress = findViewById(R.id.label_current_address);
+        try {
+            labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
+        } catch (WalletException e) {
+            e.printStackTrace();
+        }
+        refreshIndex = findViewById(R.id.button_refresh_index);
+        editTextRefreshIndex = findViewById(R.id.edit_text_refresh_index);
+
+        refreshIndex.setOnClickListener(
+                view -> {
+                    System.out.println("PIPPONEEEEEEE2222: " + Integer.parseInt(editTextRefreshIndex.getText().toString()));
+                    SWTracker.setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString()));
+                    try {
+                        labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
+                        try {
+                            imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()))));
+                        } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException | WalletException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (WalletException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     private class CallAPI extends AsyncTask<String, String, Void> {
@@ -55,14 +97,12 @@ public class HomeWalletActivity extends MainController {
             ftkrValue = findViewById(R.id.label_val_ftkr);
             labelValWalletName = findViewById(R.id.label_val_wallet_name);
 
-            System.out.println("PIPPONEEEEEEEE: " + tkgValue);
-
-
-            tkgValue.setText((int) SWTracker.i().getBb().getGreenBalance());
-            tkrValue.setText((int) SWTracker.i().getBb().getRedBalance());
-            ftkgValue.setText((int) SWTracker.i().getBb().getGreenPenalty());
-            ftkrValue.setText((int) SWTracker.i().getBb().getRedPenalty());
+            tkgValue.setText(SWTracker.getBb().getGreenBalance());
+            tkrValue.setText(SWTracker.getBb().getRedBalance());
+            ftkgValue.setText(SWTracker.getBb().getGreenPenalty());
+            ftkrValue.setText(SWTracker.getBb().getRedPenalty());
             labelValWalletName.setText(SWTracker.i().getNewWalletBean().getName());
+
         }
 
         @Override
