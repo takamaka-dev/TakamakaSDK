@@ -14,24 +14,19 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.takamaka.sdk.globalContext.FixedParameters;
+import io.takamaka.sdk.main.defaults.DefaultInitParameters;
+import io.takamaka.sdk.utils.ComboItemSettingsBookmarkUrl;
 import io.takamaka.sdk.utils.FileHelper;
 import io.takamaka.sdk.wallet.InstanceWalletKeystoreInterface;
+import io.takamaka.sdk.wallet.NewWalletBean;
 
 public class MainController extends AppCompatActivity {
-
-    protected InstanceWalletKeystoreInterface iwk;
-
-    public InstanceWalletKeystoreInterface getIwk() {
-        return iwk;
-    }
-
-    public void setIwk(InstanceWalletKeystoreInterface iwk) {
-        this.iwk = iwk;
-    }
-
     FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab;
 
     Boolean isAllFabsVisible;
@@ -142,6 +137,4 @@ public class MainController extends AppCompatActivity {
                 }
         );
     }
-
-
 }

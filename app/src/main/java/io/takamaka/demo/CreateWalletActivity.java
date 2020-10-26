@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.takamaka.demo.utils.SWTracker;
+
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
@@ -23,6 +25,7 @@ import io.takamaka.sdk.exceptions.wallet.UnlockWalletException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
 import io.takamaka.sdk.utils.IdentiColorHelper;
 import io.takamaka.sdk.wallet.InstanceWalletKeyStoreBCED25519;
+import io.takamaka.sdk.wallet.NewWalletBean;
 
 public class CreateWalletActivity extends MainController {
 
@@ -100,12 +103,20 @@ public class CreateWalletActivity extends MainController {
         protected void onPostExecute(Void result) {
             try {
                 pgsBar.setVisibility(View.INVISIBLE);
-                System.out.println("Wallet creato: " + getIwk().getPublicKeyAtIndexURL64(0));
+                System.out.println("Wallet creato: " + SWTracker.i().getIwk().getPublicKeyAtIndexURL64(0));
 
-                imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(getIwk().getPublicKeyAtIndexURL64(0))));
+                imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(0))));
 
-                Intent activity2Intent = new Intent(getApplicationContext(), SendTokenActivity.class);
+                NewWalletBean nwb = new NewWalletBean();
+                nwb.setName(getInternalName());
+                nwb.setPassword(getPassword().toCharArray());
+
+                SWTracker.i().setNwb(nwb);
+
+                Intent activity2Intent = new Intent(getApplicationContext(), HomeWalletActivity.class);
                 startActivity(activity2Intent);
+
+
 
             } catch (WalletException | HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException e) {
                 e.printStackTrace();
@@ -115,7 +126,7 @@ public class CreateWalletActivity extends MainController {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                setIwk(new InstanceWalletKeyStoreBCED25519(getInternalName(), getPassword()));
+                SWTracker.i().setIwk(new InstanceWalletKeyStoreBCED25519(getInternalName(), getPassword()));
             } catch (UnlockWalletException e) {
                 e.printStackTrace();
             }
