@@ -2,6 +2,7 @@ package io.takamaka.demo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,24 +23,12 @@ import io.takamaka.sdk.exceptions.wallet.UnlockWalletException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
 import io.takamaka.sdk.utils.IdentiColorHelper;
 import io.takamaka.sdk.wallet.InstanceWalletKeyStoreBCED25519;
-import io.takamaka.sdk.wallet.InstanceWalletKeystoreInterface;
 
 public class CreateWalletActivity extends MainController {
 
     protected ProgressBar pgsBar;
 
     protected Context context;
-
-    private InstanceWalletKeystoreInterface iwk;
-
-    public InstanceWalletKeystoreInterface getIwk() {
-        return iwk;
-    }
-
-    public void setIwk(InstanceWalletKeystoreInterface iwk) {
-        this.iwk = iwk;
-    }
-
 
     Button walletCreateSubmit;
     TextView internalNameField, passwordField;
@@ -114,6 +103,9 @@ public class CreateWalletActivity extends MainController {
                 System.out.println("Wallet creato: " + getIwk().getPublicKeyAtIndexURL64(0));
 
                 imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(getIwk().getPublicKeyAtIndexURL64(0))));
+
+                Intent activity2Intent = new Intent(getApplicationContext(), SendTokenActivity.class);
+                startActivity(activity2Intent);
 
             } catch (WalletException | HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException e) {
                 e.printStackTrace();

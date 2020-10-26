@@ -18,8 +18,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.takamaka.sdk.utils.FileHelper;
+import io.takamaka.sdk.wallet.InstanceWalletKeystoreInterface;
 
 public class MainController extends AppCompatActivity {
+
+    protected InstanceWalletKeystoreInterface iwk;
+
+    public InstanceWalletKeystoreInterface getIwk() {
+        return iwk;
+    }
+
+    public void setIwk(InstanceWalletKeystoreInterface iwk) {
+        this.iwk = iwk;
+    }
+
     FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab;
 
     Boolean isAllFabsVisible;
