@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/takamaka_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Takamaka button"
+        android:src="@drawable/takamaka_simple_dot_vertical"
+        app:backgroundTint="#173C5A"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#173C5A"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/takamaka_button"
+        app:layout_constraintStart_toStartOf="@+id/takamaka_button"
+        app:srcCompat="@drawable/user"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#173C5A"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/wallet_100pxbianco"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/restore_wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#173C5A"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/create_wallet"
+        app:layout_constraintEnd_toEndOf="@+id/create_wallet"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/create_wallet"
+        app:srcCompat="@drawable/reuse_100px_1white"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tokens_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#173C5A"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/restore_wallet"
+        app:layout_constraintEnd_toEndOf="@+id/restore_wallet"
+        app:layout_constraintStart_toStartOf="@+id/restore_wallet"
+        app:srcCompat="@drawable/send_50"
+        app:tint="@color/white" />
+</androidx.constraintlayout.widget.ConstraintLayout>
