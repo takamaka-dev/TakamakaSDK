@@ -19,14 +19,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="Takamaka button"
         android:src="@drawable/takamaka_simple_dot_vertical"
         app:backgroundTint="#173C5A"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/white"
-        android:contentDescription="Takamaka button" />
+        app:tint="@color/white" />
 
     <!--Floating action button for add alarm-->
     <!--Make sure that you are constraining this
@@ -39,7 +39,7 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#173C5A"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/takamaka_button"
@@ -85,7 +85,7 @@
         android:id="@+id/restore_wallet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#173C5A"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/create_wallet"
@@ -99,13 +99,26 @@
         android:id="@+id/tokens_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#173C5A"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/restore_wallet"
         app:layout_constraintEnd_toEndOf="@+id/restore_wallet"
         app:layout_constraintStart_toStartOf="@+id/restore_wallet"
         app:srcCompat="@drawable/send_50"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#173C5A"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/gears_50px"
         app:tint="@color/white" />
 
     <!--Action name text for the add person button-->

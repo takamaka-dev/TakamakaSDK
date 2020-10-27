@@ -27,7 +27,7 @@ import io.takamaka.sdk.wallet.InstanceWalletKeystoreInterface;
 import io.takamaka.sdk.wallet.NewWalletBean;
 
 public class MainController extends AppCompatActivity {
-    FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab;
+    FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab, settingsButton;
 
     Boolean isAllFabsVisible;
 
@@ -88,10 +88,12 @@ public class MainController extends AppCompatActivity {
         tokensButton = findViewById(R.id.tokens_button);
         createWalletFab = findViewById(R.id.create_wallet);
         restoreWalletFab = findViewById(R.id.restore_wallet);
+        settingsButton = findViewById(R.id.settings_button);
         loginButton.setVisibility(View.GONE);
         tokensButton.setVisibility(View.GONE);
         createWalletFab.setVisibility(View.GONE);
         restoreWalletFab.setVisibility(View.GONE);
+        //settingsButton.setVisibility(View.GONE);
 
         isAllFabsVisible = false;
 
@@ -102,39 +104,49 @@ public class MainController extends AppCompatActivity {
                         tokensButton.show();
                         createWalletFab.show();
                         restoreWalletFab.show();
+                        settingsButton.show();
                         isAllFabsVisible = true;
                     } else {
                         loginButton.hide();
                         tokensButton.hide();
                         createWalletFab.hide();
                         restoreWalletFab.hide();
+                        //settingsButton.hide();
                         isAllFabsVisible = false;
                     }
                 });
 
         tokensButton.setOnClickListener(
                 view -> {
-                    Intent activity2Intent = new Intent(getApplicationContext(), SendTokenActivity.class);
-                    startActivity(activity2Intent);
+                    Intent activityTokens = new Intent(getApplicationContext(), SendTokenActivity.class);
+                    startActivity(activityTokens);
                 });
 
         loginButton.setOnClickListener(
                 view -> {
-                    Intent activity2Intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(activity2Intent);
+                    Intent activityLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(activityLogin);
                 });
 
         createWalletFab.setOnClickListener(
                 v -> {
-                    Intent activity2Intent = new Intent(getApplicationContext(), CreateWalletActivity.class);
-                    startActivity(activity2Intent);
+                    Intent activityCreate = new Intent(getApplicationContext(), CreateWalletActivity.class);
+                    startActivity(activityCreate);
                 });
 
         restoreWalletFab.setOnClickListener(
                 v -> {
-                    Intent activity2Intent = new Intent(getApplicationContext(), RestoreWalletActivity.class);
-                    startActivity(activity2Intent);
+                    Intent activityRestore = new Intent(getApplicationContext(), RestoreWalletActivity.class);
+                    startActivity(activityRestore);
                 }
         );
+
+        settingsButton.setOnClickListener(
+                v -> {
+                    Intent activitySettings = new Intent(getApplicationContext(), SettingsActivity.class);
+                    startActivity(activitySettings);
+                }
+        );
+
     }
 }

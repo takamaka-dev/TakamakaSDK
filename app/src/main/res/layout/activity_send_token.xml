@@ -7,13 +7,84 @@
     tools:context=".SendTokenActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="550dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="310dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/inputTextNumberTKG"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="TKG: 12345"
+                    android:inputType="numberDecimal" />
+
+                <EditText
+                    android:id="@+id/inputTextNumberTKR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="TKR: 12345"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/inputTextMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Write your message"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/inputButtonVerify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verify Cost" />
+
+            <EditText
+                android:id="@+id/editTextNumber3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/inputSendToken"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Token" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -42,8 +113,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textMultiLine"
                 android:hint="From address"
+                android:inputType="textMultiLine"
                 android:shadowColor="#C8C8C8"
                 android:tooltipText="From Address" />
 
@@ -52,21 +123,21 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="410dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageViewTo"
@@ -86,8 +157,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textMultiLine"
                 android:hint="To Address"
+                android:inputType="textMultiLine"
                 android:shadowColor="#C8C8C8"
                 android:tooltipText="To Address" />
 
@@ -97,24 +168,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:context=".MainController"
-        tools:ignore="HardcodedText"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="-16dp">
+        tools:ignore="HardcodedText">
 
         <!--This will be the parent Floating Action Button-->
         <!--After the implementation the Floating Action Button
         at the bottom right corner-->
         <!--After clicking the above button the following two buttons
         will pop up. So this button is considered as parent FAB-->
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/takamaka_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="Takamaka button"
             android:src="@drawable/takamaka_simple_dot_vertical"
             app:backgroundTint="#173C5A"
@@ -149,7 +224,7 @@
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/takamaka_button"
@@ -162,7 +237,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -175,7 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -201,7 +276,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -209,82 +284,18 @@
             app:srcCompat="@drawable/send_50"
             app:tint="@color/white" />
 
-        <TextView
-            android:id="@+id/textView"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/settings_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
-            android:text="Send Token"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="310dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="145dp"
-            android:orientation="vertical"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#173C5A"
+            app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
-
-            <EditText
-                android:id="@+id/inputTextNumberTKG"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="TKG: 12345"
-                android:inputType="numberDecimal" />
-
-            <EditText
-                android:id="@+id/inputTextNumberTKR"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="TKR: 12345"
-                android:inputType="numberDecimal" />
-
-            <EditText
-                android:id="@+id/inputTextMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Write your message"
-                android:inputType="textMultiLine" />
-
-            <Button
-                android:id="@+id/inputButtonVerify"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Verify Cost" />
-
-            <EditText
-                android:id="@+id/editTextNumber3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number" />
-
-            <Button
-                android:id="@+id/inputSendToken"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Send Token" />
-
-        </LinearLayout>
+            app:srcCompat="@drawable/gears_50px"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
