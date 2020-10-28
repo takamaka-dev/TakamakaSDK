@@ -69,6 +69,31 @@ public class LoginActivity extends MainController {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            String readPassword = walletPassword.getText().toString();
+            WalletFXHelperErrorBean loadWallet = WalletFXHelper.loadWallet(readPassword);
+            if (loadWallet.isLoaded()) {
+                String words = WalletHelper.readKeyFile(WalletFXHelper.getCurrentWalletpath(), readPassword).getWords();
+                Perso.setWords(words);
+                System.out.println("Parole: "+ words);
+                //SWTracker.i().setIwk(iwk);
+                System.out.println("Wallet succesfully loaded");
+                JFXTabPane mainTabPanel = Perso.i().getMainTabPanel();
+                System.out.println("remove trailing from " + mainTabPanel);
+                Perso.removeTabArray(Perso.i().getTrailingTabArray(), mainTabPanel, true);
+                System.out.println("add tabs to " + mainTabPanel);
+                Perso.removeTabArray(Perso.i().getWalletLockedTabArray(), mainTabPanel, false);
+                System.out.println("add trailing");
+                Perso.removeTabArray(Perso.i().getTrailingTabArray(), mainTabPanel, false);
+
+            } else {
+
+                PopOver popOver = Perso.i().getPopOverWarning(SWInt.i().getMessage("wrong_password"), "\n", SWInt.i().getMessage("retype_password"));
+                popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
+                popOver.setAnimated(true);
+                popOver.show(openApri);
+                System.out.println(loadWallet.getError());
+                return;
+            }
 
             return null;
         }
