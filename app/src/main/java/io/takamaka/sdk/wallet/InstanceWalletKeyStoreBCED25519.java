@@ -1,6 +1,6 @@
 package io.takamaka.sdk.wallet;
 
-import io.takamaka.sdk.exceptions.wallet.SeedGenerator;
+import io.takamaka.sdk.wallet.SeedGenerator;
 import io.takamaka.sdk.wallet.beans.KeyBean;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;

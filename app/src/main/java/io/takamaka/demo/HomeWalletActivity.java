@@ -67,7 +67,6 @@ public class HomeWalletActivity extends MainController {
 
         refreshIndex.setOnClickListener(
                 view -> {
-                    System.out.println("PIPPONEEEEEEE2222: " + Integer.parseInt(editTextRefreshIndex.getText().toString()));
                     SWTracker.setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString()));
                     try {
                         labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
@@ -98,10 +97,10 @@ public class HomeWalletActivity extends MainController {
             ftkrValue = findViewById(R.id.label_val_ftkr);
             labelValWalletName = findViewById(R.id.label_val_wallet_name);
 
-            tkgValue.setText(SWTracker.getBb().getGreenBalance());
-            tkrValue.setText(SWTracker.getBb().getRedBalance());
-            ftkgValue.setText(SWTracker.getBb().getGreenPenalty());
-            ftkrValue.setText(SWTracker.getBb().getRedPenalty());
+            tkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.getBb().getGreenBalance()) / Math.pow(10, 9)));
+            tkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.getBb().getRedBalance()) / Math.pow(10, 9)));
+            ftkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.getBb().getGreenPenalty()) / Math.pow(10, 9)));
+            ftkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.getBb().getRedPenalty()) / Math.pow(10, 9)));
             labelValWalletName.setText(SWTracker.i().getNewWalletBean().getName());
 
         }
