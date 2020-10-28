@@ -63,6 +63,7 @@ public class CreateWalletActivity extends MainController {
         context = getApplicationContext();
         initMenu();
         initFormCreateWallet();
+        setCurrentActivity(this);
     }
 
     public void initFormCreateWallet() {

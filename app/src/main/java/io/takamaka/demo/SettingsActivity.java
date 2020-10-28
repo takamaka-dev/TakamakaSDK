@@ -8,6 +8,7 @@ public class SettingsActivity extends MainController {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        //initMenu();
+        initMenu();
+        setCurrentActivity(this);
     }
 }

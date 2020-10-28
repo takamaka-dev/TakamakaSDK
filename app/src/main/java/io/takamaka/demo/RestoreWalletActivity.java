@@ -17,6 +17,7 @@ public class RestoreWalletActivity extends MainController {
         setContentView(R.layout.activity_restore_wallet);
         initMenu();
         initFormRestoreWallet();
+        setCurrentActivity(this);
     }
 
     public void initFormRestoreWallet() {

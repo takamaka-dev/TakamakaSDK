@@ -9,7 +9,7 @@ public class LoginActivity extends MainController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initMenu();
-
+        setCurrentActivity(this);
     }
 
 

@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.takamaka.demo.utils.SWTracker;
 import io.takamaka.sdk.globalContext.FixedParameters;
 import io.takamaka.sdk.main.defaults.DefaultInitParameters;
 import io.takamaka.sdk.utils.ComboItemSettingsBookmarkUrl;
@@ -30,6 +31,16 @@ public class MainController extends AppCompatActivity {
     FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab, settingsButton;
 
     Boolean isAllFabsVisible;
+
+    protected AppCompatActivity getCurrentActivity() {
+        return currentActivity;
+    }
+
+    protected void setCurrentActivity(AppCompatActivity currentActivity) {
+        this.currentActivity = currentActivity;
+    }
+
+    AppCompatActivity currentActivity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +54,7 @@ public class MainController extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        currentActivity = this;
     }
 
 
@@ -93,25 +105,43 @@ public class MainController extends AppCompatActivity {
         tokensButton.setVisibility(View.GONE);
         createWalletFab.setVisibility(View.GONE);
         restoreWalletFab.setVisibility(View.GONE);
-        //settingsButton.setVisibility(View.GONE);
+        settingsButton.setVisibility(View.GONE);
 
         isAllFabsVisible = false;
 
         takamakaButton.setOnClickListener(
                 view -> {
                     if (!isAllFabsVisible) {
-                        loginButton.show();
-                        tokensButton.show();
-                        createWalletFab.show();
-                        restoreWalletFab.show();
-                        settingsButton.show();
+                        if (!(getCurrentActivity() instanceof LoginActivity)) {
+                            loginButton.show();
+                        }
+
+                        if (logged()) {
+                            tokensButton.show();
+                            if (getCurrentActivity() instanceof SendTokenActivity) {
+                                tokensButton.hide();
+                            }
+                            settingsButton.show();
+                            if (getCurrentActivity() instanceof SettingsActivity) {
+                                settingsButton.hide();
+                            }
+                        }
+
+                        if (!(getCurrentActivity() instanceof CreateWalletActivity)) {
+                            createWalletFab.show();
+                        }
+
+                        if (!(getCurrentActivity() instanceof RestoreWalletActivity)) {
+                            restoreWalletFab.show();
+                        }
+
                         isAllFabsVisible = true;
                     } else {
                         loginButton.hide();
                         tokensButton.hide();
                         createWalletFab.hide();
                         restoreWalletFab.hide();
-                        //settingsButton.hide();
+                        settingsButton.hide();
                         isAllFabsVisible = false;
                     }
                 });
@@ -149,4 +179,9 @@ public class MainController extends AppCompatActivity {
         );
 
     }
+
+    public boolean logged() {
+        return SWTracker.i().getIwk() != null;
+    }
+
 }
