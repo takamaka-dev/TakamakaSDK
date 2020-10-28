@@ -169,6 +169,19 @@
         app:srcCompat="@drawable/gears_50px"
         app:tint="@color/white" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/explorer_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#173C5A"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/settings_button"
+        app:srcCompat="@drawable/telescope_50pxbianco"
+        app:tint="@color/white" />
+
     <!--Action name text for the add person button-->
     <!--Make sure that you are constraining this Text
         to the add Person FAB button-->

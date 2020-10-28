@@ -3,12 +3,10 @@ package io.takamaka.demo;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,15 +23,10 @@ import java.util.List;
 import javax.crypto.NoSuchPaddingException;
 
 import io.takamaka.demo.utils.SWTracker;
-import io.takamaka.demo.utils.UserWalletBean;
-import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
-import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
-import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.wallet.UnlockWalletException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
 import io.takamaka.sdk.main.defaults.DefaultInitParameters;
 import io.takamaka.sdk.utils.FileHelper;
-import io.takamaka.sdk.utils.IdentiColorHelper;
 import io.takamaka.sdk.wallet.InstanceWalletKeyStoreBCED25519;
 import io.takamaka.sdk.wallet.InstanceWalletKeystoreInterface;
 import io.takamaka.sdk.wallet.NewWalletBean;
@@ -166,20 +159,6 @@ public class RestoreWalletActivity extends MainController {
                 e.printStackTrace();
             }
 
-
-            //UserWalletBean uwb = new UserWalletBean();
-            Path walletPath = Paths.get(FileHelper.getDefaultWalletDirectoryPath().toString(), getWalletName() + DefaultInitParameters.WALLET_EXTENSION);
-            String encWallet = null;
-            try {
-                encWallet = FileHelper.readStringFromFile(walletPath);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-//            uwb.setWalletmnemonic(SWTracker.i().getNewWalletBean().getPassword().toString());
-//            uwb.setEncryptedWallet(encWallet);
-//            uwb.setCypher(SWTracker.i().getNewWalletBean().getCypher());
-//            uwb.setInternalName(getWalletName() + DefaultInitParameters.WALLET_EXTENSION);
-//            uwb.setValid(true);
 
             System.out.println("Done!");
 
