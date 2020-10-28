@@ -95,7 +95,7 @@
             android:layout_marginBottom="8dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/settings_button"
+            app:layout_constraintBottom_toTopOf="@+id/explorer_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/logout_40px_white"
             app:tint="@color/white" />
