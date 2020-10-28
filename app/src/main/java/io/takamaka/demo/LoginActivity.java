@@ -3,6 +3,7 @@ package io.takamaka.demo;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -11,17 +12,28 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+
+import io.takamaka.demo.utils.SWTracker;
+import io.takamaka.demo.utils.UserWalletBean;
+import io.takamaka.demo.utils.WalletFXHelper;
+import io.takamaka.demo.utils.WalletFXHelperErrorBean;
+import io.takamaka.sdk.utils.FileHelper;
+import io.takamaka.sdk.wallet.NewWalletBean;
 
 
 public class LoginActivity extends MainController {
+    protected boolean errorLogin = false;
 
     protected ProgressBar pgsBar;
 
     protected Context context;
 
     Button walletLoginSubmit;
-    TextView walletName, walletPassword;
+    TextView walletName, walletPassword, labelError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +46,10 @@ public class LoginActivity extends MainController {
 
     private void initFormLoginWallet() {
         pgsBar = (ProgressBar) findViewById(R.id.pBar);
-        walletLoginSubmit = findViewById(R.id.login_button);
+        walletLoginSubmit = findViewById(R.id.button_login);
         LinearLayout loginWalletForm = findViewById(R.id.wallet_login_form);
+        labelError = findViewById(R.id.label_error);
+        labelError.setText("");
         walletLoginSubmit.setOnClickListener(v -> {
             List<View> wrongFields = checkFieldsForm(loginWalletForm);
             if (!wrongFields.isEmpty()) {
@@ -49,6 +63,7 @@ public class LoginActivity extends MainController {
     }
 
     private void initWalletLogin() {
+        errorLogin = false;
         LoginWalletTask cwt = new LoginWalletTask();
         cwt.execute();
     }
@@ -65,34 +80,39 @@ public class LoginActivity extends MainController {
 
         protected void onPostExecute(Void result) {
             pgsBar.setVisibility(View.INVISIBLE);
+            if (errorLogin) {
+                labelError.setText("Wrong credentials!");
+            }
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             String readPassword = walletPassword.getText().toString();
-            WalletFXHelperErrorBean loadWallet = WalletFXHelper.loadWallet(readPassword);
+            UserWalletBean uwb = new UserWalletBean();
+            uwb.setInternalName(walletName.getText().toString());
+            uwb.setWalletmnemonicChars(walletPassword.getText().toString().toCharArray());
+            SWTracker.setSelectedUWB(uwb);
+            WalletFXHelperErrorBean loadWallet = null;
+            try {
+                loadWallet = WalletFXHelper.loadWallet(readPassword);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("Something went wrong");
+            }
             if (loadWallet.isLoaded()) {
-                String words = WalletHelper.readKeyFile(WalletFXHelper.getCurrentWalletpath(), readPassword).getWords();
-                Perso.setWords(words);
-                System.out.println("Parole: "+ words);
-                //SWTracker.i().setIwk(iwk);
-                System.out.println("Wallet succesfully loaded");
-                JFXTabPane mainTabPanel = Perso.i().getMainTabPanel();
-                System.out.println("remove trailing from " + mainTabPanel);
-                Perso.removeTabArray(Perso.i().getTrailingTabArray(), mainTabPanel, true);
-                System.out.println("add tabs to " + mainTabPanel);
-                Perso.removeTabArray(Perso.i().getWalletLockedTabArray(), mainTabPanel, false);
-                System.out.println("add trailing");
-                Perso.removeTabArray(Perso.i().getTrailingTabArray(), mainTabPanel, false);
+                System.out.println("Wallet is loaded");
+                NewWalletBean nwb = new NewWalletBean();
+                nwb.setName(walletName.getText().toString());
+                nwb.setPassword(walletPassword.getText().toString().toCharArray());
 
+                SWTracker.i().setNwb(nwb);
+
+                Intent activity2Intent = new Intent(getApplicationContext(), HomeWalletActivity.class);
+                startActivity(activity2Intent);
             } else {
+                errorLogin = true;
 
-                PopOver popOver = Perso.i().getPopOverWarning(SWInt.i().getMessage("wrong_password"), "\n", SWInt.i().getMessage("retype_password"));
-                popOver.setArrowLocation(ArrowLocation.TOP_CENTER);
-                popOver.setAnimated(true);
-                popOver.show(openApri);
-                System.out.println(loadWallet.getError());
-                return;
+                System.out.println("Wrong credentials!");
             }
 
             return null;

@@ -28,7 +28,7 @@ import io.takamaka.sdk.wallet.InstanceWalletKeystoreInterface;
 import io.takamaka.sdk.wallet.NewWalletBean;
 
 public class MainController extends AppCompatActivity {
-    FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab, settingsButton;
+    FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab, settingsButton, homeButton, logoutButton;
 
     Boolean isAllFabsVisible;
 
@@ -101,11 +101,15 @@ public class MainController extends AppCompatActivity {
         createWalletFab = findViewById(R.id.create_wallet);
         restoreWalletFab = findViewById(R.id.restore_wallet);
         settingsButton = findViewById(R.id.settings_button);
+        homeButton = findViewById(R.id.home_button);
+        logoutButton = findViewById(R.id.logout_button);
         loginButton.setVisibility(View.GONE);
         tokensButton.setVisibility(View.GONE);
         createWalletFab.setVisibility(View.GONE);
         restoreWalletFab.setVisibility(View.GONE);
         settingsButton.setVisibility(View.GONE);
+        homeButton.setVisibility(View.GONE);
+        logoutButton.setVisibility(View.GONE);
 
         isAllFabsVisible = false;
 
@@ -117,6 +121,7 @@ public class MainController extends AppCompatActivity {
                         }
 
                         if (logged()) {
+                            logoutButton.show();
                             tokensButton.show();
                             if (getCurrentActivity() instanceof SendTokenActivity) {
                                 tokensButton.hide();
@@ -125,6 +130,19 @@ public class MainController extends AppCompatActivity {
                             if (getCurrentActivity() instanceof SettingsActivity) {
                                 settingsButton.hide();
                             }
+
+                            System.out.println("Logged");
+                            System.out.println(getCurrentActivity() instanceof HomeWalletActivity);
+                            if (getCurrentActivity() instanceof HomeWalletActivity) {
+                                loginButton.hide();
+                                createWalletFab.hide();
+                                restoreWalletFab.hide();
+                            } else {
+                                homeButton.show();
+                            }
+
+                            isAllFabsVisible = true;
+                            return;
                         }
 
                         if (!(getCurrentActivity() instanceof CreateWalletActivity)) {
@@ -142,6 +160,7 @@ public class MainController extends AppCompatActivity {
                         createWalletFab.hide();
                         restoreWalletFab.hide();
                         settingsButton.hide();
+                        homeButton.hide();
                         isAllFabsVisible = false;
                     }
                 });
@@ -174,6 +193,21 @@ public class MainController extends AppCompatActivity {
         settingsButton.setOnClickListener(
                 v -> {
                     Intent activitySettings = new Intent(getApplicationContext(), SettingsActivity.class);
+                    startActivity(activitySettings);
+                }
+        );
+
+        homeButton.setOnClickListener(
+                v -> {
+                    Intent activitySettings = new Intent(getApplicationContext(), HomeWalletActivity.class);
+                    startActivity(activitySettings);
+                }
+        );
+
+        logoutButton.setOnClickListener(
+                v -> {
+                    SWTracker.i().resetUser();
+                    Intent activitySettings = new Intent(getApplicationContext(), MainController.class);
                     startActivity(activitySettings);
                 }
         );

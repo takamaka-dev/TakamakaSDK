@@ -18,6 +18,16 @@ public class SWTracker {
     private static final Object SWTLOCK = new Object();
     private static NewWalletBean nwb = null;
     private static BalanceBean bb = null;
+
+    public static UserWalletBean getSelectedUWB() {
+        return selectedUWB;
+    }
+
+    public static void setSelectedUWB(UserWalletBean selectedUWB) {
+        SWTracker.selectedUWB = selectedUWB;
+    }
+
+    private static UserWalletBean selectedUWB;
     private static InstanceWalletKeystoreInterface iwk;
     private static int currentAddressNumber = 0;
     private static ComboItemSettingsBookmarkUrl currentApiUrl = DefaultInitParameters.DEFAULT_API_URL;
@@ -27,6 +37,13 @@ public class SWTracker {
     private static ConcurrentSkipListMap<String, ComboItemSettingsBookmarkUrl> sendTransactionUrl;
     private static ConcurrentSkipListMap<String, ComboItemSettingsBookmarkUrl> apiUrl;
     private static ConcurrentSkipListMap<String, ComboItemSettingsBookmarkUrl> fastTag;
+
+    public void resetUser() {
+        iwk = null;
+        selectedUWB = null;
+        nwb = null;
+        bb = null;
+    }
 
     public static int getCurrIndex() {
         return currIndex;

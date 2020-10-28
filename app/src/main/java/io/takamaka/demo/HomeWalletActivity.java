@@ -41,6 +41,7 @@ public class HomeWalletActivity extends MainController {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_wallet);
+        setCurrentActivity(this);
         initMenu();
         CallAPI callApi = new CallAPI();
         System.out.println("IWK: " + SWTracker.i().getIwk());

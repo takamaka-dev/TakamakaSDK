@@ -57,24 +57,22 @@ public class FileHelper {
      * @return
      */
     public static Path getDefaultApplicationDirectoryPath() {
-        System.setProperty("user.home", "/storage/emulated/0/Android/data/com.example.androidsdk/files");
-        String userHome = System.getProperty("user.home");
-        return Paths.get(userHome, DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME);
+        return Paths.get("/storage/emulated/0/Android/data/com.example.androidsdk/files/", DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME);
     }
 
     public static Path getThemeConfigFilePath() {
-        String userHome = System.getProperty("user.home");
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
         return Paths.get(userHome, DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME, "themeConfig.json");
     }
 
     public static Path getHotmokaTestDirectoryPath() {
-        String userHome = System.getProperty("user.home");
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
         //Log.log(Level.INFO, userHome);
         return Paths.get(getDefaultApplicationDirectoryPath().toString(), DefaultInitParameters.HOTMOKA_TEST_FOLDER_NAME);
     }
 
     public static Path getHotmokaFilesDirectoryPath() {
-        String userHome = System.getProperty("user.home");
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
         //Log.log(Level.INFO, userHome);
         return Paths.get(getDefaultApplicationDirectoryPath().toString(), DefaultInitParameters.HOTMOKA_FILES_FOLDER_NAME);
     }
@@ -167,9 +165,14 @@ public class FileHelper {
      * @return
      */
     public static Path getUserWalletsDirectoryPath() {
-        String userHome = System.getProperty("user.home");
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
         //Log.log(Level.INFO, userHome);
         return Paths.get(getDefaultApplicationDirectoryPath().toString(), FixedParameters.USER_WALLETS_FOLDER);
+    }
+
+    public static Path getWalletDirectoryPath() {
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
+        return Paths.get(getDefaultApplicationDirectoryPath().toString(), FixedParameters.WALLET_FOLDER);
     }
 
     /**

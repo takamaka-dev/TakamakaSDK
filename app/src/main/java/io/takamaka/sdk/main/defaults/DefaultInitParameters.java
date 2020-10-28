@@ -17,7 +17,7 @@ public class DefaultInitParameters {
     /**
      * root folder name for the application
      */
-    public static String APPLICATION_ROOT_FOLDER_NAME = ".tkm-chain";
+    public static String APPLICATION_ROOT_FOLDER_NAME = "tkm-chain";
     /**
      * test path hotmoka
      */
