@@ -103,7 +103,7 @@
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="@+id/takamaka_button"
-            app:layout_constraintStart_toEndOf="@+id/takamaka_button"
+            app:layout_constraintStart_toEndOf="@+id/tokens_button"
             app:srcCompat="@drawable/home_100pxbianco"
             app:tint="@color/white" />
 

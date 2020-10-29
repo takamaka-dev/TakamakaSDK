@@ -77,7 +77,7 @@ public class SWTracker {
         innerProd.put("bookmark_retrieve_url", "https://takamaka.io/api/v1/bookmark/retrieve/");
         innerProd.put("explorer_url", "https://exp.takamaka.dev/");
 
-        innerTest.put("api_url", "https://dev.takamaka.io/api/V2/testapi/address");
+        innerTest.put("api_url", "https://dev.takamaka.io/api/V2/testapi/");
         innerTest.put("send_transaction_url", "https://dev.takamaka.io/api/V2/testapi/transaction/");
         innerTest.put("bookmark_create_url", "https://dev.takamaka.io/api/v1/bookmark/create/");
         innerTest.put("bookmark_retrieve_url", "https://dev.takamaka.io/api/v1/bookmark/retrieve/");
