@@ -9,5 +9,6 @@ public class SendTokenActivity extends MainController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_token);
         initMenu();
+        setCurrentActivity(this);
     }
 }

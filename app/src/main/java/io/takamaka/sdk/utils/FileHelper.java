@@ -28,6 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.FileAttribute;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchProviderException;
@@ -57,24 +58,22 @@ public class FileHelper {
      * @return
      */
     public static Path getDefaultApplicationDirectoryPath() {
-        System.setProperty("user.home", "/storage/emulated/0/Android/data/com.example.androidsdk/files");
-        String userHome = System.getProperty("user.home");
-        return Paths.get(userHome, DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME);
+        return Paths.get("/storage/emulated/0/Android/data/com.example.androidsdk/files/", DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME);
     }
 
     public static Path getThemeConfigFilePath() {
-        String userHome = System.getProperty("user.home");
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
         return Paths.get(userHome, DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME, "themeConfig.json");
     }
 
     public static Path getHotmokaTestDirectoryPath() {
-        String userHome = System.getProperty("user.home");
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
         //Log.log(Level.INFO, userHome);
         return Paths.get(getDefaultApplicationDirectoryPath().toString(), DefaultInitParameters.HOTMOKA_TEST_FOLDER_NAME);
     }
 
     public static Path getHotmokaFilesDirectoryPath() {
-        String userHome = System.getProperty("user.home");
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
         //Log.log(Level.INFO, userHome);
         return Paths.get(getDefaultApplicationDirectoryPath().toString(), DefaultInitParameters.HOTMOKA_FILES_FOLDER_NAME);
     }
@@ -167,9 +166,14 @@ public class FileHelper {
      * @return
      */
     public static Path getUserWalletsDirectoryPath() {
-        String userHome = System.getProperty("user.home");
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
         //Log.log(Level.INFO, userHome);
         return Paths.get(getDefaultApplicationDirectoryPath().toString(), FixedParameters.USER_WALLETS_FOLDER);
+    }
+
+    public static Path getWalletDirectoryPath() {
+        String userHome = "/storage/emulated/0/Android/data/com.example.androidsdk/files/";
+        return Paths.get(getDefaultApplicationDirectoryPath().toString(), FixedParameters.WALLET_FOLDER);
     }
 
     /**
@@ -216,6 +220,14 @@ public class FileHelper {
      */
     public static Path getDefaultWalletDirectoryPath() {
         return Paths.get(getDefaultApplicationDirectoryPath().toString(), WALLET_FOLDER);
+    }
+
+    public static Path getSettingsFileJsonPath() {
+        return Paths.get(getDefaultApplicationDirectoryPath().toString(), SETTINGS_FILE_JSON);
+    }
+
+    public static Path getSettingsDirectoryPath() {
+        return Paths.get(getDefaultApplicationDirectoryPath().toString(), "settings");
     }
 
     /**
@@ -536,6 +548,10 @@ public class FileHelper {
      */
     public static boolean walletDirExists() {
         return getDefaultWalletDirectoryPath().toFile().isDirectory();
+    }
+
+    public static boolean settingsJsonFileExists() {
+        return getSettingsFileJsonPath().toFile().isFile();
     }
 
     /**

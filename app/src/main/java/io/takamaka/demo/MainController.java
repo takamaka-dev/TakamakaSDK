@@ -14,25 +14,30 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.takamaka.sdk.globalContext.FixedParameters;
-import io.takamaka.sdk.main.defaults.DefaultInitParameters;
-import io.takamaka.sdk.utils.ComboItemSettingsBookmarkUrl;
+import io.takamaka.demo.utils.SWTracker;
 import io.takamaka.sdk.utils.FileHelper;
-import io.takamaka.sdk.wallet.InstanceWalletKeystoreInterface;
-import io.takamaka.sdk.wallet.NewWalletBean;
 
 public class MainController extends AppCompatActivity {
-    FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab, settingsButton;
+    FloatingActionButton takamakaButton, loginButton, tokensButton, createWalletFab, restoreWalletFab, settingsButton, homeButton, logoutButton, explorerButton;
 
     Boolean isAllFabsVisible;
 
+    protected AppCompatActivity getCurrentActivity() {
+        return currentActivity;
+    }
+
+    protected void setCurrentActivity(AppCompatActivity currentActivity) {
+        this.currentActivity = currentActivity;
+    }
+
+    AppCompatActivity currentActivity = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SWTracker.initSettings();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initMenu();
@@ -43,12 +48,12 @@ public class MainController extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        currentActivity = this;
     }
 
 
-
     protected void highlightWrongForm(List<View> wrongFields) {
-        wrongFields.forEach(v-> ((TextView) v).setError("Field error"));
+        wrongFields.forEach(v -> ((TextView) v).setError("Field error"));
     }
 
     protected List<View> checkFieldsForm(LinearLayout form) {
@@ -67,11 +72,15 @@ public class MainController extends AppCompatActivity {
                 String idString = v.getResources().getResourceEntryName(v.getId()); // widgetA1
                 if (idString.contains("inputPasswordText")) {
                     password = ((TextView) v).getText().toString();
+                    if (password.length() < 8) {
+                        wrongFields.add(v);
+                    }
                     passwordField = v;
                 }
                 if (idString.contains("inputPasswordRetypeText")) {
                     retypePassword = ((TextView) v).getText().toString();
-                    if (!password.equals(retypePassword)) {
+
+                    if (!password.equals(retypePassword) || retypePassword.length() < 8) {
                         wrongFields.add(v);
                         wrongFields.add(passwordField);
                     }
@@ -89,29 +98,74 @@ public class MainController extends AppCompatActivity {
         createWalletFab = findViewById(R.id.create_wallet);
         restoreWalletFab = findViewById(R.id.restore_wallet);
         settingsButton = findViewById(R.id.settings_button);
+        homeButton = findViewById(R.id.home_button);
+        logoutButton = findViewById(R.id.logout_button);
+        explorerButton = findViewById(R.id.explorer_button);
         loginButton.setVisibility(View.GONE);
         tokensButton.setVisibility(View.GONE);
         createWalletFab.setVisibility(View.GONE);
         restoreWalletFab.setVisibility(View.GONE);
-        //settingsButton.setVisibility(View.GONE);
+        settingsButton.setVisibility(View.GONE);
+        homeButton.setVisibility(View.GONE);
+        logoutButton.setVisibility(View.GONE);
+        explorerButton.setVisibility(View.GONE);
 
         isAllFabsVisible = false;
 
         takamakaButton.setOnClickListener(
                 view -> {
                     if (!isAllFabsVisible) {
-                        loginButton.show();
-                        tokensButton.show();
-                        createWalletFab.show();
-                        restoreWalletFab.show();
-                        settingsButton.show();
+                        if (!(getCurrentActivity() instanceof LoginActivity)) {
+                            loginButton.show();
+                        }
+
+
+
+                        if (logged()) {
+                            if (!(getCurrentActivity() instanceof ExplorerActivity)) {
+                                explorerButton.show();
+                            }
+                            logoutButton.show();
+                            tokensButton.show();
+                            if (getCurrentActivity() instanceof SendTokenActivity) {
+                                tokensButton.hide();
+                            }
+                            settingsButton.show();
+                            if (getCurrentActivity() instanceof SettingsActivity) {
+                                settingsButton.hide();
+                            }
+
+                            System.out.println("Logged");
+                            System.out.println(getCurrentActivity() instanceof HomeWalletActivity);
+                            if (getCurrentActivity() instanceof HomeWalletActivity) {
+                                loginButton.hide();
+                                createWalletFab.hide();
+                                restoreWalletFab.hide();
+                            } else {
+                                homeButton.show();
+                            }
+
+                            isAllFabsVisible = true;
+                            return;
+                        }
+
+                        if (!(getCurrentActivity() instanceof CreateWalletActivity)) {
+                            createWalletFab.show();
+                        }
+
+                        if (!(getCurrentActivity() instanceof RestoreWalletActivity)) {
+                            restoreWalletFab.show();
+                        }
+
                         isAllFabsVisible = true;
                     } else {
                         loginButton.hide();
                         tokensButton.hide();
                         createWalletFab.hide();
                         restoreWalletFab.hide();
-                        //settingsButton.hide();
+                        settingsButton.hide();
+                        homeButton.hide();
+                        explorerButton.hide();
                         isAllFabsVisible = false;
                     }
                 });
@@ -148,5 +202,32 @@ public class MainController extends AppCompatActivity {
                 }
         );
 
+        homeButton.setOnClickListener(
+                v -> {
+                    Intent activitySettings = new Intent(getApplicationContext(), HomeWalletActivity.class);
+                    startActivity(activitySettings);
+                }
+        );
+
+        logoutButton.setOnClickListener(
+                v -> {
+                    SWTracker.i().resetUser();
+                    Intent activitySettings = new Intent(getApplicationContext(), MainController.class);
+                    startActivity(activitySettings);
+                }
+        );
+
+        explorerButton.setOnClickListener(
+                v -> {
+                    Intent activitySettings = new Intent(getApplicationContext(), ExplorerActivity.class);
+                    startActivity(activitySettings);
+                }
+        );
+
     }
+
+    public boolean logged() {
+        return SWTracker.i().getIwk() != null;
+    }
+
 }

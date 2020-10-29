@@ -3,6 +3,7 @@ package io.takamaka.sdk.utils.threadSafeUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.takamaka.demo.utils.UserWalletBean;
 import io.takamaka.sdk.globalContext.FixedParameters;
 import io.takamaka.sdk.transactions.TransactionUtils;
 import io.takamaka.sdk.wallet.beans.KeyBean;
@@ -207,5 +208,11 @@ public class TkmTextUtils {
         } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException ex) {
             throw new InclusionHashCreationException(ex);
         }
+    }
+
+    public static UserWalletBean getUserWalletBeanFromJson(String jsonString) {
+        Gson gson = new Gson();
+        UserWalletBean fb = gson.fromJson(jsonString, UserWalletBean.class);
+        return fb;
     }
 }

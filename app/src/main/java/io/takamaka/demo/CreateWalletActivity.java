@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import java.util.Date;
 import java.util.List;
 
 import io.takamaka.demo.utils.SWTracker;
@@ -23,6 +24,7 @@ import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.wallet.UnlockWalletException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
+import io.takamaka.sdk.globalContext.FixedParameters;
 import io.takamaka.sdk.utils.IdentiColorHelper;
 import io.takamaka.sdk.wallet.InstanceWalletKeyStoreBCED25519;
 import io.takamaka.sdk.wallet.NewWalletBean;
@@ -63,6 +65,7 @@ public class CreateWalletActivity extends MainController {
         context = getApplicationContext();
         initMenu();
         initFormCreateWallet();
+        setCurrentActivity(this);
     }
 
     public void initFormCreateWallet() {
@@ -127,6 +130,7 @@ public class CreateWalletActivity extends MainController {
         protected Void doInBackground(Void... voids) {
             try {
                 SWTracker.i().setIwk(new InstanceWalletKeyStoreBCED25519(getInternalName(), getPassword()));
+
             } catch (UnlockWalletException e) {
                 e.printStackTrace();
             }

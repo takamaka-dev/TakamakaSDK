@@ -30,6 +30,7 @@
             tools:layout_editor_absoluteX="0dp">
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -45,12 +46,6 @@
                     android:layout_height="wrap_content"
                     android:text="Test Environment" />
             </RadioGroup>
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -73,6 +68,57 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/explorer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#173C5A"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/settings_button"
+            app:srcCompat="@drawable/telescope_50pxbianco"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#173C5A"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toTopOf="@+id/explorer_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/logout_40px_white"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/home_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="#173C5A"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/takamaka_button"
+            app:layout_constraintStart_toEndOf="@+id/takamaka_button"
+            app:srcCompat="@drawable/home_100pxbianco"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#173C5A"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/gears_50px"
+            app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/takamaka_button"
@@ -105,7 +151,7 @@
             android:id="@+id/create_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
@@ -118,7 +164,7 @@
             android:id="@+id/restore_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"
@@ -131,7 +177,7 @@
             android:id="@+id/tokens_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"

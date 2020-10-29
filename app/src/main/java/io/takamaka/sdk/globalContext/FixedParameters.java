@@ -38,6 +38,8 @@ public class FixedParameters {
      */
     public static final String WALLET_FOLDER = "wallets";
 
+    public static final String SETTINGS_FILE_JSON = "settings/sdk_json_endpoints.json";
+
     /**
      * public keys folder name inside application root folder
      */
