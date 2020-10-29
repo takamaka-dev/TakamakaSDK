@@ -62,7 +62,7 @@
                 android:id="@+id/input_button_verify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Verify" />
+                android:text=" Verify" />
 
             <EditText
                 android:id="@+id/text_esito_optional"
