@@ -61,10 +61,8 @@ public class MainController extends AppCompatActivity {
         int childCount = form.getChildCount();
         List<View> wrongFields = new ArrayList<>();
         View passwordField = null;
-        View tkgField = null;
         String password = "";
         String retypePassword;
-        String tkg = null, tkr;
 
         for (int i = 0; i < childCount; i++) {
             View v = form.getChildAt(i);
@@ -73,7 +71,10 @@ public class MainController extends AppCompatActivity {
                 if (idString.contains("optional")) {
                     continue;
                 }
-                if (((TextView) v).getText().toString().equals("") && !(((TextView) v).getText().toString().equals("input_text_number_tkg")) && !(((TextView) v).getText().toString().equals("input_text_number_tkr"))) {
+                if (((TextView) v).getText().toString().equals("")) {
+                    wrongFields.add(v);
+                }
+                if (idString.equals("input_to_address_text") && ((TextView) v).getText().length() < 44) {
                     wrongFields.add(v);
                 }
                 if (idString.contains("inputPasswordText")) {
@@ -91,25 +92,6 @@ public class MainController extends AppCompatActivity {
                         wrongFields.add(passwordField);
                     }
                 }
-
-                if (idString.contains("input_text_number_tkg")) {
-                    tkg = ((TextView) v).getText().toString();
-                    tkgField = v;
-                }
-
-                if (idString.contains("input_text_number_tkr")) {
-                    tkr = ((TextView) v).getText().toString();
-
-                    if (tkg.isEmpty() && tkr.isEmpty()) {
-                        if (tkg.isEmpty()) {
-                            wrongFields.add(tkgField);
-                        } else if (tkr.isEmpty()) {
-                            wrongFields.add(v);
-                        }
-                    }
-                }
-
-
             }
         }
 
