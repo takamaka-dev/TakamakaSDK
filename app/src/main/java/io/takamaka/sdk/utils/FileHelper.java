@@ -28,6 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.FileAttribute;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchProviderException;
@@ -219,6 +220,14 @@ public class FileHelper {
      */
     public static Path getDefaultWalletDirectoryPath() {
         return Paths.get(getDefaultApplicationDirectoryPath().toString(), WALLET_FOLDER);
+    }
+
+    public static Path getSettingsFileJsonPath() {
+        return Paths.get(getDefaultApplicationDirectoryPath().toString(), SETTINGS_FILE_JSON);
+    }
+
+    public static Path getSettingsDirectoryPath() {
+        return Paths.get(getDefaultApplicationDirectoryPath().toString(), "settings");
     }
 
     /**
@@ -539,6 +548,10 @@ public class FileHelper {
      */
     public static boolean walletDirExists() {
         return getDefaultWalletDirectoryPath().toFile().isDirectory();
+    }
+
+    public static boolean settingsJsonFileExists() {
+        return getSettingsFileJsonPath().toFile().isFile();
     }
 
     /**

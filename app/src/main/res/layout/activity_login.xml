@@ -18,7 +18,7 @@
             android:id="@+id/explorer_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#173C5A"
             app:fabSize="normal"

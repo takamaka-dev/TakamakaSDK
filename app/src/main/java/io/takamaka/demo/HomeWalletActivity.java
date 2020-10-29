@@ -43,7 +43,6 @@ public class HomeWalletActivity extends MainController {
         setCurrentActivity(this);
         initMenu();
         CallAPI callApi = new CallAPI();
-        System.out.println("IWK: " + SWTracker.i().getIwk());
         try {
             callApi.execute(SWTracker.i().getBalanceEndpoint().toString(), SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
         } catch (WalletException e) {

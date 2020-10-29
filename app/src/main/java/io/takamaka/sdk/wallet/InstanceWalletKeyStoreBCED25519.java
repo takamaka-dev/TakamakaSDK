@@ -1,5 +1,7 @@
 package io.takamaka.sdk.wallet;
 
+import com.google.gson.JsonObject;
+
 import io.takamaka.sdk.wallet.SeedGenerator;
 import io.takamaka.sdk.wallet.beans.KeyBean;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
@@ -37,6 +39,7 @@ import org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 import org.bouncycastle.crypto.params.Ed25519KeyGenerationParameters;
 import org.bouncycastle.crypto.params.Ed25519PublicKeyParameters;
 import org.bouncycastle.util.encoders.UrlBase64;
+import org.json.JSONObject;
 
 
 public class InstanceWalletKeyStoreBCED25519 implements InstanceWalletKeystoreInterface {
@@ -114,6 +117,7 @@ public class InstanceWalletKeyStoreBCED25519 implements InstanceWalletKeystoreIn
         if (!FileHelper.walletDirExists()) {
             FileHelper.createDir(FileHelper.getDefaultWalletDirectoryPath());
         }
+
         if (!FileHelper.fileExists(Paths.get(FileHelper.getDefaultWalletDirectoryPath().toString(), currentWalletName))) {
             //System.out.println("no default wallet");
             List<String> words = SeedGenerator.generateWords();
