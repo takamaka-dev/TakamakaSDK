@@ -127,7 +127,7 @@ public class SWTracker {
 
     public URL getBalanceEndpoint() {
         try {
-            return new URL(Objects.requireNonNull(SWTracker.getSettings().get(SWTracker.getCurrentSetting())).get("api_url") + FixedParameters.API_BALANCE_ENDPOINT);
+            return new URL(Objects.requireNonNull(SWTracker.i().getSettings().get(SWTracker.i().getCurrentSetting())).get("api_url") + FixedParameters.API_BALANCE_ENDPOINT);
         } catch (MalformedURLException ex) {
         }
         return null;

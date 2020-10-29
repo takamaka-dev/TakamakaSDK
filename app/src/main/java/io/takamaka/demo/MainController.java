@@ -8,6 +8,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ public class MainController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SWTracker.initSettings();
+        SWTracker.i().initSettings();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initMenu();
@@ -56,7 +57,7 @@ public class MainController extends AppCompatActivity {
         wrongFields.forEach(v -> ((TextView) v).setError("Field error"));
     }
 
-    protected List<View> checkFieldsForm(LinearLayout form) {
+    protected List<View> checkFieldsForm(ViewGroup form) {
         int childCount = form.getChildCount();
         List<View> wrongFields = new ArrayList<>();
         View passwordField = null;
@@ -65,11 +66,13 @@ public class MainController extends AppCompatActivity {
         for (int i = 0; i < childCount; i++) {
             View v = form.getChildAt(i);
             if (v instanceof TextView) {
+                String idString = v.getResources().getResourceEntryName(v.getId());
+                if (idString.contains("optional")) {
+                    continue;
+                }
                 if (((TextView) v).getText().toString().equals("")) {
                     wrongFields.add(v);
                 }
-
-                String idString = v.getResources().getResourceEntryName(v.getId()); // widgetA1
                 if (idString.contains("inputPasswordText")) {
                     password = ((TextView) v).getText().toString();
                     if (password.length() < 8) {

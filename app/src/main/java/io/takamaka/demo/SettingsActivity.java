@@ -20,9 +20,9 @@ public class SettingsActivity extends MainController {
         radioButtonProduction = findViewById(R.id.radioButtonProduction);
         radioButtonTest = findViewById(R.id.radioButtonTest);
         radioGroup = findViewById(R.id.radioGroup);
-        if (SWTracker.getCurrentSetting().equals("prod")) {
+        if (SWTracker.i().getCurrentSetting().equals("prod")) {
             radioGroup.check(radioButtonProduction.getId());
-        } else if (SWTracker.getCurrentSetting().equals("test")) {
+        } else if (SWTracker.i().getCurrentSetting().equals("test")) {
             radioGroup.check(radioButtonTest.getId());
         }
 

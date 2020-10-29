@@ -45,19 +45,19 @@ public class HomeWalletActivity extends MainController {
         CallAPI callApi = new CallAPI();
         try {
             System.out.println("IWK instance: " + SWTracker.i().getIwk());
-            callApi.execute(SWTracker.i().getBalanceEndpoint().toString(), SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
+            callApi.execute(SWTracker.i().getBalanceEndpoint().toString(), SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()));
         } catch (WalletException e) {
             e.printStackTrace();
         }
         imageViewIdenticon = findViewById(R.id.imageViewIdenticon);
         try {
-            imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()))));
+            imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()))));
         } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException | WalletException e) {
             e.printStackTrace();
         }
         labelCurrentAddress = findViewById(R.id.label_current_address);
         try {
-            labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
+            labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()));
         } catch (WalletException e) {
             e.printStackTrace();
         }
@@ -66,11 +66,11 @@ public class HomeWalletActivity extends MainController {
 
         refreshIndex.setOnClickListener(
                 view -> {
-                    SWTracker.setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString().isEmpty() ? "0" : editTextRefreshIndex.getText().toString()));
+                    SWTracker.i().setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString().isEmpty() ? "0" : editTextRefreshIndex.getText().toString()));
                     try {
-                        labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
+                        labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()));
                         try {
-                            imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()))));
+                            imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()))));
                         } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException | WalletException e) {
                             e.printStackTrace();
                         }
@@ -96,10 +96,10 @@ public class HomeWalletActivity extends MainController {
             ftkrValue = findViewById(R.id.label_val_ftkr);
             labelValWalletName = findViewById(R.id.label_val_wallet_name);
 
-            tkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.getBb().getGreenBalance()) / Math.pow(10, 9)));
-            tkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.getBb().getRedBalance()) / Math.pow(10, 9)));
-            ftkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.getBb().getGreenPenalty()) / Math.pow(10, 9)));
-            ftkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.getBb().getRedPenalty()) / Math.pow(10, 9)));
+            tkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getGreenBalance()) / Math.pow(10, 9)));
+            tkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getRedBalance()) / Math.pow(10, 9)));
+            ftkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getGreenPenalty()) / Math.pow(10, 9)));
+            ftkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getRedPenalty()) / Math.pow(10, 9)));
             labelValWalletName.setText(SWTracker.i().getNewWalletBean().getName());
 
         }
@@ -124,7 +124,7 @@ public class HomeWalletActivity extends MainController {
                 System.out.println(response.body().toString());
                 BalanceBean bb = g.fromJson(response.body().string(), BalanceBean.class);
                 System.out.println(bb.getRedBalance());
-                SWTracker.setBb(bb);
+                SWTracker.i().setBb(bb);
             } catch (IOException e) {
                 e.printStackTrace();
             }

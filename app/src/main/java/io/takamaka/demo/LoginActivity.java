@@ -91,7 +91,7 @@ public class LoginActivity extends MainController {
             UserWalletBean uwb = new UserWalletBean();
             uwb.setInternalName(walletName.getText().toString());
             uwb.setWalletmnemonicChars(walletPassword.getText().toString().toCharArray());
-            SWTracker.setSelectedUWB(uwb);
+            SWTracker.i().setSelectedUWB(uwb);
             WalletFXHelperErrorBean loadWallet = null;
             try {
                 loadWallet = WalletFXHelper.loadWallet(readPassword);

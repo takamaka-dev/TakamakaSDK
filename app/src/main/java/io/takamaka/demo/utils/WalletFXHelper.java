@@ -81,6 +81,13 @@ public class WalletFXHelper {
 
     }
 
+    public static int generateRandomNumber() {
+        int min = 50;
+        int max = 100;
+        return (int)(Math.random() * (max - min + 1) + min);
+
+    }
+
     public static Path getCurrentWalletpath() {
         String currentWalletName = SWTracker.i().getSelectedUWB().getInternalName().substring(0, 40) + DefaultInitParameters.WALLET_EXTENSION;
         Path currentWalletPath = Paths.get(FileHelper.getDefaultWalletDirectoryPath().toString(), currentWalletName);
