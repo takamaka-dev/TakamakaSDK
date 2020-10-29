@@ -128,6 +128,7 @@ public class MainController extends AppCompatActivity {
 
 
 
+                        // login
                         if (logged()) {
                             if (!(getCurrentActivity() instanceof ExplorerActivity)) {
                                 explorerButton.show();
@@ -156,6 +157,8 @@ public class MainController extends AppCompatActivity {
                             isAllFabsVisible = true;
                             return;
                         }
+
+                        // Create Wallet
 
                         if (!(getCurrentActivity() instanceof CreateWalletActivity)) {
                             createWalletFab.show();

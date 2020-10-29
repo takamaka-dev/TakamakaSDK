@@ -63,6 +63,7 @@ public class HomeWalletActivity extends MainController {
             e.printStackTrace();
         }
         labelCurrentAddress = findViewById(R.id.label_current_address);
+
         try {
             labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()));
         } catch (WalletException e) {
