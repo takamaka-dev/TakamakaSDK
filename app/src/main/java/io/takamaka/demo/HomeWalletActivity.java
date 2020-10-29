@@ -1,5 +1,6 @@
 package io.takamaka.demo;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,6 +39,10 @@ public class HomeWalletActivity extends MainController {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (SWTracker.i().getIwk() == null) {
+            Intent activitySettings = new Intent(getApplicationContext(), MainController.class);
+            startActivity(activitySettings);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_wallet);
         setCurrentActivity(this);
@@ -45,7 +50,9 @@ public class HomeWalletActivity extends MainController {
         CallAPI callApi = new CallAPI();
         try {
             System.out.println("IWK instance: " + SWTracker.i().getIwk());
-            callApi.execute(SWTracker.i().getBalanceEndpoint().toString(), SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()));
+            if (SWTracker.i().getIwk() != null) {
+                callApi.execute(SWTracker.i().getBalanceEndpoint().toString(), SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()));
+            }
         } catch (WalletException e) {
             e.printStackTrace();
         }
@@ -76,6 +83,9 @@ public class HomeWalletActivity extends MainController {
                         }
                     } catch (WalletException e) {
                         e.printStackTrace();
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                        labelCurrentAddress.setText("");
                     }
                 });
     }

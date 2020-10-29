@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/form_send_token"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SendTokenActivity">
@@ -16,6 +15,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
 
         <LinearLayout
+            android:id="@+id/form_send_token"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -26,6 +26,7 @@
             tools:layout_editor_absoluteY="310dp">
 
             <LinearLayout
+                android:id="@+id/form_send_token_currencies"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -50,7 +51,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/input_text_message"
+                android:id="@+id/input_text_message_optional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -135,6 +136,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
         <LinearLayout
+            android:id="@+id/form_to_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
