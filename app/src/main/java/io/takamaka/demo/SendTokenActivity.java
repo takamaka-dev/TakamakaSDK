@@ -48,6 +48,7 @@ public class SendTokenActivity extends MainController {
 
     private void initSendTokenForm() throws WalletException, HashEncodeException, HashAlgorithmNotFoundException, HashProviderNotFoundException {
         inputFromAddressText = findViewById(R.id.input_from_address_text);
+        inputFromAddressText.setEnabled(false);
         inputToAddressText = findViewById(R.id.input_to_address_text);
         inputTextNumberTkg = findViewById(R.id.input_text_number_tkg);
         inputTextNumberTkr = findViewById(R.id.input_text_number_tkr);
