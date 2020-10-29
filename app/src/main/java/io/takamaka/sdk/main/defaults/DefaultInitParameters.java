@@ -1,5 +1,7 @@
 package io.takamaka.sdk.main.defaults;
 
+import java.math.BigInteger;
+
 import io.takamaka.sdk.utils.ComboItemSettingsBookmarkUrl;
 
 /**
@@ -13,7 +15,14 @@ public class DefaultInitParameters {
      */
     public static String WALLET_EXTENSION = ".wallet";
 
-
+    public static final BigInteger DISK_SCALE = new BigInteger("100");
+    public static final BigInteger MEM_SCALE = BigInteger.TEN;
+    public static final BigInteger CPU_SCALE = BigInteger.ONE;
+    public static final String TARGET_CLIENT_NUMBER_MAX = "400";
+    public static final BigInteger TARGET_CLIENT_NUMBER_MAX_BI = new BigInteger(TARGET_CLIENT_NUMBER_MAX);
+    public static final BigInteger YEARS_MOORE_LAW = new BigInteger("10");
+    public static final BigInteger FEE_SCALE_MULT = new BigInteger("5");
+    public static final BigInteger FEE_SCALE_DIV = new BigInteger("15");
     /**
      * root folder name for the application
      */

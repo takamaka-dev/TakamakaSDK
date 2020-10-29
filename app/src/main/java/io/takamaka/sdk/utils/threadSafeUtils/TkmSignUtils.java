@@ -135,6 +135,7 @@ public class TkmSignUtils {
             return out;
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new HashEncodeException(ex);
         }
     }

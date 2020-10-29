@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.takamaka.demo.utils.SWTracker;
@@ -18,8 +20,19 @@ import io.takamaka.demo.utils.WalletFXHelper;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
+import io.takamaka.sdk.exceptions.wallet.TransactionCanNotBeCreatedException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
+import io.takamaka.sdk.transactions.InternalTransactionBean;
+import io.takamaka.sdk.transactions.TransactionBean;
+import io.takamaka.sdk.transactions.fee.FeeBean;
+import io.takamaka.sdk.transactions.fee.TransactionFeeCalculator;
 import io.takamaka.sdk.utils.IdentiColorHelper;
+import io.takamaka.sdk.utils.threadSafeUtils.TkmTextUtils;
+import io.takamaka.sdk.wallet.TkmWallet;
+import io.takamaka.sdk.wallet.TransactionBox;
+
+import static io.takamaka.sdk.globalContext.KeyContexts.TransactionType.PAY;
+import static io.takamaka.sdk.main.defaults.TransactionGenerator.getTransactionBean;
 
 public class SendTokenActivity extends MainController {
 
@@ -60,6 +73,7 @@ public class SendTokenActivity extends MainController {
         inputTextNumberTkr = findViewById(R.id.input_text_number_tkr);
         inputTextMessage = findViewById(R.id.input_text_message_optional);
         textEsito = findViewById(R.id.text_esito_optional);
+        textEsito.setEnabled(false);
         imageViewFrom = findViewById(R.id.image_view_from);
         imageViewTo = findViewById(R.id.image_view_to);
         inputButtonVerify = findViewById(R.id.input_button_verify);
@@ -167,17 +181,65 @@ public class SendTokenActivity extends MainController {
                 wrongFields.addAll(checkFieldsForm(singleForm));
             });
 
-            wrongFields.forEach(e -> {
-                System.out.println(getResources().getResourceEntryName(e.getId()));
-            });
+            if (wrongFields.size() == 1 && getResources().getResourceEntryName(wrongFields.get(0).getId()).contains("input_text_number_tk")) {
+                inputTextNumberTkg.setError(null);
+                inputTextNumberTkr.setError(null);
+                wrongFields.clear();
+            }
 
             System.out.println("wrong fields size: " + wrongFields.size());
 
             if (!wrongFields.isEmpty()) {
                 highlightWrongForm(wrongFields);
             } else {
-                inputButtonSendToken.setEnabled(true);
+                InternalTransactionBean itb = null;
+                try {
+                    itb = getTransactionBean(
+                            PAY,
+                            SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()),
+                            inputToAddressText.getText().toString(),
+                            new BigInteger(inputTextNumberTkg.getText().toString().isEmpty() ? "0" : inputTextNumberTkg.getText().toString()),
+                            new BigInteger(inputTextNumberTkr.getText().toString().equals("") ? "0" : inputTextNumberTkr.getText().toString()),
+                            inputTextMessage.getText().toString(),
+                            new Date((new Date()).getTime() + 60000L* 5) ,
+                            0, 0
+                    );
+                } catch (WalletException e) {
+                    e.printStackTrace();
+                }
+                TransactionBean genericTRA = null;
+
+                System.out.println("Internal transaction bean ultimo : " + itb);
+
+                try {
+                    genericTRA = TkmWallet.createGenericTransaction(
+                            itb,
+                            SWTracker.i().getIwk(),
+                            SWTracker.i().getCurrentAddressNumber());
+                } catch (TransactionCanNotBeCreatedException e) {
+                    e.printStackTrace();
+                }
+
+                String txJson = TkmTextUtils.toJson(genericTRA);
+                TransactionBox tbox = TkmWallet.verifyTransactionIntegrity(txJson);
+
+                System.out.println("TBOXONE:" + tbox.getItb().getFrom());
+
+                FeeBean feeBean = TransactionFeeCalculator.getFeeBean(tbox);
+                if (feeBean == null) {
+                    textEsito.setError("Unexcepted validation error");
+
+                } else {
+                    String cpu = feeBean.getCpu().toString();
+                    String disk = feeBean.getDisk().toString();
+                    String mem = feeBean.getMemory().toString();
+                    textEsito.setText("CPU: " + cpu + " MEM: " + mem + " DISK: " + disk);
+                    inputButtonSendToken.setEnabled(true);
+                }
             }
         });
+
+
+
     }
 }
