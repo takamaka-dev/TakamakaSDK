@@ -37,7 +37,7 @@ public class MainController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SWTracker.initSettings();
+        SWTracker.i().initSettings();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initMenu();
