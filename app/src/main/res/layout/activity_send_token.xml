@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/form_send_token"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SendTokenActivity">
@@ -30,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/inputTextNumberTKG"
+                    android:id="@+id/input_text_number_tkg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -39,7 +40,7 @@
                     android:inputType="numberDecimal" />
 
                 <EditText
-                    android:id="@+id/inputTextNumberTKR"
+                    android:id="@+id/input_text_number_tkr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -49,7 +50,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/inputTextMessage"
+                android:id="@+id/input_text_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -57,20 +58,20 @@
                 android:inputType="textMultiLine" />
 
             <Button
-                android:id="@+id/inputButtonVerify"
+                android:id="@+id/input_button_verify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Verify Cost" />
 
             <EditText
-                android:id="@+id/editTextNumber3"
+                android:id="@+id/text_esito_optional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number" />
 
             <Button
-                android:id="@+id/inputSendToken"
+                android:id="@+id/input_send_token"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Send Token" />
@@ -96,7 +97,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <ImageView
-                android:id="@+id/imageViewFrom"
+                android:id="@+id/image_view_from"
                 android:layout_width="100dp"
                 android:layout_height="112dp"
                 android:layout_marginStart="23dp"
@@ -105,11 +106,11 @@
                 android:layout_weight="1"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/inputFromAddressText"
+                app:layout_constraintStart_toEndOf="@+id/input_from_address_text"
                 app:srcCompat="@drawable/takamaka_hq_icon" />
 
             <EditText
-                android:id="@+id/inputFromAddressText"
+                android:id="@+id/input_from_address_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -140,7 +141,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageViewTo"
+                android:id="@+id/image_view_to"
                 android:layout_width="100dp"
                 android:layout_height="112dp"
                 android:layout_marginStart="23dp"
@@ -149,11 +150,11 @@
                 android:layout_weight="1"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/inputFromAddressText"
+                app:layout_constraintStart_toEndOf="@+id/input_from_address_text"
                 app:srcCompat="@drawable/takamaka_hq_icon" />
 
             <EditText
-                android:id="@+id/inputToAddressText"
+                android:id="@+id/input_to_address_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
