@@ -26,15 +26,17 @@ public class SettingsActivity extends MainController {
             radioGroup.check(radioButtonTest.getId());
         }
 
+        System.out.println("Current settings: " + SWTracker.i().getCurrentSetting());
+
         radioButtonProduction.setOnClickListener(
                 e -> {
-                    SWTracker.setCurrentSetting("prod");
+                    SWTracker.i().setCurrentSetting("prod");
                 }
         );
 
         radioButtonTest.setOnClickListener(
                 e -> {
-                    SWTracker.setCurrentSetting("test");
+                    SWTracker.i().setCurrentSetting("test");
                 }
         );
     }

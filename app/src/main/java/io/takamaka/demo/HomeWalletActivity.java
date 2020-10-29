@@ -44,6 +44,7 @@ public class HomeWalletActivity extends MainController {
         initMenu();
         CallAPI callApi = new CallAPI();
         try {
+            System.out.println("IWK instance: " + SWTracker.i().getIwk());
             callApi.execute(SWTracker.i().getBalanceEndpoint().toString(), SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
         } catch (WalletException e) {
             e.printStackTrace();
@@ -65,7 +66,7 @@ public class HomeWalletActivity extends MainController {
 
         refreshIndex.setOnClickListener(
                 view -> {
-                    SWTracker.setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString()));
+                    SWTracker.setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString().isEmpty() ? "0" : editTextRefreshIndex.getText().toString()));
                     try {
                         labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
                         try {
@@ -106,6 +107,7 @@ public class HomeWalletActivity extends MainController {
         @Override
         protected Void doInBackground(String... params) {
             String urlString = params[0]; // URL to call
+            System.out.println("urlString: " + urlString);
             String data = params[1]; //data to post
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
@@ -119,6 +121,7 @@ public class HomeWalletActivity extends MainController {
             try {
                 Response response = client.newCall(request).execute();
                 Gson g = new Gson();
+                System.out.println(response.body().toString());
                 BalanceBean bb = g.fromJson(response.body().string(), BalanceBean.class);
                 System.out.println(bb.getRedBalance());
                 SWTracker.setBb(bb);

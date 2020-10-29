@@ -142,6 +142,7 @@ public class MainController extends AppCompatActivity {
                                 createWalletFab.hide();
                                 restoreWalletFab.hide();
                             } else {
+                                System.out.println("ciao");
                                 homeButton.show();
                             }
 

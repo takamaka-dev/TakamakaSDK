@@ -6,6 +6,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+import io.takamaka.demo.utils.SWTracker;
+
 public class ExplorerActivity extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -14,7 +16,11 @@ public class ExplorerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explorer);
         WebView myWebView = (WebView) findViewById(R.id.webview);
-        myWebView.loadUrl("https://exp.takamaka.dev/");
+
+
+
+        System.out.println("Explorer url: " + SWTracker.i().getSettings().get(SWTracker.i().getCurrentSetting()).get("explorer_url"));
+        myWebView.loadUrl((String) SWTracker.i().getSettings().get(SWTracker.i().getCurrentSetting()).get("explorer_url"));
 
 
         myWebView.clearCache(true);
