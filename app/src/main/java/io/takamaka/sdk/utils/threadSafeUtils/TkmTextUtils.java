@@ -136,8 +136,10 @@ public class TkmTextUtils {
             sb.append(itb.getSlot());
             //F.y(sb.toString());
             String hash = TkmSignUtils.Hash256(sb.toString());
+            System.out.println("hashone");
             return hash;
         } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException ex) {
+            System.out.println("va in eccezione");
             throw new HashCompositionException(ex);
         }
     }

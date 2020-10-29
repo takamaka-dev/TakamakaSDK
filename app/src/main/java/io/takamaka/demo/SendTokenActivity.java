@@ -209,7 +209,7 @@ public class SendTokenActivity extends MainController {
                 }
                 TransactionBean genericTRA = null;
 
-                System.out.println("Internal transaction bean: " + itb);
+                System.out.println("Internal transaction bean ultimo : " + itb);
 
                 try {
                     genericTRA = TkmWallet.createGenericTransaction(
