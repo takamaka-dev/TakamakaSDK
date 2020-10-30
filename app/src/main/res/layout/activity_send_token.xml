@@ -62,7 +62,7 @@
                 android:id="@+id/input_button_verify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" Verify" />
+                android:text=" Verify Cost" />
 
             <EditText
                 android:id="@+id/text_esito_optional"
@@ -78,6 +78,8 @@
                 android:id="@+id/input_send_token"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#173C5A"
+                android:textColor="#fff"
                 android:text="Send Token" />
 
             <TextView
