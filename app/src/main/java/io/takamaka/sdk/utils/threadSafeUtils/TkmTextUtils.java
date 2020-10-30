@@ -18,11 +18,14 @@ import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.InclusionHashCreationException;
 import io.takamaka.sdk.transactions.TransactionBean;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
+import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -34,7 +37,6 @@ import java.util.Locale;
  */
 public class TkmTextUtils {
     /**
-     *
      * @param text
      * @return true if text is null or blank
      */
@@ -55,7 +57,6 @@ public class TkmTextUtils {
     }
 
     /**
-     *
      * @param tb
      * @return
      */
@@ -65,7 +66,6 @@ public class TkmTextUtils {
     }
 
     /**
-     *
      * @param itb
      * @return
      */
@@ -101,23 +101,23 @@ public class TkmTextUtils {
      * StringBuilder sb = new StringBuilder();
      * <br>
      * sb.append(itb.getFrom());<br>
-     *
+     * <p>
      * sb.append(itb.getTo());<br>
-     *
+     * <p>
      * sb.append(itb.getMessage());<br>
-     *
+     * <p>
      * sb.append(itb.getNotBefore().getTime());<br>
-     *
+     * <p>
      * sb.append(itb.getRedValue());<br>
-     *
+     * <p>
      * sb.append(itb.getGreenValue());<br>
-     *
+     * <p>
      * sb.append(itb.getTransactionType().name());<br>
-     *
+     * <p>
      * sb.append(itb.getEpoch());<br>
-     *
+     * <p>
      * sb.append(itb.getSlot());<br>
-     *
+     * <p>
      * String hash = TkmSignUtils.Hash256(sb.toString());<br>
      *
      * @param itb
@@ -160,7 +160,6 @@ public class TkmTextUtils {
     }
 
     /**
-     *
      * @param transactionBeanJson
      * @return
      */
@@ -185,7 +184,6 @@ public class TkmTextUtils {
     }
 
     /**
-     *
      * @param internalTransactionBeanJson
      * @return
      */
@@ -229,7 +227,7 @@ public class TkmTextUtils {
             Locale l = Locale.getDefault();
             NumberFormat formatter = NumberFormat.getNumberInstance(l);
             BigDecimal movePointLeft = new BigDecimal(nanoTK).movePointLeft(DefaultInitParameters.NUMBER_OF_ZEROS);
-            String format = NumberFormat.getNumberInstance(l).format(movePointLeft);
+            //String format = NumberFormat.getNumberInstance(l).format(movePointLeft);
             DecimalFormatSymbols dcs = DecimalFormatSymbols.getInstance(l);
             char decimalSeparator = dcs.getDecimalSeparator();
             char groupingSeparator = dcs.getGroupingSeparator();
@@ -244,6 +242,44 @@ public class TkmTextUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static final String formatNumberWithShift(String nanoTK, int decimals) {
+        //NumberFormat formatter = NumberFormat.getNumberInstance(l);
+        Locale l = Locale.getDefault();
+        return formatNumberWithShift(nanoTK, decimals, l);
+    }
+
+    public static final String formatNumberWithShift(String nanoTK, int decimals, Locale l) {
+        //NumberFormat formatter = NumberFormat.getNumberInstance(l);
+        BigDecimal movePointLeft = new BigDecimal(nanoTK).movePointLeft(DefaultInitParameters.NUMBER_OF_ZEROS);
+        MathContext mc = new MathContext(decimals);
+        BigDecimal bd = movePointLeft.round(mc);
+        //String format = NumberFormat.getNumberInstance(l).format(bd);
+        DecimalFormatSymbols dcs = DecimalFormatSymbols.getInstance(l);
+        char decimalSeparator = dcs.getDecimalSeparator();
+        char groupingSeparator = dcs.getGroupingSeparator();
+
+
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        DecimalFormatSymbols decimalFormatSymbols = df.getDecimalFormatSymbols();
+        decimalFormatSymbols.setGroupingSeparator(groupingSeparator);
+        decimalFormatSymbols.setDecimalSeparator(decimalSeparator);
+        df.setDecimalFormatSymbols(decimalFormatSymbols);
+        //DecimalFormat df = new DecimalFormat("#,###.00");
+        System.out.println("Format finale " + df.format(bd));
+        return df.format(bd);
+        /*
+        BigInteger integerPart = bd.toBigInteger().mod(new BigInteger("10").pow(DefaultInitParameters.NUMBER_OF_ZEROS));
+        String formattedIntegerPArt = NumberFormat.getNumberInstance(l).format(integerPart);
+        //movePointLeft
+        String toString = bd.toPlainString();
+        System.out.println("Valore nella home: " + toString);
+
+        String[] split = StringUtils.split(toString, ".");
+        String res = formattedIntegerPArt + decimalSeparator + split[1];
+        return res;
+        */
     }
 
     public static final String formatNumber(String nanoTK, Locale l) {
@@ -267,4 +303,50 @@ public class TkmTextUtils {
         }
     }
 
+    public static final String applyLocale(BigDecimal nanoTK, Locale l) {
+        try {
+            NumberFormat formatter = NumberFormat.getNumberInstance(l);
+            String format = NumberFormat.getNumberInstance(l).format(nanoTK);
+            DecimalFormatSymbols dcs = DecimalFormatSymbols.getInstance(l);
+            char decimalSeparator = dcs.getDecimalSeparator();
+            char groupingSeparator = dcs.getGroupingSeparator();
+            BigInteger integerPart = nanoTK.toBigInteger().mod(new BigInteger("10").pow(DefaultInitParameters.NUMBER_OF_ZEROS));
+            String formattedIntegerPArt = NumberFormat.getNumberInstance(l).format(integerPart);
+            //movePointLeft
+            String toString = nanoTK.toPlainString();
+            String[] split = StringUtils.split(toString, ".");
+            String res = formattedIntegerPArt + decimalSeparator + split[1];
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static final String roundDecimal(String value, int decimals) {
+        return roundDecimal(value, decimals, Locale.getDefault());
+    }
+
+    public static final String roundDecimal(String value, int decimals, Locale l) {
+        MathContext mc = new MathContext(decimals);
+        BigDecimal bd = new BigDecimal(value).round(mc);
+        return applyLocale(bd, l);
+    }
+
+
+    public static BigInteger validateBI(String sValue) {
+        BigInteger g = null;
+        if (!isNullOrBlank(sValue)) {
+            sValue = sValue.trim();
+            try {
+                BigDecimal gb = new BigDecimal("" + sValue);
+                BigDecimal gbWei = gb.movePointRight(DefaultInitParameters.NUMBER_OF_ZEROS);
+                g = gbWei.toBigInteger();
+            } catch (Exception e) {
+                //Log.logStacktrace(Level.INFO, e);
+                //val.setText("");
+            }
+        }
+        return g;
+    }
 }

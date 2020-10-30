@@ -18,6 +18,7 @@ import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
 import io.takamaka.sdk.utils.IdentiColorHelper;
+import io.takamaka.sdk.utils.threadSafeUtils.TkmTextUtils;
 import io.takamaka.sdk.wallet.beans.BalanceBean;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -107,10 +108,14 @@ public class HomeWalletActivity extends MainController {
             ftkrValue = findViewById(R.id.label_val_ftkr);
             labelValWalletName = findViewById(R.id.label_val_wallet_name);
 
-            tkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getGreenBalance()) / Math.pow(10, 9)));
-            tkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getRedBalance()) / Math.pow(10, 9)));
-            ftkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getGreenPenalty()) / Math.pow(10, 9)));
-            ftkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getRedPenalty()) / Math.pow(10, 9)));
+            tkgValue.setText(TkmTextUtils.formatNumberWithShift(SWTracker.i().getBb().getGreenBalance(), 2));
+            tkrValue.setText(TkmTextUtils.formatNumberWithShift(SWTracker.i().getBb().getRedBalance(), 2));
+            ftkgValue.setText(TkmTextUtils.formatNumberWithShift(SWTracker.i().getBb().getGreenPenalty(), 2));
+            ftkrValue.setText(TkmTextUtils.formatNumberWithShift(SWTracker.i().getBb().getRedPenalty(), 2));
+//            tkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getGreenBalance()) / Math.pow(10, 9)));
+//            tkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getRedBalance()) / Math.pow(10, 9)));
+//            ftkgValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getGreenPenalty()) / Math.pow(10, 9)));
+//            ftkrValue.setText(String.valueOf(Double.parseDouble(SWTracker.i().getBb().getRedPenalty()) / Math.pow(10, 9)));
             labelValWalletName.setText(SWTracker.i().getNewWalletBean().getName());
 
         }

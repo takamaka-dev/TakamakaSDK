@@ -13,10 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +25,6 @@ import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.wallet.TransactionCanNotBeCreatedException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
-import io.takamaka.sdk.main.defaults.DefaultInitParameters;
 import io.takamaka.sdk.transactions.InternalTransactionBean;
 import io.takamaka.sdk.transactions.TransactionBean;
 import io.takamaka.sdk.transactions.fee.FeeBean;
@@ -38,7 +34,6 @@ import io.takamaka.sdk.utils.TkmSignUtils;
 import io.takamaka.sdk.utils.threadSafeUtils.TkmTextUtils;
 import io.takamaka.sdk.wallet.TkmWallet;
 import io.takamaka.sdk.wallet.TransactionBox;
-import io.takamaka.sdk.wallet.beans.TransactionBeanResult;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -233,14 +228,14 @@ public class SendTokenActivity extends MainController {
             } else {
                 InternalTransactionBean itb = null;
                 try {
-                    long inputTextNumberTkgLong = Long.parseLong(inputTextNumberTkg.getText().toString().isEmpty() ? "0" : inputTextNumberTkg.getText().toString()) * DefaultInitParameters.BIG_INTEGER;
-                    long inputTextNumberTkrLong = Long.parseLong(inputTextNumberTkr.getText().toString().isEmpty() ? "0" : inputTextNumberTkr.getText().toString()) * DefaultInitParameters.BIG_INTEGER;
+                    //double inputTextNumberTkgLong = Double.parseDouble(inputTextNumberTkg.getText().toString().isEmpty() ? "0" : inputTextNumberTkg.getText().toString()) * DefaultInitParameters.BIG_INTEGER;
+                    //double inputTextNumberTkrLong = Double.parseDouble(inputTextNumberTkr.getText().toString().isEmpty() ? "0" : inputTextNumberTkr.getText().toString()) * DefaultInitParameters.BIG_INTEGER;
                     itb = getTransactionBean(
                             PAY,
                             SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()),
                             inputToAddressText.getText().toString(),
-                            new BigInteger(inputTextNumberTkg.getText().toString().isEmpty() ? "0" : String.valueOf(inputTextNumberTkgLong)),
-                            new BigInteger(inputTextNumberTkr.getText().toString().equals("") ? "0" : String.valueOf(inputTextNumberTkrLong)),
+                            TkmTextUtils.validateBI(inputTextNumberTkg.getText().toString()),
+                            TkmTextUtils.validateBI(inputTextNumberTkr.getText().toString()),
                             inputTextMessage.getText().toString(),
                             new Date((new Date()).getTime() + 60000L* 5) ,
                             0, 0
