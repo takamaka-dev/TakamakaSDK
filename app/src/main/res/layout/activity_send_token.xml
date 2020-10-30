@@ -69,13 +69,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColor="#43B885"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/input_send_token"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Send Token" />
+
+            <TextView
+                android:id="@+id/text_final_submit_esito_optional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#43B885"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -157,14 +168,12 @@
 
             <EditText
                 android:id="@+id/input_to_address_text"
-                android:layout_width="wrap_content"
+                android:layout_width="168dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ems="10"
-                android:hint="To Address"
-                android:inputType="textMultiLine"
-                android:textIsSelectable="true"
-                android:shadowColor="#C8C8C8"
-                android:tooltipText="To Address" />
+                android:hint="To address"
+                android:inputType="textMultiLine" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

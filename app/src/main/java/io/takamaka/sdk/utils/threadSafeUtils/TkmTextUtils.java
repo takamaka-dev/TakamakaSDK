@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import io.takamaka.demo.utils.UserWalletBean;
 import io.takamaka.sdk.globalContext.FixedParameters;
+import io.takamaka.sdk.main.defaults.DefaultInitParameters;
 import io.takamaka.sdk.transactions.TransactionUtils;
 import io.takamaka.sdk.wallet.beans.KeyBean;
 import io.takamaka.sdk.wallet.beans.EncKeyBean;
@@ -18,8 +19,13 @@ import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.InclusionHashCreationException;
 import io.takamaka.sdk.transactions.TransactionBean;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Thread safe methods for use
@@ -135,7 +141,7 @@ public class TkmTextUtils {
             sb.append(itb.getEpoch());
             sb.append(itb.getSlot());
             //F.y(sb.toString());
-            String hash = TkmSignUtils.Hash256(sb.toString());
+            String hash = io.takamaka.sdk.utils.TkmSignUtils.Hash256(sb.toString());
             System.out.println("hashone");
             return hash;
         } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException ex) {
@@ -206,7 +212,7 @@ public class TkmTextUtils {
      */
     public static String singleTransactionInclusionHash(String itbHash, String addr, String sig, String random, String walletCypher) throws InclusionHashCreationException {
         try {
-            return TkmSignUtils.Hash256(itbHash + addr + sig + random + walletCypher);
+            return io.takamaka.sdk.utils.TkmSignUtils.Hash256(itbHash + addr + sig + random + walletCypher);
         } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException ex) {
             throw new InclusionHashCreationException(ex);
         }
@@ -217,4 +223,48 @@ public class TkmTextUtils {
         UserWalletBean fb = gson.fromJson(jsonString, UserWalletBean.class);
         return fb;
     }
+
+    public static final String formatNumber(String nanoTK) {
+        try {
+            Locale l = Locale.getDefault();
+            NumberFormat formatter = NumberFormat.getNumberInstance(l);
+            BigDecimal movePointLeft = new BigDecimal(nanoTK).movePointLeft(DefaultInitParameters.NUMBER_OF_ZEROS);
+            String format = NumberFormat.getNumberInstance(l).format(movePointLeft);
+            DecimalFormatSymbols dcs = DecimalFormatSymbols.getInstance(l);
+            char decimalSeparator = dcs.getDecimalSeparator();
+            char groupingSeparator = dcs.getGroupingSeparator();
+            BigInteger integerPart = movePointLeft.toBigInteger().mod(new BigInteger("10").pow(DefaultInitParameters.NUMBER_OF_ZEROS));
+            String formattedIntegerPArt = NumberFormat.getNumberInstance(l).format(integerPart);
+            //movePointLeft
+            String toString = movePointLeft.toPlainString();
+            String[] split = StringUtils.split(toString, ".");
+            String res = formattedIntegerPArt + decimalSeparator + split[1];
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static final String formatNumber(String nanoTK, Locale l) {
+        try {
+            NumberFormat formatter = NumberFormat.getNumberInstance(l);
+            BigDecimal movePointLeft = new BigDecimal(nanoTK).movePointLeft(DefaultInitParameters.NUMBER_OF_ZEROS);
+            String format = NumberFormat.getNumberInstance(l).format(movePointLeft);
+            DecimalFormatSymbols dcs = DecimalFormatSymbols.getInstance(l);
+            char decimalSeparator = dcs.getDecimalSeparator();
+            char groupingSeparator = dcs.getGroupingSeparator();
+            BigInteger integerPart = movePointLeft.toBigInteger().mod(new BigInteger("10").pow(DefaultInitParameters.NUMBER_OF_ZEROS));
+            String formattedIntegerPArt = NumberFormat.getNumberInstance(l).format(integerPart);
+            //movePointLeft
+            String toString = movePointLeft.toPlainString();
+            String[] split = StringUtils.split(toString, ".");
+            String res = formattedIntegerPArt + decimalSeparator + split[1];
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

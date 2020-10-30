@@ -597,18 +597,15 @@ public class FileHelper {
     }
 
     public static Path getSettingsPathFolder() {
-        Path settingsFolder = Paths.get(FileHelper.getDefaultApplicationDirectoryPath().toString(), FixedParameters.SETTINGS_FOLDER);
-        return settingsFolder;
+        return Paths.get(FileHelper.getDefaultApplicationDirectoryPath().toString(), FixedParameters.SETTINGS_FOLDER);
     }
 
     public static Path getTransactionsDumpPathFolder() {
-        Path settingsFolder = Paths.get(FileHelper.getDefaultApplicationDirectoryPath().toString(), FixedParameters.TRANSACTIONS_DUMP_FOLDER);
-        return settingsFolder;
+        return Paths.get(FileHelper.getDefaultApplicationDirectoryPath().toString(), FixedParameters.TRANSACTIONS_DUMP_FOLDER);
     }
 
     public static Path getSimulationPathFolder() {
-        Path settingsFolder = Paths.get(FileHelper.getDefaultApplicationDirectoryPath().toString(), FixedParameters.SIMULATION_DUMP_FOLDER);
-        return settingsFolder;
+        return Paths.get(FileHelper.getDefaultApplicationDirectoryPath().toString(), FixedParameters.SIMULATION_DUMP_FOLDER);
     }
 
     public static Path getTransactionsDumpPathFolder(String pidName) {

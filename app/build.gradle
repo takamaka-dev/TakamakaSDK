@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "io.takamaka"
+        applicationId "com.example.androidsdk"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1

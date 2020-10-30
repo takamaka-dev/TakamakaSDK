@@ -133,6 +133,16 @@ public class SWTracker {
         return null;
     }
 
+    public URL getTransactionEndpoint() {
+        try {
+            System.out.println("Current settings: " + SWTracker.i().getCurrentSetting());
+            return new URL(Objects.requireNonNull(SWTracker.i().getSettings().get(SWTracker.i().getCurrentSetting())).get("send_transaction_url").toString());
+        } catch (MalformedURLException ex) {
+
+        }
+        return null;
+    }
+
     public String getBalanceKey() {
         return currentApiUrl.getReqKey();
 

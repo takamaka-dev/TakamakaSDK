@@ -45,7 +45,7 @@ public class DefaultInitParameters {
      */
     public static final int NUMBER_OF_ZEROS = 9;
 
-
+    public static final int BIG_INTEGER = 1000000000;
     /**
      * Minimum stake bet in unit format. Use {@code TkmTK} before apply
      */

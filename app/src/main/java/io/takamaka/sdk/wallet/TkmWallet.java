@@ -84,6 +84,9 @@ public class TkmWallet {
 
     public static TransactionBox verifyTransactionIntegrity(String transactionJson) {
         TransactionBean tb = TkmTextUtils.transactionBeanFromJson(transactionJson);
+
+        System.out.println("transaction bean from json " + tb);
+
         TransactionBox veriTransactionIntegrity = verifyTransactionIntegrity(tb, transactionJson);
         return veriTransactionIntegrity;
     }

@@ -1,6 +1,8 @@
 package io.takamaka.demo;
 
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,7 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,14 +28,22 @@ import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.wallet.TransactionCanNotBeCreatedException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
+import io.takamaka.sdk.main.defaults.DefaultInitParameters;
 import io.takamaka.sdk.transactions.InternalTransactionBean;
 import io.takamaka.sdk.transactions.TransactionBean;
 import io.takamaka.sdk.transactions.fee.FeeBean;
 import io.takamaka.sdk.transactions.fee.TransactionFeeCalculator;
 import io.takamaka.sdk.utils.IdentiColorHelper;
+import io.takamaka.sdk.utils.TkmSignUtils;
 import io.takamaka.sdk.utils.threadSafeUtils.TkmTextUtils;
 import io.takamaka.sdk.wallet.TkmWallet;
 import io.takamaka.sdk.wallet.TransactionBox;
+import io.takamaka.sdk.wallet.beans.TransactionBeanResult;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static io.takamaka.sdk.globalContext.KeyContexts.TransactionType.PAY;
 import static io.takamaka.sdk.main.defaults.TransactionGenerator.getTransactionBean;
@@ -37,10 +51,31 @@ import static io.takamaka.sdk.main.defaults.TransactionGenerator.getTransactionB
 public class SendTokenActivity extends MainController {
 
     private String fromAddress, toAddress;
+    private TransactionBox tbox;
+
+    public boolean getTxResult() {
+        return txResult;
+    }
+
+    public void setTxResult(boolean txResult) {
+        this.txResult = txResult;
+    }
+
+    private boolean txResult;
 
     EditText inputFromAddressText, inputToAddressText, inputTextNumberTkg, inputTextNumberTkr, inputTextMessage, textEsito;
     ImageView imageViewFrom, imageViewTo;
     Button inputButtonVerify, inputButtonSendToken;
+    TextView textFinalSubmitEsito;
+
+    public TransactionBox getTbox() {
+        return tbox;
+    }
+
+    public void setTbox(TransactionBox tbox) {
+        this.tbox = tbox;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +108,11 @@ public class SendTokenActivity extends MainController {
         inputTextNumberTkr = findViewById(R.id.input_text_number_tkr);
         inputTextMessage = findViewById(R.id.input_text_message_optional);
         textEsito = findViewById(R.id.text_esito_optional);
-        textEsito.setEnabled(false);
         imageViewFrom = findViewById(R.id.image_view_from);
         imageViewTo = findViewById(R.id.image_view_to);
         inputButtonVerify = findViewById(R.id.input_button_verify);
         inputButtonSendToken = findViewById(R.id.input_send_token);
+        textFinalSubmitEsito = findViewById(R.id.text_final_submit_esito_optional);
 
         inputButtonSendToken.setEnabled(false);
         inputButtonSendToken.setEnabled(false);
@@ -175,6 +210,10 @@ public class SendTokenActivity extends MainController {
         imageViewTo.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(toAddress)));
 
         inputButtonVerify.setOnClickListener(v -> {
+            if (inputToAddressText.getText().toString().length() != 44) {
+                inputToAddressText.setError("Wrong address");
+                return;
+            }
             System.out.println("Clicked! verify");
             List<View> wrongFields = new ArrayList<>();
             forms.forEach(singleForm -> {
@@ -194,12 +233,14 @@ public class SendTokenActivity extends MainController {
             } else {
                 InternalTransactionBean itb = null;
                 try {
+                    long inputTextNumberTkgLong = Long.parseLong(inputTextNumberTkg.getText().toString().isEmpty() ? "0" : inputTextNumberTkg.getText().toString()) * DefaultInitParameters.BIG_INTEGER;
+                    long inputTextNumberTkrLong = Long.parseLong(inputTextNumberTkr.getText().toString().isEmpty() ? "0" : inputTextNumberTkr.getText().toString()) * DefaultInitParameters.BIG_INTEGER;
                     itb = getTransactionBean(
                             PAY,
                             SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()),
                             inputToAddressText.getText().toString(),
-                            new BigInteger(inputTextNumberTkg.getText().toString().isEmpty() ? "0" : inputTextNumberTkg.getText().toString()),
-                            new BigInteger(inputTextNumberTkr.getText().toString().equals("") ? "0" : inputTextNumberTkr.getText().toString()),
+                            new BigInteger(inputTextNumberTkg.getText().toString().isEmpty() ? "0" : String.valueOf(inputTextNumberTkgLong)),
+                            new BigInteger(inputTextNumberTkr.getText().toString().equals("") ? "0" : String.valueOf(inputTextNumberTkrLong)),
                             inputTextMessage.getText().toString(),
                             new Date((new Date()).getTime() + 60000L* 5) ,
                             0, 0
@@ -221,9 +262,9 @@ public class SendTokenActivity extends MainController {
                 }
 
                 String txJson = TkmTextUtils.toJson(genericTRA);
-                TransactionBox tbox = TkmWallet.verifyTransactionIntegrity(txJson);
 
-                System.out.println("TBOXONE:" + tbox.getItb().getFrom());
+                TransactionBox tbox = TkmWallet.verifyTransactionIntegrity(txJson);
+                setTbox(tbox);
 
                 FeeBean feeBean = TransactionFeeCalculator.getFeeBean(tbox);
                 if (feeBean == null) {
@@ -233,13 +274,65 @@ public class SendTokenActivity extends MainController {
                     String cpu = feeBean.getCpu().toString();
                     String disk = feeBean.getDisk().toString();
                     String mem = feeBean.getMemory().toString();
-                    textEsito.setText("CPU: " + cpu + " MEM: " + mem + " DISK: " + disk);
+                    textEsito.setText("CPU: " + cpu + " MEM: " + mem + " DISK: " + TkmTextUtils.formatNumber(disk));
                     inputButtonSendToken.setEnabled(true);
                 }
             }
         });
 
-
+        inputButtonSendToken.setOnClickListener(e -> {
+            DoSubmit ds = new DoSubmit();
+            String hexBody = TkmSignUtils.fromStringToHexString(getTbox().getTransactionJson());
+            ds.execute(String.valueOf(SWTracker.i().getTransactionEndpoint()), hexBody);
+        });
 
     }
+
+    protected class DoSubmit extends AsyncTask<String, String, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (getTxResult()) {
+                textFinalSubmitEsito.setText("Transaction has been successfully submitted");
+            } else {
+                textFinalSubmitEsito.setTextColor(Color.RED);
+                textFinalSubmitEsito.setText("Transaction Error");
+            }
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            String urlString = params[0]; // URL to call
+            System.out.println("urlString: " + urlString);
+            String data = params[1]; //data to post
+            System.out.println(data);
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+            RequestBody body = RequestBody.create(mediaType, "tx=" + data);
+            Request request = new Request.Builder()
+                    .url(urlString)
+                    .method("POST", body)
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                String responseResult = response.body().string();
+                System.out.println("response di pay " + responseResult);
+                setTxResult(false);
+                if (responseResult.contains("true")) {
+                    setTxResult(true);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
 }
