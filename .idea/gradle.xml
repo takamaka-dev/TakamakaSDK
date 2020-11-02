@@ -9,8 +9,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="/mnt/extra/android_projects/android-sdk" />
-            <option value="/mnt/extra/android_projects/android-sdk/app" />
+            <option value="/mnt/extra/android_projects/TakamakaSDK" />
+            <option value="/mnt/extra/android_projects/TakamakaSDK/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
