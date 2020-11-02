@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/java/com.example.androidsdk
+/mnt*
