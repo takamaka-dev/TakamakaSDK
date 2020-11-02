@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.List;
 
 import io.takamaka.demo.utils.SWTracker;
-import io.takamaka.demo.utils.WalletFXHelper;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
