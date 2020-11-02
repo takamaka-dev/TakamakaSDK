@@ -21,6 +21,7 @@
         <activity android:name=".RestoreWalletActivity" />
         <activity android:name=".CreateWalletActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".TransactionInfoActivity" />
         <activity android:name=".MainController">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

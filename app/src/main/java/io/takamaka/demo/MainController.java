@@ -185,6 +185,7 @@ public class MainController extends AppCompatActivity {
                 view -> {
                     Intent activityTokens = new Intent(getApplicationContext(), SendTokenActivity.class);
                     startActivity(activityTokens);
+                    System.out.println("Application context: " + getApplicationContext());
                 });
 
         loginButton.setOnClickListener(
