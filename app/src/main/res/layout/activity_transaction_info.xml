@@ -54,6 +54,7 @@
         android:layout_height="wrap_content"
         android:outlineProvider="bounds"
         android:text="TRANSACTION SUCESSFULLY TRANSMITTED"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
