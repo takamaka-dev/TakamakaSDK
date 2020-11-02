@@ -76,7 +76,7 @@ public class SendTokenActivity extends MainController {
     protected void onCreate(Bundle savedInstanceState) {
         try {
             fromAddress = SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex());
-            toAddress = SWTracker.i().getIwk().getPublicKeyAtIndexURL64(WalletFXHelper.generateRandomNumber());
+            toAddress = "Insert here your destination address";
         } catch (WalletException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
