@@ -116,3 +116,10 @@ This button takes us to the area of the application used to change environment, 
 	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig100.jpeg" />
 </p>
 Simply activate the environment of interest by activating the radio button.
+
+# Logout Button
+
+<p align="center">
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig110.jpeg" />
+</p>
+Just click on the button to logout from your Wallet Session
