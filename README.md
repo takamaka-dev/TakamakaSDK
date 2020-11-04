@@ -1,4 +1,7 @@
 # Takamaka Android Sdk Guide
+
+https://cdn.takamaka.dev/androidsdkdocs/javadocSdk.html
+
 Takamaka SDK for Android Applications (AiliA SA)
 Takamaka is proud to present Android SDK prototype, easy to understand the functionalities and demonstrate the correct work flow.
 
