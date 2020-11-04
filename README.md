@@ -89,3 +89,24 @@ The home screen for this app is presented with the following features
 <p align="center">
 	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig77.jpeg" />
 </p>
+
+
+## Transaction Info-Status
+- . Status
+Once the transaction is sent through this new screen is presented informing the user of the status. 
+
+<p align="center">
+	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig8.png" />
+</p>
+
+If the transaction is succesful or not.
+
+- New Transaction button takes us to the Send Token section if a new transaction is needed to be created.
+- Go home button, takes us to the wallet home screen.
+
+# Explorer section
+Explorer is an integreated web page directly pointing to the transactions pool that can be consultable using web filters. 
+<p align="center">
+	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig8.png" />
+</p>
+Setting the filters is easy to spot up the transaction of interst and consult the body of transaction.
