@@ -112,7 +112,7 @@ Explorer is an integreated web page directly pointing to the transactions pool t
 Setting the filters is easy to spot up the transaction of interst and consult the body of transaction.
 
 # Settings section
-this button takes us to the area of the application used to change environment, from production to test area and viceversa everytime it is needed for develompent purposes.
+This button takes us to the area of the application used to change environment, from production to test area and viceversa everytime it is needed for develompent purposes.
 
 <p align="center">
 	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig100.jpeg" />
