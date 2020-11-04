@@ -14,7 +14,7 @@ Launch the application a clean app will appear.
 Once clicked the rounded button with T letter a vertical line of action buttons will appear.
 
  <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig2.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig2_fix.jpeg" />
 </p>
 
 ## Wallet login button.
@@ -27,7 +27,7 @@ If there is a wallet previously created with the app.
 
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig3.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig3_fix.jpeg" />
 </p>
 The home screen will appear.
 
@@ -37,7 +37,7 @@ The home screen will appear.
 - Repeat Password
 - Click Create button
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig4.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig4_fix.jpeg" />
 </p>
 
 Less than 3 seconds and our app will generate a brand-new wallet transiting to the home screen of this wallet. 
@@ -52,7 +52,7 @@ Less than 3 seconds and our app will generate a brand-new wallet transiting to t
 - Click Restore button
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig5.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig5_fix.jpeg" />
 </p>
 
 Less than 3 seconds and our app will restore our wallet transiting to the home screen of this wallet.
@@ -72,7 +72,7 @@ The home screen for this app is presented with the following features
 - Refresh index button whose duty is to generate a new address once invoked and the field besides inserting a number that will identify our new address.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig6.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig6_fix.jpeg" />
 </p>
 
 # Send Token
