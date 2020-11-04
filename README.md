@@ -87,5 +87,5 @@ The home screen for this app is presented with the following features
 - Send Button, is in charge to validate and send the transaction to the blockchain.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig77.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig77.jpeg" />
 </p>
