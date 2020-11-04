@@ -8,13 +8,13 @@ Takamaka is proud to present Android SDK prototype, easy to understand the funct
 Launch the application a clean app will appear.
  
  <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig1_fix.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig11.jpeg" />
 </p>
 
 Once clicked the rounded button with T letter a vertical line of action buttons will appear.
 
  <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig2_fix.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig22.jpeg" />
 </p>
 
 ## Wallet login button.
@@ -27,7 +27,7 @@ If there is a wallet previously created with the app.
 
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig3_fix.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig33.jpeg" />
 </p>
 The home screen will appear.
 
@@ -37,7 +37,7 @@ The home screen will appear.
 - Repeat Password
 - Click Create button
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig4_fix.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig44.jpeg" />
 </p>
 
 Less than 3 seconds and our app will generate a brand-new wallet transiting to the home screen of this wallet. 
@@ -52,7 +52,7 @@ Less than 3 seconds and our app will generate a brand-new wallet transiting to t
 - Click Restore button
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig5_fix.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig55.jpeg" />
 </p>
 
 Less than 3 seconds and our app will restore our wallet transiting to the home screen of this wallet.
@@ -72,7 +72,7 @@ The home screen for this app is presented with the following features
 - Refresh index button whose duty is to generate a new address once invoked and the field besides inserting a number that will identify our new address.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig6_fix.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig66.jpeg" />
 </p>
 
 # Send Token
@@ -87,5 +87,5 @@ The home screen for this app is presented with the following features
 - Send Button, is in charge to validate and send the transaction to the blockchain.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig7.png" />
+	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig77.png" />
 </p>
