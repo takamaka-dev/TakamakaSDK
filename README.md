@@ -27,7 +27,7 @@ If there is a wallet previously created with the app.
 
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig33.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig33_fix.jpeg" />
 </p>
 The home screen will appear.
 
@@ -87,5 +87,5 @@ The home screen for this app is presented with the following features
 - Send Button, is in charge to validate and send the transaction to the blockchain.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig77.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig77.png" />
 </p>
