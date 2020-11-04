@@ -6,7 +6,7 @@ Takamaka is proud to present Android SDK prototype, easy to understand the funct
 Launch the application a clean app will appear.
  
  <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig11.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig11_fix.jpeg" />
 </p>
 
 Once clicked the rounded button with T letter a vertical line of action buttons will appear.
