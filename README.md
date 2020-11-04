@@ -96,7 +96,7 @@ The home screen for this app is presented with the following features
 Once the transaction is sent through this new screen is presented informing the user of the status. 
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig8.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig88.jpeg" />
 </p>
 
 If the transaction is succesful or not.
@@ -107,6 +107,6 @@ If the transaction is succesful or not.
 # Explorer section
 Explorer is an integreated web page directly pointing to the transactions pool that can be consultable using web filters. 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig8.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig99.jpeg" />
 </p>
 Setting the filters is easy to spot up the transaction of interst and consult the body of transaction.
