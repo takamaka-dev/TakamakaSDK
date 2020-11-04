@@ -8,13 +8,13 @@ Takamaka is proud to present Android SDK prototype, easy to understand the funct
 Launch the application a clean app will appear.
  
  <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig1.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig1.jpeg" />
 </p>
 
 Once clicked the rounded button with T letter a vertical line of action buttons will appear.
 
  <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig2.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig2.jpeg" />
 </p>
 
 ## Wallet login button.
@@ -27,7 +27,7 @@ If there is a wallet previously created with the app.
 
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig3.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig3.jpeg" />
 </p>
 The home screen will appear.
 
@@ -37,7 +37,7 @@ The home screen will appear.
 - Repeat Password
 - Click Create button
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig4.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig4.jpeg" />
 </p>
 
 Less than 3 seconds and our app will generate a brand-new wallet transiting to the home screen of this wallet. 
@@ -52,7 +52,7 @@ Less than 3 seconds and our app will generate a brand-new wallet transiting to t
 - Click Restore button
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig5.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig5.jpeg" />
 </p>
 
 Less than 3 seconds and our app will restore our wallet transiting to the home screen of this wallet.
@@ -72,7 +72,7 @@ The home screen for this app is presented with the following features
 - Refresh index button whose duty is to generate a new address once invoked and the field besides inserting a number that will identify our new address.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/WalletGuide/EN/fig6.png" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig6.jpeg" />
 </p>
 
 # Send Token
