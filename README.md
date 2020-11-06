@@ -28,7 +28,7 @@ If there is a wallet previously created with the app.
 
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig33_fix.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig112.jpeg" />
 </p>
 The home screen will appear.
 
@@ -116,7 +116,7 @@ Setting the filters is easy to spot up the transaction of interst and consult th
 This button takes us to the area of the application used to change environment, from production to test area and viceversa everytime it is needed for develompent purposes.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig100.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig111.jpeg" />
 </p>
 Simply activate the environment of interest by activating the radio button.
 
