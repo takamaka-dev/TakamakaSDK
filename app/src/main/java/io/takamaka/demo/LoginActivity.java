@@ -18,11 +18,17 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import io.takamaka.demo.utils.SWTracker;
 import io.takamaka.demo.utils.UserWalletBean;
@@ -41,6 +47,8 @@ public class LoginActivity extends MainController {
 
     Button walletLoginSubmit;
     TextView walletName, walletPassword, labelError;
+    LinearLayout walletLoginForm;
+    String selectedWalletName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +59,68 @@ public class LoginActivity extends MainController {
         initFormLoginWallet();
     }
 
+    private void clearWalletListContent() {
+        LinearLayout internalContainerWallets = findViewById(R.id.linear_layout_wallets_container);
+        int childCount = internalContainerWallets.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View v = internalContainerWallets.getChildAt(i);
+            if (v.getTag() == null) {
+                v.setBackgroundColor(Color.parseColor("#5c82a1"));
+            }
+
+        }
+    }
+
+    private String getWalletName(LinearLayout l) {
+        int childCount = l.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View v = l.getChildAt(i);
+            if (v.getTag() != null && v.getTag().equals("walletNameTag")) {
+                TextView tv = (TextView) v;
+                return tv.getText().toString();
+            }
+
+        }
+        return "";
+    }
+
+    private List<String> retrieveWalletList() {
+        List<String> l = new ArrayList<>();
+        try (Stream<Path> walk = Files.walk(FileHelper.getWalletDirectoryPath())) {
+
+            List<String> result = walk.filter(Files::isRegularFile)
+                    .map(x -> x.getFileName().toString().split("\\.")[0]).collect(Collectors.toList());
+
+            return result;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+
     private void initFormLoginWallet() {
-        //String[] arr = {"lonely","episode","found","oval","holiday","bargain","gown","expose","indicate","lumber","vast","legal","lamp","narrow","club","west","dose","jazz","crush","mystery","helmet","deliver","banner","tray","guilt"};
-        String[] arr = {};
-        ScrollView loginWalletForm = findViewById(R.id.wallets_scroll_container);
+        pgsBar = findViewById(R.id.progressBar);
+        pgsBar.setVisibility(View.GONE);
+        labelError = findViewById(R.id.label_error);
+        labelError.setText("");
+        walletLoginForm = findViewById(R.id.wallet_login_form);
+        walletPassword = findViewById(R.id.wallet_password);
+        walletPassword.setEnabled(false);
+        walletLoginSubmit = findViewById(R.id.button_login);
+        walletLoginSubmit.setEnabled(false);
+        List<String> listOfStoredWallets = retrieveWalletList();
 
         LinearLayout internalContainerWallets = findViewById(R.id.linear_layout_wallets_container);
 
-        for(String s: arr) {
+        for(String s: listOfStoredWallets) {
             LinearLayout l = new LinearLayout(this);
             l.setOrientation(LinearLayout.HORIZONTAL);
             l.setBackgroundColor(Color.parseColor("#5c82a1"));
             ImageView iv = new ImageView(this);
             iv.setImageResource(R.drawable.wallet_50px_white);
             TextView walletName = new TextView(this);
+            walletName.setTag("walletNameTag");
             walletName.setWidth(260);
             walletName.setTextColor(Color.WHITE);
             walletName.setPadding(20, 0, 0, 0);
@@ -83,11 +139,38 @@ public class LoginActivity extends MainController {
                     5
             ));
             v.setBackgroundColor(Color.parseColor("#B3B3B3"));
+            v.setTag("separator");
 
             internalContainerWallets.addView(l);
             internalContainerWallets.addView(v);
+
+            l.setOnClickListener(e -> {
+                clearWalletListContent();
+                l.setBackgroundColor(Color.parseColor("#173c5a"));
+                walletPassword.setEnabled(true);
+                walletLoginSubmit.setEnabled(true);
+                selectedWalletName = getWalletName(l);
+                System.out.println(selectedWalletName);
+
+            });
+
         }
-        if (arr.length == 0) {
+
+        walletLoginSubmit.setOnClickListener(event -> {
+
+            System.out.println("Selected wallet: " + selectedWalletName);
+            System.out.println("Password: " + walletPassword.getText().toString());
+
+            List<View> wrongFields = checkFieldsForm(walletLoginForm);
+            if (!wrongFields.isEmpty()) {
+                highlightWrongForm(wrongFields);
+            } else {
+                walletPassword = findViewById(R.id.wallet_password);
+                initWalletLogin();
+            }
+        });
+
+        if (listOfStoredWallets.isEmpty()) {
             LinearLayout l = new LinearLayout(this);
             l.setOrientation(LinearLayout.HORIZONTAL);
             l.setTextAlignment(LinearLayout.TEXT_ALIGNMENT_CENTER);
@@ -147,7 +230,7 @@ public class LoginActivity extends MainController {
         protected Void doInBackground(Void... voids) {
             String readPassword = walletPassword.getText().toString();
             UserWalletBean uwb = new UserWalletBean();
-            uwb.setInternalName(walletName.getText().toString());
+            uwb.setInternalName(selectedWalletName);
             uwb.setWalletmnemonicChars(walletPassword.getText().toString().toCharArray());
             SWTracker.i().setSelectedUWB(uwb);
             WalletFXHelperErrorBean loadWallet = null;
@@ -160,7 +243,7 @@ public class LoginActivity extends MainController {
             if (loadWallet.isLoaded()) {
                 System.out.println("Wallet is loaded");
                 NewWalletBean nwb = new NewWalletBean();
-                nwb.setName(walletName.getText().toString());
+                nwb.setName(selectedWalletName);
                 nwb.setPassword(walletPassword.getText().toString().toCharArray());
 
                 SWTracker.i().setNwb(nwb);
