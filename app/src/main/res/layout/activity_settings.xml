@@ -48,25 +48,6 @@
                 android:entries="@array/array_data"
                 tools:visibility="visible" />
 
-            <RadioButton
-                android:id="@+id/radioButtonProduction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Prod. Environment" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="52dp">
-
-            </RadioGroup>
-
-            <RadioButton
-                android:id="@+id/radioButtonTest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Test Environment" />
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

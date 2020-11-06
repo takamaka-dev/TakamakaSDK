@@ -2,6 +2,7 @@ package io.takamaka.demo;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -28,7 +29,7 @@ public class SettingsActivity extends MainController {
 
 
 
-        radioButtonProduction = findViewById(R.id.radioButtonProduction);
+        /*radioButtonProduction = findViewById(R.id.radioButtonProduction);
         radioButtonTest = findViewById(R.id.radioButtonTest);
         radioGroup = findViewById(R.id.radioGroup);
         if (SWTracker.i().getCurrentSetting().equals("prod")) {
@@ -37,7 +38,7 @@ public class SettingsActivity extends MainController {
             radioGroup.check(radioButtonTest.getId());
         }
 
-        System.out.println("Current settings: " + SWTracker.i().getCurrentSetting());
+
 
         radioButtonProduction.setOnClickListener(
                 e -> {
@@ -50,28 +51,26 @@ public class SettingsActivity extends MainController {
                     SWTracker.i().setCurrentSetting("test");
                 }
         );
-
+*/
 
         spinnerButton = findViewById(R.id.spinner_button);
 
-        int childCount = spinnerButton.getChildCount();
-        for (int sIndex = 1; sIndex < childCount; sIndex++) {
-
-            View v = spinnerButton.getChildAt(sIndex);
-            v.setOnClickListener(e-> {
-
-                if(v.getTag().equals("test_env")){
+        spinnerButton.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getItemAtPosition(position).toString().contains("Test")) {
                     SWTracker.i().setCurrentSetting("test");
-
-                } else if(v.getTag().equals("prod_env")) {
+                } else if (parent.getItemAtPosition(position).toString().contains("Prod")) {
                     SWTracker.i().setCurrentSetting("prod");
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                    }
+            }
+        });
 
-            });
-
-        }
     }
 
 

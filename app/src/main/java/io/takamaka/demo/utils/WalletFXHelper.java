@@ -20,7 +20,7 @@ public class WalletFXHelper {
 
         String wName = SWTracker.i().getSelectedUWB().getInternalName();
 
-        Path userWalletDestPath = Paths.get(FileHelper.getDefaultWalletDirectoryPath().toString(), SWTracker.i().getSelectedUWB().getInternalName() + DefaultInitParameters.WALLET_EXTENSION);
+        Path userWalletDestPath = Paths.get(FileHelper.getDefaultWalletDirectoryPath().toString(), wName + DefaultInitParameters.WALLET_EXTENSION);
 
         userWalletOrigPath = userWalletDestPath;
         System.out.println("wallet name and path " + wName + " " + userWalletOrigPath);
@@ -40,7 +40,7 @@ public class WalletFXHelper {
         userWalletBeanFromJson.setValid(true);
 
         try {
-            FileHelper.writeStringToFile(FileHelper.getDefaultWalletDirectoryPath(), SWTracker.i().getSelectedUWB().getInternalName(), userWalletBeanFromJson.getEncryptedWallet(), true);
+            FileHelper.writeStringToFile(FileHelper.getDefaultWalletDirectoryPath(), wName + DefaultInitParameters.WALLET_EXTENSION, userWalletBeanFromJson.getEncryptedWallet(), true);
         } catch (IOException ex) {
             ex.printStackTrace();
             System.out.println("temporary file write error");

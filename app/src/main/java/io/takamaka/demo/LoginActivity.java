@@ -26,7 +26,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -110,10 +112,12 @@ public class LoginActivity extends MainController {
         walletLoginSubmit = findViewById(R.id.button_login);
         walletLoginSubmit.setEnabled(false);
         List<String> listOfStoredWallets = retrieveWalletList();
+        Set<String> uniqueGas = new HashSet<String>(listOfStoredWallets);
 
         LinearLayout internalContainerWallets = findViewById(R.id.linear_layout_wallets_container);
 
-        for(String s: listOfStoredWallets) {
+
+        for(String s: uniqueGas) {
             LinearLayout l = new LinearLayout(this);
             l.setOrientation(LinearLayout.HORIZONTAL);
             l.setBackgroundColor(Color.parseColor("#5c82a1"));
@@ -185,22 +189,6 @@ public class LoginActivity extends MainController {
             internalContainerWallets.addView(l);
         }
 
-
-//        pgsBar = (ProgressBar) findViewById(R.id.pBar);
-//        walletLoginSubmit = findViewById(R.id.button_login);
-//        LinearLayout loginWalletForm = findViewById(R.id.wallet_login_form);
-//        labelError = findViewById(R.id.label_error);
-//        labelError.setText("");
-//        walletLoginSubmit.setOnClickListener(v -> {
-//            List<View> wrongFields = checkFieldsForm(loginWalletForm);
-//            if (!wrongFields.isEmpty()) {
-//                highlightWrongForm(wrongFields);
-//            } else {
-//                walletName = findViewById(R.id.wallet_name);
-//                walletPassword = findViewById(R.id.wallet_password);
-//                initWalletLogin();
-//            }
-//        });
     }
 
     private void initWalletLogin() {
