@@ -1,4 +1,7 @@
 # Takamaka Android Sdk Guide
+
+https://cdn.takamaka.dev/androidsdkdocs/javadocSdk.html
+
 Takamaka SDK for Android Applications (AiliA SA)
 Takamaka is proud to present Android SDK prototype, easy to understand the functionalities and demonstrate the correct work flow.
 
@@ -6,7 +9,7 @@ Takamaka is proud to present Android SDK prototype, easy to understand the funct
 Launch the application a clean app will appear.
  
  <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig11.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig11_fix.jpeg" />
 </p>
 
 Once clicked the rounded button with T letter a vertical line of action buttons will appear.
@@ -85,7 +88,7 @@ The home screen for this app is presented with the following features
 - Send Button, is in charge to validate and send the transaction to the blockchain.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig77.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig77_fix2.jpeg" />
 </p>
 
 
