@@ -61,6 +61,10 @@ public class FileHelper {
         return Paths.get("/storage/emulated/0/Android/data/io.takamaka/files/", DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME);
     }
 
+    public static Path getWalletPath() {
+        return Paths.get("/storage/emulated/0/Android/data/io.takamaka/files/", DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME, "/wallets/");
+    }
+
     public static Path getThemeConfigFilePath() {
         String userHome = "/storage/emulated/0/Android/data/io.takamaka/files/";
         return Paths.get(userHome, DefaultInitParameters.APPLICATION_ROOT_FOLDER_NAME, "themeConfig.json");

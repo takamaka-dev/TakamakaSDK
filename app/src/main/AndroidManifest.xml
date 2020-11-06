@@ -20,7 +20,7 @@
         <activity android:name=".SendTokenActivity" />
         <activity android:name=".RestoreWalletActivity" />
         <activity android:name=".CreateWalletActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".TransactionInfoActivity" />
         <activity android:name=".MainController">
             <intent-filter>
