@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.takamaka.demo.utils.SWTracker;
+import io.takamaka.sdk.main.defaults.DefaultInitParameters;
 import io.takamaka.sdk.utils.FileHelper;
 
 public class MainController extends AppCompatActivity {
@@ -38,6 +39,7 @@ public class MainController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DefaultInitParameters.APPLICATION_HOME = new ContextWrapper(this).getFilesDir().toString();
         SWTracker.i().initSettings();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

@@ -1,7 +1,10 @@
 package io.takamaka.sdk.main.defaults;
 
+import android.content.ContextWrapper;
+
 import java.math.BigInteger;
 
+import io.takamaka.demo.MainController;
 import io.takamaka.sdk.utils.ComboItemSettingsBookmarkUrl;
 
 /**
@@ -13,6 +16,7 @@ public class DefaultInitParameters {
     /**
      * default wallet file extension
      */
+    public static String APPLICATION_HOME = null;//"/storage/emulated/0/Android/data/io.takamaka/files/";
     public static String WALLET_EXTENSION = ".wallet";
 
     public static final BigInteger DISK_SCALE = new BigInteger("100");
