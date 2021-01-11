@@ -22,8 +22,8 @@ android {
         applicationId "io.takamaka"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 4
-        versionName "Takamaka SDK - TEST"
+        versionCode 6
+        versionName "Takamaka SDK 1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

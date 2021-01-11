@@ -18,6 +18,7 @@ import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
 import io.takamaka.sdk.utils.IdentiColorHelper;
+import io.takamaka.sdk.utils.TkmSignUtils;
 import io.takamaka.sdk.utils.threadSafeUtils.TkmTextUtils;
 import io.takamaka.sdk.wallet.beans.BalanceBean;
 import okhttp3.MediaType;
@@ -34,6 +35,7 @@ public class HomeWalletActivity extends MainController {
     TextView ftkrValue;
     TextView labelValWalletName;
     TextView labelCurrentAddress;
+    TextView labelCurrentCrc;
     TextView editTextRefreshIndex;
     ImageView imageViewIdenticon;
     Button refreshIndex;
@@ -64,9 +66,10 @@ public class HomeWalletActivity extends MainController {
             e.printStackTrace();
         }
         labelCurrentAddress = findViewById(R.id.label_current_address);
-
+        labelCurrentCrc = findViewById(R.id.label_current_crc);
         try {
             labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()));
+            labelCurrentCrc.setText(TkmSignUtils.getHexCRC(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex())));
         } catch (WalletException e) {
             e.printStackTrace();
         }
@@ -78,6 +81,7 @@ public class HomeWalletActivity extends MainController {
                     SWTracker.i().setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString().isEmpty() ? "0" : editTextRefreshIndex.getText().toString()));
                     try {
                         labelCurrentAddress.setText(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()));
+                        labelCurrentCrc.setText(TkmSignUtils.getHexCRC(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex())));
                         try {
                             imageViewIdenticon.setImageDrawable(new BitmapDrawable(getResources(), IdentiColorHelper.identiconMatrixGenerator(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex()))));
                         } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException | WalletException e) {

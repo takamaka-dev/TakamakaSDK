@@ -16,6 +16,9 @@ import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.CRC32;
+import java.util.zip.Checksum;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
@@ -391,6 +394,19 @@ public class TkmSignUtils {
         } catch (HashEncodeException | HashAlgorithmNotFoundException | HashProviderNotFoundException ex) {
             return 0L;
         }
+    }
+
+    public static final String getHexCRC(String addressBASE64URL) {
+        //System.out.println("bytes: " + Arrays.toString(fromB64URLToByteArray(addressBASE64URL)));
+        return getHexCRC(fromB64URLToByteArray(addressBASE64URL));
+    }
+
+    private static final String getHexCRC(byte[] input) {
+        Checksum checksum = new CRC32();
+        checksum.reset();
+        checksum.update(input, 0, input.length);
+        Long value = checksum.getValue();
+        return Long.toHexString(value).substring(0, 4);
     }
 
 }
