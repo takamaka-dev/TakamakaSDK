@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".ExplorerActivity"></activity>
+        <activity android:name=".WebViewActivity"></activity>
+        <activity android:name=".OauthLoginActivity" />
+        <activity android:name=".ExplorerActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HomeWalletActivity" />
         <activity android:name=".SendTokenActivity" />
@@ -26,6 +28,20 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="net.openid.appauth.RedirectUriReceiverActivity"
+            tools:node="replace">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
+                    android:host="testsite.takamaka.org:20443"
+                    android:path="/oauth/authorized" />
             </intent-filter>
         </activity>
     </application>

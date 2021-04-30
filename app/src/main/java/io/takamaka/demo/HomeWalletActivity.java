@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class HomeWalletActivity extends MainController {
     TextView editTextRefreshIndex;
     ImageView imageViewIdenticon;
     Button refreshIndex;
+    FloatingActionButton oauthLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,8 @@ public class HomeWalletActivity extends MainController {
         refreshIndex = findViewById(R.id.button_refresh_index);
         editTextRefreshIndex = findViewById(R.id.edit_text_refresh_index);
 
+        oauthLoginButton = findViewById(R.id.oauth_login_button);
+
         refreshIndex.setOnClickListener(
                 view -> {
                     SWTracker.i().setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString().isEmpty() ? "0" : editTextRefreshIndex.getText().toString()));
@@ -89,6 +93,12 @@ public class HomeWalletActivity extends MainController {
                         e.printStackTrace();
                         labelCurrentAddress.setText("");
                     }
+                });
+
+        oauthLoginButton.setOnClickListener(
+                view -> {
+                    Intent activityTokens = new Intent(getApplicationContext(), OauthLoginActivity.class);
+                    startActivity(activityTokens);
                 });
     }
 

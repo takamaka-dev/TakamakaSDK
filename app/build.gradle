@@ -25,6 +25,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [appAuthRedirectScheme: 'https://testsite.takamaka.org:20443/oauth/authorized']
     }
 
     buildTypes {
@@ -40,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation 'net.openid:appauth:0.8.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
