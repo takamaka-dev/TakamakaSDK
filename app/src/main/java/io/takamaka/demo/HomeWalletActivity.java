@@ -99,6 +99,13 @@ public class HomeWalletActivity extends MainController {
             oauth.execute();
         }
 
+        oauthSyncAddressButton.setOnClickListener(
+                view -> {
+                    OauthAPISyncAddress syncAction = new OauthAPISyncAddress();
+                    syncAction.execute();
+                }
+        );
+
         refreshIndex.setOnClickListener(
                 view -> {
                     SWTracker.i().setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString().isEmpty() ? "0" : editTextRefreshIndex.getText().toString()));
