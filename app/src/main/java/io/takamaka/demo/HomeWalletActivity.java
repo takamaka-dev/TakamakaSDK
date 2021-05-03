@@ -1,7 +1,9 @@
 package io.takamaka.demo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
@@ -19,6 +21,8 @@ import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
 import io.takamaka.sdk.utils.IdentiColorHelper;
+import io.takamaka.sdk.utils.OauthResponseBean;
+import io.takamaka.sdk.utils.TokenBean;
 import io.takamaka.sdk.utils.threadSafeUtils.TkmTextUtils;
 import io.takamaka.sdk.wallet.beans.BalanceBean;
 import okhttp3.MediaType;
@@ -26,6 +30,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class HomeWalletActivity extends MainController {
 
@@ -36,12 +42,18 @@ public class HomeWalletActivity extends MainController {
     TextView labelValWalletName;
     TextView labelCurrentAddress;
     TextView editTextRefreshIndex;
+    TextView wellcomeOauth;
     ImageView imageViewIdenticon;
     Button refreshIndex;
-    FloatingActionButton oauthLoginButton;
+    FloatingActionButton oauthLoginButton, oauthSyncAddressButton;
+
+    private OauthResponseBean orb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        wellcomeOauth = findViewById(R.id.wellcome_oauth);
+
+
         if (SWTracker.i().getIwk() == null) {
             Intent activitySettings = new Intent(getApplicationContext(), MainController.class);
             startActivity(activitySettings);
@@ -77,6 +89,16 @@ public class HomeWalletActivity extends MainController {
 
         oauthLoginButton = findViewById(R.id.oauth_login_button);
 
+
+        oauthSyncAddressButton = findViewById(R.id.oauth_sync_address_button);
+        System.out.println(oauthSyncAddressButton);
+        if (SWTracker.getAccessToken() == null) {
+            oauthSyncAddressButton.hide();
+        } else {
+            OauthAPI oauth = new OauthAPI();
+            oauth.execute();
+        }
+
         refreshIndex.setOnClickListener(
                 view -> {
                     SWTracker.i().setCurrIndex(Integer.parseInt(editTextRefreshIndex.getText().toString().isEmpty() ? "0" : editTextRefreshIndex.getText().toString()));
@@ -98,8 +120,76 @@ public class HomeWalletActivity extends MainController {
         oauthLoginButton.setOnClickListener(
                 view -> {
                     Intent activityTokens = new Intent(getApplicationContext(), OauthLoginActivity.class);
-                    startActivity(activityTokens);
+                    startActivityForResult(activityTokens, 0);
                 });
+    }
+
+    //label_current_address
+    private class OauthAPISyncAddress extends AsyncTask<String, String, Void> {
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            wellcomeOauth = findViewById(R.id.wellcome_oauth);
+            wellcomeOauth.setText("Your address is included in Takamaka");
+        }
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        protected Void doInBackground(String... strings) {
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            Request request = new Request.Builder()
+                    .url("https://testsite.takamaka.org/api/oauth/syncaddress/" + labelCurrentAddress.getText().toString())
+                    .method("GET", null)
+                    .addHeader("Authorization", "Bearer " + SWTracker.getAccessToken())
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                assert response.body() != null;
+                String result = response.body().string();
+                System.out.println(result);
+                Gson g = new Gson();
+                orb = g.fromJson(result, OauthResponseBean.class);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+
+    private class OauthAPI extends AsyncTask<String, String, Void> {
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            wellcomeOauth = findViewById(R.id.wellcome_oauth);
+            wellcomeOauth.setText("Hi there, " + orb.getUsername());
+        }
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        protected Void doInBackground(String... strings) {
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+            Request request = new Request.Builder()
+                    .url("https://testsite.takamaka.org/api/oauth/email")
+                    .method("GET", null)
+                    .addHeader("Authorization", "Bearer " + SWTracker.getAccessToken())
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                assert response.body() != null;
+                String result = response.body().string();
+                System.out.println(result);
+                Gson g = new Gson();
+                orb = g.fromJson(result, OauthResponseBean.class);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
     private class CallAPI extends AsyncTask<String, String, Void> {
@@ -145,8 +235,10 @@ public class HomeWalletActivity extends MainController {
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .build();
             try {
+                System.out.println("vediamo dove fa print");
                 Response response = client.newCall(request).execute();
                 Gson g = new Gson();
+                System.out.println("response qui di seguito");
                 System.out.println(response.body().toString());
                 BalanceBean bb = g.fromJson(response.body().string(), BalanceBean.class);
                 System.out.println(bb.getRedBalance());

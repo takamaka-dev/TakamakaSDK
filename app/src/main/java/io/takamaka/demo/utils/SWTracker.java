@@ -37,6 +37,16 @@ public class SWTracker {
     private static ConcurrentSkipListMap<String, ComboItemSettingsBookmarkUrl> apiUrl;
     private static ConcurrentSkipListMap<String, ComboItemSettingsBookmarkUrl> fastTag;
 
+    public static String getAccessToken() {
+        return accessToken;
+    }
+
+    public static void setAccessToken(String accessToken) {
+        SWTracker.accessToken = accessToken;
+    }
+
+    private static String accessToken = null;
+
     public static String getCurrentSetting() {
         return currentSetting;
     }
