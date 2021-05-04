@@ -36,6 +36,8 @@ public class OauthLoginActivity extends MainController {
 
     Button oauthLoginButton;
     TextView userName, userPassword, labelError;
+    String resultApiLoginOauth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,22 +88,28 @@ public class OauthLoginActivity extends MainController {
             pgsBar.setVisibility(View.INVISIBLE);
             if (errorLogin) {
                 labelError.setText("Wrong credentials!");
+            } else {
+                SWTracker.setAccessToken(tb.getAccess_token());
+                Intent activitySettings = new Intent(getApplicationContext(), HomeWalletActivity.class);
+                startActivity(activitySettings);
             }
-            SWTracker.setAccessToken(tb.getAccess_token());
-            Intent activitySettings = new Intent(getApplicationContext(), HomeWalletActivity.class);
-            startActivity(activitySettings);
+
+
+            errorLogin = false;
             //finish();
         }
 
         @Override
         protected Void doInBackground(String... params) {
-            System.out.println("EMAIL: " + params[0]);
-            System.out.println("PASSWORD: " + params[1]);
+            String email = params[0].trim();
+            String password = params[1].trim();
+            System.out.println("EMAIL: " + email);
+            System.out.println("PASSWORD: " + password);
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            System.out.println("confirm=yes&email="+params[0]+"&password="+params[1]);
-            RequestBody body = RequestBody.create(mediaType, "confirm=yes&email="+params[0]+"&password="+params[1]);
+            System.out.println("confirm=yes&email="+email+"&password="+password);
+            RequestBody body = RequestBody.create(mediaType, "confirm=yes&email="+email+"&password="+password);
             //RequestBody body = RequestBody.create(mediaType, "confirm=yes&email=eltonTest@gmail.com&password=11111111");
             Request request = new Request.Builder()
                     .url("https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address")
@@ -133,9 +141,14 @@ public class OauthLoginActivity extends MainController {
                 assert response.body() != null;
                 String result = response.body().string();
                 System.out.println(result);
-                Gson g = new Gson();
-                tb = g.fromJson(result, TokenBean.class);
-                System.out.println(tb.getAccess_token());
+                if (!result.equals("Access denied: error=access_denied")) {
+                    Gson g = new Gson();
+                    tb = g.fromJson(result, TokenBean.class);
+                    System.out.println(tb.getAccess_token());
+                } else {
+                    errorLogin = true;
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
