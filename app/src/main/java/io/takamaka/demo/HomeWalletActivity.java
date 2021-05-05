@@ -16,21 +16,32 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.Date;
 
 import io.takamaka.demo.utils.SWTracker;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashAlgorithmNotFoundException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashEncodeException;
 import io.takamaka.sdk.exceptions.threadSafeUtils.HashProviderNotFoundException;
+import io.takamaka.sdk.exceptions.wallet.TransactionCanNotBeCreatedException;
 import io.takamaka.sdk.exceptions.wallet.WalletException;
+import io.takamaka.sdk.transactions.BuilderITB;
+import io.takamaka.sdk.transactions.InternalTransactionBean;
+import io.takamaka.sdk.transactions.TransactionBean;
 import io.takamaka.sdk.utils.IdentiColorHelper;
 import io.takamaka.sdk.utils.OauthResponseBean;
+import io.takamaka.sdk.utils.TkmSignUtils;
 import io.takamaka.sdk.utils.threadSafeUtils.TkmTextUtils;
+import io.takamaka.sdk.wallet.TkmWallet;
 import io.takamaka.sdk.wallet.beans.BalanceBean;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static io.takamaka.sdk.globalContext.KeyContexts.TransactionType.BLOB;
+import static io.takamaka.sdk.globalContext.KeyContexts.TransactionType.PAY;
+import static io.takamaka.sdk.main.defaults.TransactionGenerator.getTransactionBean;
 
 
 public class HomeWalletActivity extends MainController {
@@ -102,8 +113,25 @@ public class HomeWalletActivity extends MainController {
 
         oauthSyncAddressButton.setOnClickListener(
                 view -> {
-                    OauthAPISyncAddress syncAction = new OauthAPISyncAddress();
-                    syncAction.execute();
+                    AlertDialog alertDialog = new AlertDialog.Builder(this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Are you sure to sync this address in Takamaka?")
+                            .setMessage("Exiting will call finish() method")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    OauthAPISyncAddress syncAction = new OauthAPISyncAddress();
+                                    syncAction.execute();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            })
+                            .show();
+
                 }
         );
 
@@ -130,34 +158,6 @@ public class HomeWalletActivity extends MainController {
                     Intent activityTokens = new Intent(getApplicationContext(), OauthLoginActivity.class);
                     startActivityForResult(activityTokens, 0);
                 });
-
-
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
-//set icon
-                .setIcon(android.R.drawable.ic_dialog_alert)
-//set title
-                .setTitle("Are you sure to Exit")
-//set message
-                .setMessage("Exiting will call finish() method")
-//set positive button
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //set what would happen when positive button is clicked
-                        finish();
-                    }
-                })
-//set negative button
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //set what should happen when negative button is clicked
-                        Toast.makeText(getApplicationContext(),"Nothing Happened",Toast.LENGTH_LONG).show();
-                    }
-                })
-                .show();
-
-
     }
 
     //label_current_address
@@ -174,10 +174,50 @@ public class HomeWalletActivity extends MainController {
         @SuppressLint("SetTextI18n")
         @Override
         protected Void doInBackground(String... strings) {
+
+            OauthResponseBean orb = new OauthResponseBean();
+            orb.setAction("new_address");
+            orb.setDate(new Date().getTime());
+
+            InternalTransactionBean itb = null;
+            try {
+                /*itb = getTransactionBean(
+                        BLOB,
+                        SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()),
+                        null,
+                        null,
+                        null,
+                        new Gson().toJson(orb),
+                        new Date((new Date()).getTime() + 60000L* 5) ,
+                        0, 0
+                );
+                */
+                itb = BuilderITB.blob(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()), null, new Gson().toJson(orb), new Date(0L));
+            } catch (WalletException e) {
+                e.printStackTrace();
+            }
+            TransactionBean genericTRA = null;
+
+            System.out.println("Internal transaction bean ultimo : " + itb);
+
+            try {
+                genericTRA = TkmWallet.createGenericTransaction(
+                        itb,
+                        SWTracker.i().getIwk(),
+                        SWTracker.i().getCurrentAddressNumber());
+            } catch (TransactionCanNotBeCreatedException e) {
+                e.printStackTrace();
+            }
+
+            String txJson = TkmTextUtils.toJson(genericTRA);
+            String hexJson = TkmSignUtils.fromStringToHexString(txJson);
+
+            System.out.println(hexJson);
+
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
             Request request = new Request.Builder()
-                    .url("https://testsite.takamaka.org/api/oauth/syncaddress/" + labelCurrentAddress.getText().toString())
+                    .url("https://testsite.takamaka.org/api/oauth/syncaddress/" + hexJson)
                     .method("GET", null)
                     .addHeader("Authorization", "Bearer " + SWTracker.getAccessToken())
                     .build();
