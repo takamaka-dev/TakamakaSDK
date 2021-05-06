@@ -2,6 +2,7 @@ package io.takamaka.demo;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -57,11 +58,13 @@ public class HomeWalletActivity extends MainController {
     ImageView imageViewIdenticon;
     Button refreshIndex;
     FloatingActionButton oauthLoginButton, oauthSyncAddressButton;
-
+    private String currentUserOauth, resultMesssage;
     private OauthResponseBean orb;
+    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ctx = this;
         wellcomeOauth = findViewById(R.id.wellcome_oauth);
 
 
@@ -113,10 +116,10 @@ public class HomeWalletActivity extends MainController {
 
         oauthSyncAddressButton.setOnClickListener(
                 view -> {
-                    AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    AlertDialog alertDialog = new AlertDialog.Builder(ctx)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setTitle("Are you sure to sync this address in Takamaka?")
-                            .setMessage("Exiting will call finish() method")
+                            .setMessage("")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -167,8 +170,15 @@ public class HomeWalletActivity extends MainController {
         @SuppressLint("SetTextI18n")
         @Override
         protected void onPostExecute(Void aVoid) {
-            wellcomeOauth = findViewById(R.id.wellcome_oauth);
-            wellcomeOauth.setText("Your address is included in Takamaka");
+            AlertDialog alertDialog = new AlertDialog.Builder(ctx)
+                    .setIcon(android.R.drawable.alert_dark_frame)
+                    .setTitle("Alert")
+                    .setMessage(resultMesssage)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    }).show();
         }
 
         @SuppressLint("SetTextI18n")
@@ -178,27 +188,15 @@ public class HomeWalletActivity extends MainController {
             OauthResponseBean orb = new OauthResponseBean();
             orb.setAction("new_address");
             orb.setDate(new Date().getTime());
+            orb.setEmail(currentUserOauth);
 
             InternalTransactionBean itb = null;
             try {
-                /*itb = getTransactionBean(
-                        BLOB,
-                        SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()),
-                        null,
-                        null,
-                        null,
-                        new Gson().toJson(orb),
-                        new Date((new Date()).getTime() + 60000L* 5) ,
-                        0, 0
-                );
-                */
                 itb = BuilderITB.blob(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()), null, new Gson().toJson(orb), new Date(0L));
             } catch (WalletException e) {
                 e.printStackTrace();
             }
             TransactionBean genericTRA = null;
-
-            System.out.println("Internal transaction bean ultimo : " + itb);
 
             try {
                 genericTRA = TkmWallet.createGenericTransaction(
@@ -228,7 +226,7 @@ public class HomeWalletActivity extends MainController {
                 System.out.println(result);
                 Gson g = new Gson();
                 orb = g.fromJson(result, OauthResponseBean.class);
-
+                resultMesssage = orb.getMsg();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -245,6 +243,7 @@ public class HomeWalletActivity extends MainController {
         protected void onPostExecute(Void aVoid) {
             wellcomeOauth = findViewById(R.id.wellcome_oauth);
             wellcomeOauth.setText("Hi there, " + orb.getUsername());
+            currentUserOauth = orb.getUsername();
         }
 
         @SuppressLint("SetTextI18n")
