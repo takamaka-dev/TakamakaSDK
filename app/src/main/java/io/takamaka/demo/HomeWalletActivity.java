@@ -193,6 +193,11 @@ public class HomeWalletActivity extends MainController {
             InternalTransactionBean itb = null;
             System.out.println("Indice corrente: " + SWTracker.getCurrIndex());
             try {
+                System.out.println("INDIRIZZO CORRENTE: " + SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()));
+            } catch (WalletException e) {
+                e.printStackTrace();
+            }
+            try {
                 itb = BuilderITB.blob(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()), null, new Gson().toJson(orb), new Date(0L));
             } catch (WalletException e) {
                 e.printStackTrace();
@@ -203,12 +208,15 @@ public class HomeWalletActivity extends MainController {
                 genericTRA = TkmWallet.createGenericTransaction(
                         itb,
                         SWTracker.i().getIwk(),
-                        SWTracker.i().getCurrentAddressNumber());
+                        SWTracker.i().getCurrIndex());
             } catch (TransactionCanNotBeCreatedException e) {
                 e.printStackTrace();
             }
 
             String txJson = TkmTextUtils.toJson(genericTRA);
+
+            System.out.println(txJson);
+
             String hexJson = TkmSignUtils.fromStringToHexString(txJson);
 
             System.out.println(hexJson);
