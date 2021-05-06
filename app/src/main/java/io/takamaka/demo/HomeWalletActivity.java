@@ -191,8 +191,9 @@ public class HomeWalletActivity extends MainController {
             orb.setEmail(currentUserOauth);
 
             InternalTransactionBean itb = null;
+            System.out.println("Indice corrente: " + SWTracker.getCurrIndex());
             try {
-                itb = BuilderITB.blob(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()), null, new Gson().toJson(orb), new Date(0L));
+                itb = BuilderITB.blob(SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()), null, new Gson().toJson(orb), new Date(0L));
             } catch (WalletException e) {
                 e.printStackTrace();
             }
