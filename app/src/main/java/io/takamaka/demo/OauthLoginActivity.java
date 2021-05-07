@@ -37,12 +37,19 @@ public class OauthLoginActivity extends MainController {
     Button oauthLoginButton;
     TextView userName, userPassword, labelError;
     String resultApiLoginOauth;
-
+    private String baseUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oauth_login);
+        baseUrl = "https://www.takamaka.io";
+        if (SWTracker.getCurrentSetting().equals("test")) {
+            baseUrl = "https://testsite.takamaka.org";
+        }
+
+        System.out.println(baseUrl);
+
         initMenu();
         setCurrentActivity(this);
         initFormLoginOauth();
@@ -112,7 +119,7 @@ public class OauthLoginActivity extends MainController {
             RequestBody body = RequestBody.create(mediaType, "confirm=yes&email="+email+"&password="+password);
             //RequestBody body = RequestBody.create(mediaType, "confirm=yes&email=eltonTest@gmail.com&password=11111111");
             Request request = new Request.Builder()
-                    .url("https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address")
+                    .url(baseUrl + "/oauth/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address")
                     .method("POST", body)
                     .addHeader("Connection", "keep-alive")
                     .addHeader("Origin", "https://testsite.takamaka.org")

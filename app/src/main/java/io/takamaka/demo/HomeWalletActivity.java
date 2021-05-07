@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -39,11 +38,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import static io.takamaka.sdk.globalContext.KeyContexts.TransactionType.BLOB;
-import static io.takamaka.sdk.globalContext.KeyContexts.TransactionType.PAY;
-import static io.takamaka.sdk.main.defaults.TransactionGenerator.getTransactionBean;
-
 
 public class HomeWalletActivity extends MainController {
 
@@ -205,10 +199,11 @@ public class HomeWalletActivity extends MainController {
             TransactionBean genericTRA = null;
 
             try {
+                assert itb != null;
                 genericTRA = TkmWallet.createGenericTransaction(
                         itb,
                         SWTracker.i().getIwk(),
-                        SWTracker.i().getCurrIndex());
+                        SWTracker.getCurrIndex());
             } catch (TransactionCanNotBeCreatedException e) {
                 e.printStackTrace();
             }
