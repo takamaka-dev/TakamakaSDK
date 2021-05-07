@@ -1,5 +1,6 @@
 package io.takamaka.demo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -291,12 +292,17 @@ public class SendTokenActivity extends MainController {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (getTxResult()) {
+          /*  if (getTxResult()) {
                 textFinalSubmitEsito.setText("Transaction has been successfully submitted");
             } else {
                 textFinalSubmitEsito.setTextColor(Color.RED);
                 textFinalSubmitEsito.setText("Transaction Error");
             }
+        */
+            SWTracker.i().setTransactionResult(getTxResult());
+
+            Intent activityTransactionInfo = new Intent(getApplicationContext(), TransactionInfoActivity.class);
+            startActivity(activityTransactionInfo);
         }
 
         @Override

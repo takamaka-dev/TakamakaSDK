@@ -41,23 +41,12 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             tools:layout_editor_absoluteX="0dp">
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/radioButtonProduction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Prod. Environment" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonTest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Test Environment" />
-            </RadioGroup>
+            <Spinner
+                android:id="@+id/spinner_button"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:entries="@array/array_data"
+                tools:visibility="visible" />
 
         </LinearLayout>
 

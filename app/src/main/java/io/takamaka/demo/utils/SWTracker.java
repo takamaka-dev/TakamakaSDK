@@ -28,6 +28,19 @@ public class SWTracker {
     private static InstanceWalletKeystoreInterface iwk;
     private static int currentAddressNumber = 0;
 
+    // get result Transaction Info
+    public static boolean isTransactionResult() {
+        return TransactionResult;
+    }
+
+// set result Transaction Info
+    public static void setTransactionResult(boolean transactionResult) {
+        TransactionResult = transactionResult;
+    }
+
+    private static boolean TransactionResult;
+
+
     private static HashMap<String, HashMap> settings = new HashMap<>();
     private static ComboItemSettingsBookmarkUrl currentApiUrl = DefaultInitParameters.DEFAULT_API_URL;
     private static ComboItemSettingsBookmarkUrl currentTransactionsEndpoint = DefaultInitParameters.DEFAULT_SEND_TRANSACTION_URL;
@@ -61,7 +74,9 @@ public class SWTracker {
 
     public static void setSettings(HashMap<String, HashMap> settings) {
         SWTracker.settings = settings;
+
     }
+
 
     public void resetUser() {
         iwk = null;

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="./styles.css">
+	<!-- CSS only -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link href="https://kit-pro.fontawesome.com/releases/latest/css/pro-v4-shims.min.css" media="all" rel="stylesheet">
+
+
+	<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://takamaka.io/static/js/kit.fontawesome.js"></script>
+	<title>
+		SDK - Wallet
+	</title>
+</head>
+<body>
+	<nav class="navbar takamaka-navbar navbar-light bg-dark text-center shadow-sm p-3 mb-5 bg-white rounded">
+		<a class="navbar-brand" href="#">
+			<img src="https://takamaka.io/static/img/logo_minimal.png">
+		</a>
+		<div class="col text-white">
+			<h1 style="cursor: default;">SDK-Wallet</h1>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Feature <i class="fal fa-link"></i></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-toggle="collapse" data-target=".order0">
+							<td><i class="fas fa-plus"></i></td>
+							<td>Java class bean list</td>
+						</tr>
+						<tr class="collapse order0">
+							<td></td>
+							<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/beans/KeyBean.html">com.h2tcoin.takamakachain.wallet.beans.KeyBean</a></td>
+						</tr>
+						<tr class="collapse order0">
+							<td></td>
+							<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/beans/PublicKeyBean.html">com.h2tcoin.takamakachain.wallet.beans.PublicKeyBean</a></td>
+						</tr>
+						<tr class="collapse order0">
+							<td></td>
+							<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/transactions/TransactionBean.html">com.h2tcoin.takamakachain.transactions.TransactionBean</a></td>
+						</tr>
+						<tr class="collapse order0">
+							<td></td>
+							<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/transactions/InternalTransactionBean.html">com.h2tcoin.takamakachain.transactions.InternalTransactionBean</a></td>
+						</tr>
+						<tr data-toggle="collapse" data-target=".order1">
+							<td><i class="fas fa-plus"></i></td>
+							<td>Create a new wallet</td>
+						</tr>
+						<tr class="collapse order1">
+							<td></td>
+							<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/InstanceWalletKeystoreInterface.html">com.h2tcoin.takamakachain.wallet.InstanceWalletKeystoreInterface</a></td>
+						</tr>
+						<tr class="collapse order1">
+							<td></td>
+							<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/InstanceWalletKeyStoreBCED25519.html#<init>(java.lang.String,java.lang.String)">com.h2tcoin.takamakachain.wallet.InstanceWalletKeyStoreBCED25519</a></td>
+								
+							</tr>
+							<tr data-toggle="collapse" data-target=".order2">
+								<td><i class="fas fa-plus"></i></td>
+								<td>Recover an existing wallet</td>
+							</tr>
+							<tr class="collapse order2">
+								<td></td>
+								<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/InstanceWalletKeystoreInterface.html">com.h2tcoin.takamakachain.wallet.InstanceWalletKeystoreInterface</a></td>
+							</tr>
+							<tr class="collapse order2">
+								<td></td>
+								<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/InstanceWalletKeyStoreBCED25519.html#<init>(java.lang.String,java.lang.String)">com.h2tcoin.takamakachain.wallet.InstanceWalletKeyStoreBCED25519</a></td>
+								</tr>
+								<tr class="collapse order2">
+									<td></td>
+									<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/WalletHelper.html#importKeyFromWords(java.util.List,java.nio.file.Path,java.lang.String,com.h2tcoin.takamakachain.globalContext.KeyContexts.WalletCypher,java.lang.String)">com.h2tcoin.takamakachain.wallet.WalletHelper#importKeyFromWords(List<String> words, Path path, String filename, KeyContexts.WalletCypher cypher, String newPassword)</a></td>
+									</tr>
+									<tr data-toggle="collapse" data-target=".order3">
+										<td><i class="fas fa-plus"></i></td>
+										<td>Get Words list</td>
+									</tr>
+									<tr class="collapse order3">
+										<td></td>
+										<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/SeedGenerator.html#generateWords()">com.h2tcoin.takamakachain.wallet.SeedGenerator#generateWords()</a></td>
+									</tr>
+									<tr class="collapse order3">
+										<td></td>
+										<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/WalletHelper.html#readKeyFile(java.nio.file.Path,java.lang.String)">com.h2tcoin.takamakachain.wallet.WalletHelper#readKeyFile(Path filename, String password)</a></td>
+									</tr>
+									<tr data-toggle="collapse" data-target=".order4">
+										<td><i class="fas fa-plus"></i></td>
+										<td>Get public key related to an index</td>
+									</tr>
+									<tr class="collapse order4">
+										<td></td>
+										<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/InstanceWalletKeystoreInterface.html#getPublicKeyAtIndexURL64(int)">com.h2tcoin.takamakachain.wallet.InstanceWalletKeystoreInterface#getPublicKeyAtIndexURL64(int i)</a></td>
+									</tr>
+									<tr data-toggle="collapse" data-target=".order5">
+										<td><i class="fas fa-plus"></i></td>
+										<td>Sign a transaction</td>
+									</tr>
+									<tr class="collapse order5">
+										<td></td>
+										<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/TkmWallet.html#createGenericTransaction(com.h2tcoin.takamakachain.transactions.InternalTransactionBean,com.h2tcoin.takamakachain.wallet.InstanceWalletKeystoreInterface,int)">com.h2tcoin.takamakachain.wallet.TkmWallet#createGenericTransaction(InternalTransactionBean itb, InstanceWalletKeystoreInterface iwk, int signKey)</a></td>
+									</tr>
+									<tr class="collapse order5">
+										<td></td>
+										<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/TkmCypherProviderBCED25519.html#sign(org.bouncycastle.crypto.AsymmetricCipherKeyPair,java.lang.String)">com.h2tcoin.takamakachain.wallet.TkmCypherProviderBCED25519#sign(AsymmetricCipherKeyPair keyPair, String message)</a></td>
+									</tr>
+									
+									
+									<tr data-toggle="collapse" data-target=".order6">
+										<td><i class="fas fa-plus"></i></td>
+										<td>Verify a signed transaction</td>
+									</tr>
+									<tr class="collapse order6">
+										<td></td>
+										<td class="nopadding-tb">
+											<a href="./apidocs/com/h2tcoin/takamakachain/wallet/TkmWallet.html#verifyTransactionIntegrity(com.h2tcoin.takamakachain.transactions.TransactionBean,java.lang.String)">com.h2tcoin.takamakachain.wallet.TkmWallet#verifyTransactionIntegrity(TransactionBean tb, String transactionJson)</a>
+										</td>
+									</tr>
+									<tr class="collapse order6">
+										<td></td>
+										<td class="nopadding-tb">
+											<a href="./apidocs/com/h2tcoin/takamakachain/wallet/TkmWallet.html#verifySign(com.h2tcoin.takamakachain.transactions.TransactionBean)">com.h2tcoin.takamakachain.wallet.TkmWallet#verifySign(TransactionBean tb)</a>
+										</td>
+									</tr>
+									<tr class="collapse order6">
+										<td></td>
+										<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/wallet/TkmCypherProviderBCED25519.html#verify(java.lang.String,java.lang.String,java.lang.String)">com.h2tcoin.takamakachain.wallet.TkmCypherProviderBCED25519#verify(AsymmetricCipherKeyPair keyPair, String signature, String message)</a></td>
+									</tr>
+									
+									<tr data-toggle="collapse" data-target=".order7">
+										<td><i class="fas fa-plus"></i></td>
+										<td>Compute integrity hash</td>
+									</tr>
+									<tr class="collapse order7">
+										<td></td>
+										<td class="nopadding-tb"><a href="./apidocs/com/h2tcoin/takamakachain/utils/threadSafeUtils/TkmTextUtils.html#internalTransactionBeanHash(com.h2tcoin.takamakachain.transactions.InternalTransactionBean)">com.h2tcoin.takamakachain.utils.threadSafeUtils#internalTransactionBeanHash(InternalTransactionBean itb)</a></td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+				<footer id="mini-footer" class="bkg_footer small" style="background: rgb(23, 60, 90);">
+					<div class="container-fluid">
+						<div class="row text-center">
+							<div class="col-md-1 col-sm-1 logo_small nopadding nomargin pull-left text-left">
+								<a href="/"><img class="pull-left" src="https://takamaka.io/static/img/logo-small.png" alt="logo"></a>
+							</div>
+							<div class="col social_icons nopadding nomargin pull-right">
+								<div class="pull-right" style="text-align: right;">
+									<a href="https://www.linkedin.com/company/takamaka-enterprise-blockchain/"><i class="fab fa-linkedin-in fa-2x" aria-hidden="true"></i></a>
+									<a href="https://www.reddit.com/r/takamaka/"><i class="fab fa-reddit-alien fa-2x" aria-hidden="true"></i></a>
+									<a href="https://twitter.com/Takamaka_io"><i class="fab fa-twitter fa-2x" aria-hidden="true"></i></a>
+									<a href="https://t.me/takamaka_io"><i class="fab fa-telegram-plane fa-2x" aria-hidden="true"></i></a>
+									<a href="https://medium.com/takamaka"><i class="fab fa-medium fa-2x" aria-hidden="true"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</footer>
+			</body>
+			</html>

@@ -1,0 +1,112 @@
+table tr td {
+	cursor: pointer
+}
+
+table tr:first-child th {
+	border: 0px !important
+}
+
+.takamaka-navbar.bg-dark {
+	background-color: rgb(23, 60, 90) !important
+} 
+
+footer.bkg_footer {
+    background-color: #133550;
+    padding: 50px 0;
+    color: #fff
+}
+
+footer.bkg_footer.small {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 0 !important;
+    z-index: 9999
+}
+
+footer.bkg_footer a {
+    display: inline;
+    padding: 0 6px
+}
+
+footer.bkg_footer img {
+    width: 90px;
+}
+
+footer.bkg_footer.small img {
+    width: 25px
+}
+
+footer.bkg_footer.small .social_icons {
+    position: relative;
+    top: 4px
+}
+
+footer.bkg_footer.small .social_icons i {
+    font-size: 15px;
+    margin-right: 12px;
+    color: white
+}
+
+footer .logo_small {
+    text-align: center;
+    margin: 20px 0;
+}
+
+p#pSmall {
+    font-size: 12px;
+}
+
+.social_icons {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.social_icons a .svg-inline--fa {
+    background-color: #184568;
+    color: #133550;
+    font-size: 27px;
+    padding: 3px;
+    width: 27px;
+    border-radius: 8px;
+    margin: 3px;
+    transition: 0.3s;
+}
+
+.social_icons a .svg-inline--fa:hover {
+    background: #fff;
+}
+
+.nopadding {
+	padding: 0 !important
+}
+
+.nomargin {
+	margin: 0 !important
+}
+
+.nopadding-tb {
+	padding-bottom: 0 !important;
+    padding-top: 0 !important;
+}
+
+table tr td.nopadding-tb {
+	border-radius: 40px;
+    padding: 20px;
+    background-color: #4A6782;
+}
+
+table tr td.nopadding-tb a {
+	color: white;
+	font-size: 12px;
+}
+
+table tr td.nopadding-tb:hover {
+	background-color: #F8981D;
+    /* color: black; */
+}
+
+table tr td.nopadding-tb:hover a {
+	color: #253441;
+	text-decoration: none
+}

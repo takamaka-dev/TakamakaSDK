@@ -19,11 +19,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.androidsdk"
+        applicationId "io.takamaka"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 6
+        versionName "Takamaka SDK 1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [appAuthRedirectScheme: 'https://testsite.takamaka.org:20443/oauth/authorized']
     }
