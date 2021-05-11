@@ -152,3 +152,4 @@ curl 'https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id
   --data-raw 'confirm=yes&email=EMAIL&password=PASSWORD' \
   --compressed
 
+You can convert the code in a runnable java version by using Postman
