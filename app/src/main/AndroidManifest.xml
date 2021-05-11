@@ -41,10 +41,10 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:scheme="https"
-                    android:host="testsite.takamaka.org:20443"
-                    android:path="/oauth/authorized" />
+                    android:host="takamaka.io"
+                    android:path="/oauthserver/authorized" />
             </intent-filter>
         </activity>
     </application>
-
+<!-- testsite.takamaka.org:20443 -->
 </manifest>

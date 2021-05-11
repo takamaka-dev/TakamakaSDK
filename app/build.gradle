@@ -25,7 +25,7 @@ android {
         versionCode 6
         versionName "Takamaka SDK 1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [appAuthRedirectScheme: 'https://testsite.takamaka.org:20443/oauth/authorized']
+        manifestPlaceholders = [appAuthRedirectScheme: 'https://takamaka.io/oauthserver/authorized']
     }
 
     buildTypes {

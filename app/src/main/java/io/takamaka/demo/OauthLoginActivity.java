@@ -115,33 +115,35 @@ public class OauthLoginActivity extends MainController {
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            System.out.println("confirm=yes&email="+email+"&password="+password);
-            RequestBody body = RequestBody.create(mediaType, "confirm=yes&email="+email+"&password="+password);
-            //RequestBody body = RequestBody.create(mediaType, "confirm=yes&email=eltonTest@gmail.com&password=11111111");
+            RequestBody body = RequestBody.create(mediaType, "confirm=yes&email=isacco.borsani.old@gmail.com&password=admin7256");
             Request request = new Request.Builder()
-                    .url(baseUrl + "/oauth/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address")
+                    .url(baseUrl + "/oauth/authorize?response_type=code&client_id=prod&redirect_uri=https%3A%2F%2Ftakamaka.io%2Foauthserver%2Fauthorized&scope=email+address")
                     .method("POST", body)
                     .addHeader("Connection", "keep-alive")
-                    .addHeader("Origin", "https://testsite.takamaka.org")
-                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .addHeader("Cache-Control", "max-age=0")
-                    .addHeader("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36")
-                    .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
+                    .addHeader("Pragma", "no-cache")
+                    .addHeader("Cache-Control", "no-cache")
                     .addHeader("sec-ch-ua", "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google Chrome\";v=\"90\"")
                     .addHeader("sec-ch-ua-mobile", "?0")
                     .addHeader("Upgrade-Insecure-Requests", "1")
-
-
+                    .addHeader("Origin", baseUrl)
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36")
+                    .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
                     .addHeader("Sec-Fetch-Site", "same-origin")
                     .addHeader("Sec-Fetch-Mode", "navigate")
                     .addHeader("Sec-Fetch-User", "?1")
                     .addHeader("Sec-Fetch-Dest", "document")
-                    .addHeader("Referer", "https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address")
+                    .addHeader("Referer", baseUrl + "/oauth/authorize?response_type=code&client_id=prod&redirect_uri=https%3A%2F%2Ftakamaka.io%2Foauthserver%2Fauthorized&scope=email+address")
                     .addHeader("Accept-Language", "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7")
-                    .addHeader("Cookie", "session=eyJkZXZfb2F1dGhyZWRpciI6Imh0dHBzOi8vdGVzdHNpdGUudGFrYW1ha2Eub3JnOjIwNDQzL29hdXRoL2F1dGhvcml6ZWQifQ.YI_WUg.m4D93mtf86l462-1eSOMONGaOHU; session=eyJkZXZfdG9rZW4iOnsiIHQiOlsiMmxWVDdHenc1blFONW9uTWNrWkxOMDc1VEFUMHBCIiwiIl19fQ.YI_tUA.rzr4raz5r6_Pe0lZAUhBMv2HaHE")
+                    .addHeader("Cookie", "cookiebar=hide; session=eyJkZXZfdG9rZW4iOnsiIHQiOlsib2ZOU1FUaTRFTVhZV1JKYWphbTBaMDhjeXhkYVh4IiwiIl19LCJwcm9kX29hdXRocmVkaXIiOiJodHRwczovL3Rha2FtYWthLmlvL29hdXRoc2VydmVyL2F1dGhvcml6ZWQifQ.YJqXFA.XyX99pb8hokn5R_KnbOqaznogIM; session=eyJkZXZfdG9rZW4iOnsiIHQiOlsiWlo0NzNpeU5hZTF2WXdyOGROMDlPNlpCSEljeTVKIiwiIl19fQ.YJqXPA.six22bjXukhVg_Xk16RzK9jWEF4")
                     .addHeader("dnt", "1")
                     .addHeader("sec-gpc", "1")
                     .build();
+            try {
+                Response response = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             try {
 
                 Response response = client.newCall(request).execute();

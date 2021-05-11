@@ -55,12 +55,17 @@ public class HomeWalletActivity extends MainController {
     private String currentUserOauth, resultMesssage;
     private OauthResponseBean orb;
     private Context ctx;
+    private String baseUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ctx = this;
         wellcomeOauth = findViewById(R.id.wellcome_oauth);
 
+        baseUrl = "https://www.takamaka.io";
+        if (SWTracker.getCurrentSetting().equals("test")) {
+            baseUrl = "https://testsite.takamaka.org";
+        }
 
         if (SWTracker.i().getIwk() == null) {
             Intent activitySettings = new Intent(getApplicationContext(), MainController.class);
@@ -219,7 +224,7 @@ public class HomeWalletActivity extends MainController {
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
             Request request = new Request.Builder()
-                    .url("https://testsite.takamaka.org/api/oauth/syncaddress/" + hexJson)
+                    .url(baseUrl + "/api/oauth/syncaddress/" + hexJson)
                     .method("GET", null)
                     .addHeader("Authorization", "Bearer " + SWTracker.getAccessToken())
                     .build();
@@ -256,7 +261,7 @@ public class HomeWalletActivity extends MainController {
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
             Request request = new Request.Builder()
-                    .url("https://testsite.takamaka.org/api/oauth/email")
+                    .url(baseUrl + "/api/oauth/email")
                     .method("GET", null)
                     .addHeader("Authorization", "Bearer " + SWTracker.getAccessToken())
                     .build();
