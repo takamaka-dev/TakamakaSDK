@@ -116,6 +116,9 @@ public class OauthLoginActivity extends MainController {
                     .build();
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
             RequestBody body = RequestBody.create(mediaType, "confirm=yes&email="+email+"&password="+password);
+
+            //to switch in test enviroment read the oauth section in the following document: https://github.com/takamaka-dev/TakamakaSDK/blob/master/README.md
+
             Request request = new Request.Builder()
                     .url(baseUrl + "/oauth/authorize?response_type=code&client_id=prod&redirect_uri=https%3A%2F%2Ftakamaka.io%2Foauthserver%2Fauthorized&scope=email+address")
                     .method("POST", body)
