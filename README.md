@@ -149,10 +149,6 @@ curl 'https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id
   -H 'Cookie: session=eyJkZXZfb2F1dGhyZWRpciI6Imh0dHBzOi8vdGVzdHNpdGUudGFrYW1ha2Eub3JnOjIwNDQzL29hdXRoL2F1dGhvcml6ZWQifQ.YJqzQw.hhKyH1pVrafRwnIdzK0RucMvkZQ' \
   -H 'dnt: 1' \
   -H 'sec-gpc: 1' \
-  --data-raw 'confirm=yes&email=isacco.borsani.old%40gmail.com&password=admin7256' \
+  --data-raw 'confirm=yes&email=<email>&password=<password>' \
   --compressed
-  
-  
-  You can convert the code in a java runnable example by using Postman
-
 
