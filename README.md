@@ -126,3 +126,30 @@ Simply activate the environment of interest by activating the radio button.
 	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig110.jpeg" />
 </p>
 Just click on the button to logout from your Wallet Session
+
+## In order to switch from production to test enviroment for oauth procedure just use the following curl
+
+curl 'https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address' \
+  -H 'Connection: keep-alive' \
+  -H 'Pragma: no-cache' \
+  -H 'Cache-Control: no-cache' \
+  -H 'sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'Origin: https://testsite.takamaka.org' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-Mode: navigate' \
+  -H 'Sec-Fetch-User: ?1' \
+  -H 'Sec-Fetch-Dest: document' \
+  -H 'Referer: https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address' \
+  -H 'Accept-Language: it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7' \
+  -H 'Cookie: session=eyJkZXZfb2F1dGhyZWRpciI6Imh0dHBzOi8vdGVzdHNpdGUudGFrYW1ha2Eub3JnOjIwNDQzL29hdXRoL2F1dGhvcml6ZWQifQ.YJqzQw.hhKyH1pVrafRwnIdzK0RucMvkZQ' \
+  -H 'dnt: 1' \
+  -H 'sec-gpc: 1' \
+  --data-raw 'confirm=yes&email=EMAIL&password=PASSWORD' \
+  --compressed
+
+You can convert the code in a runnable java version by using Postman
