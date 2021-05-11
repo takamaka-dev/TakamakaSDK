@@ -115,7 +115,7 @@ public class OauthLoginActivity extends MainController {
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .build();
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-            RequestBody body = RequestBody.create(mediaType, "confirm=yes&email=isacco.borsani.old@gmail.com&password=admin7256");
+            RequestBody body = RequestBody.create(mediaType, "confirm=yes&email="+email+"&password="+password);
             Request request = new Request.Builder()
                     .url(baseUrl + "/oauth/authorize?response_type=code&client_id=prod&redirect_uri=https%3A%2F%2Ftakamaka.io%2Foauthserver%2Fauthorized&scope=email+address")
                     .method("POST", body)
