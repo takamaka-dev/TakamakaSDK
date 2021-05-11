@@ -117,7 +117,7 @@ public class HomeWalletActivity extends MainController {
                 view -> {
                     AlertDialog alertDialog = new AlertDialog.Builder(ctx)
                             .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setTitle("Are you sure to sync this address in Takamaka?")
+                            .setTitle("Are you sure to sync this address in your Takamaka account?")
                             .setMessage("")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
