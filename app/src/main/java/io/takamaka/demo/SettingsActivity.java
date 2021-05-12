@@ -20,38 +20,7 @@ public class SettingsActivity extends MainController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         initMenu();
-
-
-
-
         setCurrentActivity(this);
-
-
-
-
-        /*radioButtonProduction = findViewById(R.id.radioButtonProduction);
-        radioButtonTest = findViewById(R.id.radioButtonTest);
-        radioGroup = findViewById(R.id.radioGroup);
-        if (SWTracker.i().getCurrentSetting().equals("prod")) {
-            radioGroup.check(radioButtonProduction.getId());
-        } else if (SWTracker.i().getCurrentSetting().equals("test")) {
-            radioGroup.check(radioButtonTest.getId());
-        }
-
-
-
-        radioButtonProduction.setOnClickListener(
-                e -> {
-                    SWTracker.i().setCurrentSetting("prod");
-                }
-        );
-
-        radioButtonTest.setOnClickListener(
-                e -> {
-                    SWTracker.i().setCurrentSetting("test");
-                }
-        );
-*/
 
         spinnerButton = findViewById(R.id.spinner_button);
 
