@@ -38,6 +38,7 @@ public class OauthLoginActivity extends MainController {
     TextView userName, userPassword, labelError;
     String resultApiLoginOauth;
     private String baseUrl;
+    Request request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,6 @@ public class OauthLoginActivity extends MainController {
         if (SWTracker.getCurrentSetting().equals("test")) {
             baseUrl = "https://testsite.takamaka.org";
         }
-
-        System.out.println(baseUrl);
 
         initMenu();
         setCurrentActivity(this);
@@ -119,7 +118,7 @@ public class OauthLoginActivity extends MainController {
 
             //to switch in test enviroment read the oauth section in the following document: https://github.com/takamaka-dev/TakamakaSDK/blob/master/README.md
 
-            Request request = new Request.Builder()
+            request = new Request.Builder()
                     .url(baseUrl + "/oauth/authorize?response_type=code&client_id=prod&redirect_uri=https%3A%2F%2Ftakamaka.io%2Foauthserver%2Fauthorized&scope=email+address")
                     .method("POST", body)
                     .addHeader("Connection", "keep-alive")
@@ -142,6 +141,33 @@ public class OauthLoginActivity extends MainController {
                     .addHeader("dnt", "1")
                     .addHeader("sec-gpc", "1")
                     .build();
+
+            if (baseUrl.equals("https://testsite.takamaka.org")) {
+                request = new Request.Builder()
+                        .url(baseUrl + "/oauth/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address")
+                        .method("POST", body)
+                        .addHeader("Connection", "keep-alive")
+                        .addHeader("Pragma", "no-cache")
+                        .addHeader("Cache-Control", "no-cache")
+                        .addHeader("sec-ch-ua", "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google Chrome\";v=\"90\"")
+                        .addHeader("sec-ch-ua-mobile", "?0")
+                        .addHeader("Upgrade-Insecure-Requests", "1")
+                        .addHeader("Origin", baseUrl)
+                        .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                        .addHeader("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36")
+                        .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
+                        .addHeader("Sec-Fetch-Site", "same-origin")
+                        .addHeader("Sec-Fetch-Mode", "navigate")
+                        .addHeader("Sec-Fetch-User", "?1")
+                        .addHeader("Sec-Fetch-Dest", "document")
+                        .addHeader("Referer", baseUrl + "/authorize?response_type=code&client_id=dev&redirect_uri=https%3A%2F%2Ftestsite.takamaka.org%3A20443%2Foauth%2Fauthorized&scope=email+address")
+                        .addHeader("Accept-Language", "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7")
+                        .addHeader("Cookie", "session=eyJkZXZfb2F1dGhyZWRpciI6Imh0dHBzOi8vdGVzdHNpdGUudGFrYW1ha2Eub3JnOjIwNDQzL29hdXRoL2F1dGhvcml6ZWQifQ.YJqzQw.hhKyH1pVrafRwnIdzK0RucMvkZQ; session=eyJkZXZfdG9rZW4iOnsiIHQiOlsiaU5HR2liWFQzYU1FMlZBRGNVSlFJNDRhSDJoNlZhIiwiIl19fQ.YJuaOA.lZNcvTYlz2O4cI8dxdo1OmrIvyw")
+                        .addHeader("dnt", "1")
+                        .addHeader("sec-gpc", "1")
+                        .build();
+            }
+
             try {
                 Response response = client.newCall(request).execute();
             } catch (IOException e) {

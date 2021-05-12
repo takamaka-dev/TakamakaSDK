@@ -63,6 +63,7 @@ public class SettingsActivity extends MainController {
                 } else if (parent.getItemAtPosition(position).toString().contains("Prod")) {
                     SWTracker.i().setCurrentSetting("prod");
                 }
+                SWTracker.setAccessToken(null);
             }
 
             @Override
