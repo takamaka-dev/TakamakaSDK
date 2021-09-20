@@ -94,6 +94,10 @@ public class WalletFXHelper {
         return currentWalletPath;
     }
 
+    public static Path getWalletPath() {
+        return Paths.get(FileHelper.getDefaultWalletDirectoryPath().toString(), SWTracker.getSelectedUWB().getInternalName() + DefaultInitParameters.WALLET_EXTENSION);
+    }
+
 //    public static void submitTransaction(TransactionBox tbox, AsyncActionInterface aai) {
 //        try {
 //            String hexBody = TkmSignUtils.fromStringToHexString(tbox.getTransactionJson());
