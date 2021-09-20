@@ -116,9 +116,15 @@ Setting the filters is easy to spot up the transaction of interst and consult th
 This button takes us to the area of the application used to change environment, from production to test area and viceversa everytime it is needed for develompent purposes.
 
 <p align="center">
-	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/fig111.jpeg" />
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/new_settings_sdk_android.png" />
 </p>
 Simply activate the environment of interest by activating the radio button.
+
+It is also possible to display your 25 secret words by clicking on the button "SHOW 25 WORDS"
+
+<p align="center">
+	<img src="https://downloads.takamaka.dev/FILES/AndroidSdk/new_settings_2_sdk_android.png" />
+</p>
 
 # Logout Button
 
