@@ -160,9 +160,39 @@ curl 'https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id
 
 You can convert the code in a runnable java version by using Postman
 
-# API used to work with the application 
+# List of API's used to work with the application and customize the search accordingly.
 ## Exact search FROM:
-The folowing curl code can be used to establish on searching bases the from key field.
+The folowing curl code can be used to establish on searching bases the FROM key field.
 ```bash
 curl --location --request GET 'https://takamaka.io/api/search/from/l9Bk_09EFVo7VFS0pLS1d5cs8I4rnHhG_iTGRoWXH_s.'
+```
+## Exact search TO:
+The folowing curl code can be used to establish on searching bases the TO key field.
+```bash
+curl --location --request GET 'https://takamaka.io/api/search/to/l9Bk_09EFVo7VFS0pLS1d5cs8I4rnHhG_iTGRoWXH_s.'
+```
+## Exact search FROM + TO:
+The folowing curl code can be used to establish on searching bases the FROM + TO key field.
+```bash
+curl --location --request GET 'https://takamaka.io/api/search/fromto/l9Bk_09EFVo7VFS0pLS1d5cs8I4rnHhG_iTGRoWXH_s.'
+```
+## Exact search SITH:
+The folowing curl code can be used to establish on searching bases the SITH key field.
+```bash
+curl --location --request GET 'https://takamaka.io/api/search/sith/8dZHInqDRjdfPubgvnLcByyu4dsFCSIQFOq3JMpd7EE.'
+```
+## Exact search MESSAGE:
+The folowing curl code can be used to establish on searching bases the WORDs key field.
+```bash
+curl --location --request GET 'https://takamaka.io/api/search/message/test%20back'
+```
+
+## Exact search TRANSACTION HASH:
+The folowing curl code can be used to establish on searching bases the HASH key field.
+```bash
+curl --location --request GET 'https://takamaka.io/api/search/transactionhash/T3l8ONh_SlyFXKx1c-51LR7Cz9xhvDpMYZVKD0OO_So.'
+```
+## List transactions
+```bash
+curl --location --request GET 'https://takamaka.io/api/listtransactions/l9Bk_09EFVo7VFS0pLS1d5cs8I4rnHhG_iTGRoWXH_s.'
 ```
