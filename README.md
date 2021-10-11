@@ -182,7 +182,7 @@ The folowing curl code can be used to establish on searching bases the SITH key 
 curl --location --request GET 'https://takamaka.io/api/search/sith/8dZHInqDRjdfPubgvnLcByyu4dsFCSIQFOq3JMpd7EE.'
 ```
 ## Exact search MESSAGE:
-The folowing curl code can be used to establish on searching bases the WORDs key field.
+The folowing curl code can be used to establish on searching bases the transaction MESSAGE key field.
 ```bash
 curl --location --request GET 'https://takamaka.io/api/search/message/test%20back'
 ```
@@ -193,6 +193,7 @@ The folowing curl code can be used to establish on searching bases the HASH key 
 curl --location --request GET 'https://takamaka.io/api/search/transactionhash/T3l8ONh_SlyFXKx1c-51LR7Cz9xhvDpMYZVKD0OO_So.'
 ```
 ## List transactions
+It lists all the transactions that involve that address where address is equal to the one specified.
 ```bash
 curl --location --request GET 'https://takamaka.io/api/listtransactions/l9Bk_09EFVo7VFS0pLS1d5cs8I4rnHhG_iTGRoWXH_s.'
 ```
