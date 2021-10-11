@@ -161,7 +161,7 @@ curl 'https://testsite.takamaka.org/oauth/authorize?response_type=code&client_id
 You can convert the code in a runnable java version by using Postman
 
 ## API used to work with the application 
-#Exact search FROM:
+# Exact search FROM:
 The folowing curl code can be used to establish on searching bases the from key field.
 ```bash
 curl --location --request GET 'https://takamaka.io/api/search/from/l9Bk_09EFVo7VFS0pLS1d5cs8I4rnHhG_iTGRoWXH_s.'
