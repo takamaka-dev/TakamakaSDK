@@ -75,7 +75,7 @@ public class SendTokenActivity extends MainController {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
-            fromAddress = SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrIndex());
+            fromAddress = SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex());
             toAddress = "Insert here your destination address";
         } catch (WalletException e) {
             e.printStackTrace();
@@ -232,7 +232,7 @@ public class SendTokenActivity extends MainController {
                     //double inputTextNumberTkrLong = Double.parseDouble(inputTextNumberTkr.getText().toString().isEmpty() ? "0" : inputTextNumberTkr.getText().toString()) * DefaultInitParameters.BIG_INTEGER;
                     itb = getTransactionBean(
                             PAY,
-                            SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.i().getCurrentAddressNumber()),
+                            SWTracker.i().getIwk().getPublicKeyAtIndexURL64(SWTracker.getCurrIndex()),
                             inputToAddressText.getText().toString(),
                             TkmTextUtils.validateBI(inputTextNumberTkg.getText().toString()),
                             TkmTextUtils.validateBI(inputTextNumberTkr.getText().toString()),
@@ -251,7 +251,7 @@ public class SendTokenActivity extends MainController {
                     genericTRA = TkmWallet.createGenericTransaction(
                             itb,
                             SWTracker.i().getIwk(),
-                            SWTracker.i().getCurrentAddressNumber());
+                            SWTracker.getCurrIndex());
                 } catch (TransactionCanNotBeCreatedException e) {
                     e.printStackTrace();
                 }
@@ -278,6 +278,10 @@ public class SendTokenActivity extends MainController {
         inputButtonSendToken.setOnClickListener(e -> {
             DoSubmit ds = new DoSubmit();
             String hexBody = TkmSignUtils.fromStringToHexString(getTbox().getTransactionJson());
+
+            System.out.println("TRX JSON: " + getTbox().getTransactionJson());
+
+            System.out.println("CURRENT TRANSACTION ENDPOINT: " + SWTracker.i().getTransactionEndpoint());
             ds.execute(String.valueOf(SWTracker.i().getTransactionEndpoint()), hexBody);
         });
 

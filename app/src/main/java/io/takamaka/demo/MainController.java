@@ -34,7 +34,6 @@ public class MainController extends AppCompatActivity {
     protected void setCurrentActivity(AppCompatActivity currentActivity) {
         this.currentActivity = currentActivity;
     }
-
     AppCompatActivity currentActivity = null;
 
     @Override
